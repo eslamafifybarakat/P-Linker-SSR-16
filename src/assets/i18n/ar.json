@@ -1,0 +1,48 @@
+{
+  "titles": {
+    "projectName": "استقدام",
+    "error500": "خطأ في الخادم",
+    "login": "تسجيل الدخول",
+    "signUp": "إنشاء حساب"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "services": {
+      "title": "الخدمات",
+      "items": {
+        "offices": "المكاتب",
+        "sponsorshipTransfer": "نقل الكفالة"
+      }
+    },
+    "aboutP-linker": {
+      "title": "حول",
+      "items": {
+        "policies": "السياسات",
+        "journey": "الرحلة"
+      }
+    },
+    "support": {
+      "title": "الدعم",
+      "items": {
+        "contactUs": "اتصل بنا",
+        "faqs": "الأسئلة الشائعة"
+      }
+    }
+  },
+  "footer": {
+    "allRight": "جميع الحقوق محفوظة © 2022.",
+    "contactUs": "اتصل بنا",
+    "subscribeNewsletter": "اشترك",
+    "terms": "الشروط والأحكام",
+    "privacy": "سياسة الخصوصية",
+    "websiteMap": "خريطة الموقع",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "join": "انضم",
+    "download": "حمل تطبيقنا الجوال"
+  },
+  "errors": {
+    "backToHome": "العودة إلى الصفحة الرئيسية",
+    "serverError": "حدث خطأ في الخادم",
+    "pageNotFound": "الصفحة غير موجودة"
+  }
+}

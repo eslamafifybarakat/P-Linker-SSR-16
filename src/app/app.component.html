@@ -1,0 +1,19 @@
+<main style="transition: 0.5s" class="main-wrapper" [style.opacity]="isServer ? 0 : 1">
+  <div class="d-none d-xl-block" *ngIf="shouldRender">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="d-block d-xl-none" *ngIf="shouldRender">
+    <navbar-mobile></navbar-mobile>
+  </div>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+  <footer *ngIf="shouldRender">
+    <app-footer></app-footer>
+    <bottom-navigation class="d-block d-xl-none"></bottom-navigation>
+  </footer>
+</main>
+<p-toast [showTransformOptions]="'translateX(-100%)'" [showTransitionOptions]="'500ms'"
+  [hideTransitionOptions]="'500ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+
+<scroll-top></scroll-top>

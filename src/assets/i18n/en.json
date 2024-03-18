@@ -1,0 +1,48 @@
+{
+  "titles": {
+    "projectName": "P-linker",
+    "error500": "Server error",
+    "login": "Login",
+    "signUp": "Sign Up"
+  },
+  "nav": {
+    "home": "Home",
+    "services": {
+      "title": "Services",
+      "items": {
+        "offices": "Offices",
+        "sponsorshipTransfer": "Sponsorship Transfer"
+      }
+    },
+    "aboutP-linker": {
+      "title": "About",
+      "items": {
+        "policies": "Policies",
+        "journey": "Journey"
+      }
+    },
+    "support": {
+      "title": "Support",
+      "items": {
+        "contactUs": "Contact Us",
+        "faqs": "FAQs"
+      }
+    }
+  },
+  "footer": {
+    "allRight": "All Rights Reserved © 2022.",
+    "contactUs": "Contact Us",
+    "subscribeNewsletter": "Subscribe Newsletter",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "websiteMap": "Website Map",
+    "emailAddress": "Email Address",
+    "join": "Join",
+    "download": "Download our mobile app"
+  },
+  "errors": {
+    "backToHome": "Back to home",
+    "serverError": "A server error has occurred",
+    "pageNotFound": "Page not found"
+  }
+}
