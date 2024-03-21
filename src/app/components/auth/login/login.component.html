@@ -1,0 +1,90 @@
+<div id="login">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-md-4 mb-2">
+    <a class="text-dark pointer lh-sm" (click)="back()">
+      <i class="pi pi-arrow-left scaleX-rtl"></i>
+    </a>
+    <a class="lang-item">
+      <language-selector></language-selector>
+    </a>
+  </div>
+  <div class="d-lg-none d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
+    <img src="assets/images/auth/auth-logo-dark.svg" class="form-logo mb-2 pointer" alt="logo" [routerLink]="['/']">
+  </div>
+  <div>
+    <h1 class="fs-1 text-center mb-0">
+      {{'auth.signInToYourAccount' | translate}}
+    </h1>
+    <p class="mt-2 text-center lh-sm description">
+      {{'auth.enterToLogIn' | translate}}
+    </p>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()" class="pt-sm-4 pt-2">
+    <div class="mb-4">
+      <label for="username" class="form-label required">
+        {{'labels.username' | translate}}
+      </label>
+      <input id="username" class="form-control" type="text" placeholder="{{'placeholders.username' | translate}}"
+        formControlName="userName" (input)="publicService?.clearValidationErrors(formControls.userName)"
+        [class.border-red]="(formControls?.userName?.touched||formControls?.userName?.dirty)&&formControls?.userName?.invalid" />
+      <div class="mt-1">
+        <ng-container
+          *ngIf="formControls?.userName?.invalid && (formControls?.userName?.dirty || formControls?.userName?.touched)">
+          <ng-container *ngIf="formControls?.userName?.errors?.required">
+            <span class="text-danger fs-8-1">
+              {{'validations.username'|translate}}
+            </span>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="password" class="required">
+        {{'labels.password'|translate}}
+      </label>
+      <div class="rounded-input p-mask"
+        [class.border-red]="formControls?.password?.invalid && (formControls?.password?.dirty || formControls?.password?.touched)">
+        <p-password [toggleMask]="true" id="p-password" formControlName="password"
+          placeholder="{{'placeholders.password'|translate}}" [disabled]="isLoadingBtn"
+          [attr.autocomplete]="'current-password'" [feedback]="false">
+        </p-password>
+      </div>
+      <div class="mt-2">
+        <ng-container
+          *ngIf="formControls?.password?.invalid && (formControls?.password?.dirty || formControls?.password?.touched) ">
+          <ng-container *ngIf="formControls?.password?.errors?.['required']">
+            <span class="text-danger fs-8">
+              {{'validations.password'|translate}}
+            </span>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group mt-0 d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="d-flex gap-2">
+        <p-checkbox value="val1" id="chkRemember" [binary]="true" formControlName="remember"></p-checkbox>
+        <label class="text-muted" for="chkRemember">
+          {{'auth.rememberPassword' | translate}}
+        </label>
+      </div>
+      <a [routerLink]="['/forgot-password']" class="text-main-color fs-6">
+        {{'auth.forgotPassword' | translate}}
+      </a>
+    </div>
+    <div class="position-relative mt-4">
+      <div class="or text-center">
+        OR
+      </div>
+    </div>
+    <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+      <span class="newProcurelinker fs-5-1 fw-bold">
+        {{'auth.newProcurelinker'|translate}}
+      </span>
+      <a class="createAccount fs-5-1 fw-bold" [routerLink]="'/auth/supplier-registration'">
+        {{'auth.createNewAccount'|translate}}
+      </a>
+    </div>
+    <button type="submit" class="btn w-100 btn-solid-main form-btn mt-md-5 mt-4 fs-6" [disabled]="isLoadingBtn">
+      {{'auth.signIn'|translate}}
+    </button>
+  </form>
+</div>

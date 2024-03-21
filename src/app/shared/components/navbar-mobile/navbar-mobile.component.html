@@ -9,7 +9,7 @@
           <div class="line line3"></div>
         </button>
       </button>
-      <app-language-selector></app-language-selector>
+      <language-selector></language-selector>
     </div>
   </div>
 </nav>
@@ -18,7 +18,8 @@
   <div class="overlay position-absolute"></div>
   <div class="position-relative">
     <div class="d-flex align-items-center justify-content-end my-4">
-      <a class="close d-flex justify-content-center align-items-center rounded-circle text-white-color" title="close" (click)="closeSidebar()">
+      <a class="close d-flex justify-content-center align-items-center rounded-circle text-white-color" title="close"
+        (click)="closeSidebar()">
         <i class="pi pi-times fs-8"></i>
       </a>
     </div>
@@ -31,7 +32,8 @@
       <ul class="p-0">
         <ng-container *ngFor="let item of navItems">
           <li class="nav-item" *ngIf="!item.logout || isUserLoggedIn">
-            <a class="nav-link text-white-color d-flex gap-2" (click)="item.logout ? logOut() : closeSidebar()" [routerLink]="item.route" routerLinkActive="active">
+            <a class="nav-link text-white-color d-flex gap-2" (click)="item.logout ? logOut() : closeSidebar()"
+              [routerLink]="item.route" routerLinkActive="active">
               <!-- <svg-icon [src]="'assets/icons/' + item.icon + '.svg'"></svg-icon> -->
               {{ item.label | translate }}
             </a>

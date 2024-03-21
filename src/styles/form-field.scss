@@ -1,0 +1,176 @@
+input[type]::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+select::-webkit-input-placeholder,
+select.form-control.has-value {
+  color: var(--text-desc-color) !important;
+  font-size: 0.9rem;
+  color: #777 !important;
+}
+
+input[type]:-moz-placeholder,
+textarea:-moz-placeholder,
+select:-moz-placeholder,
+select.form-control.has-value {
+  /* Firefox 18- */
+  color: var(--text-desc-color);
+  font-size: 1rem;
+}
+
+input[type]::-moz-placeholder,
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+select.form-control.has-value {
+  /* Firefox 19+ */
+  color: var(--text-desc-color);
+  font-size: 1rem;
+}
+
+input[type]:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+select:-ms-input-placeholder,
+select.form-control.has-value {
+  color: var(--text-desc-color);
+  font-size: 1rem;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-input-color) inset !important;
+}
+
+.form-check-input[type="checkbox"]:focus {
+  box-shadow: none;
+}
+
+.form-check-input[type="checkbox"]:focus-visible {
+  box-shadow: none;
+}
+
+.form-check-input:checked {
+  background-color: var(--bg-main-color);
+  border-color: var(--text-main-color);
+}
+
+.form-control,
+.form-control:focus,
+.form-control:focus-visible,
+.form-select,
+.form-select:focus,
+.form-select:focus-visible,
+.ng-select.ng-select-single .ng-select-container,
+.p-inputmask,
+.p-password-input,
+.p-calendar-w-btn .p-inputtext {
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: var(--bg-input-color);
+  border-color: var(--border-input-color);
+  height: 3.7rem;
+  border-radius: var(--border-input-radius);
+  padding: 1rem;
+}
+.p-inputtext,
+.p-password {
+  width: 100%;
+}
+.p-mask .p-inputmask {
+  border-radius: var(--border-input-radius) !important;
+}
+
+.form-check .form-check-input {
+  border-radius: 50% !important;
+  transform: scale(1.1);
+
+  &:checked {
+    background-color: #77a13b !important;
+    border-color: #77a13b !important;
+  }
+
+  &:focus {
+    border-color: var(--text-desc-color);
+  }
+}
+
+.form-control-left {
+  border-left: 0;
+}
+
+.input-group {
+  .input-group-text {
+    background-color: var(--bg-input-color) !important;
+    border-color: var(--border-input-color);
+    border-radius: var(--border-input-radius);
+
+    .eyeIcon {
+      color: var(--text-desc-color);
+    }
+  }
+
+  .input-group-text-left {
+    border-radius: var(--border-input-radius) 0 0 var(--border-input-radius) !important;
+    border-right: transparent !important;
+  }
+
+  .input-group-text-right {
+    border-radius: 0 var(--border-input-radius) var(--border-input-radius) 0 !important;
+    border-left: transparent !important;
+  }
+
+  .form-control-single,
+  .form-control-single:focus,
+  .form-control-single:focus-within,
+  .form-control-single:focus-visible {
+    border-right: transparent;
+  }
+}
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  // background-image: url(../../assets/image/form/valid.svg) !important;
+  border: none;
+}
+
+.border-red {
+  border: 1px solid #dc3545 !important;
+  border-radius: 0.625rem !important;
+
+  .ng-select-container {
+    border: 0 !important;
+  }
+}
+
+.border-green {
+  border: 1px solid #198754 !important;
+  border-radius: 0.625rem !important;
+
+  .ng-select-container {
+    border: 0 !important;
+  }
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: transparent;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.required::after {
+  content: "*";
+  color: #dc3545;
+}
+#login {
+  .p-checkbox .p-checkbox-box {
+    box-shadow: none;
+  }
+  .p-checkbox .p-checkbox-box.p-highlight {
+    background-color: var(--bg-white-color);
+    color: var(--text-main-color);
+    border-color: var(--bg-main-color);
+  }
+  .p-icon-wrapper svg {
+    color: var(--text-main-color);
+  }
+}

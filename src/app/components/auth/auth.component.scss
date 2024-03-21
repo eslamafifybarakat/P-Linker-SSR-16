@@ -1,0 +1,19 @@
+#auth-form {
+  .bg-form {
+    background-image: url(../../../assets/images/auth/auth-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    .overlay {
+      inset: 0;
+      background: linear-gradient(
+        1.01deg,
+        rgba(3, 25, 44, 0.65) 48%,
+        rgba(0, 39, 72, 0.091) 99.27%
+      );
+      z-index: 0;
+    }
+  }
+  .form-logo {
+    width: 3rem;
+  }
+}

@@ -29,6 +29,32 @@
       }
     }
   },
+  "global":{
+    "backToHome":"Back to home"
+  },
+  "auth":{
+    "welcomeBack":"Welcome Back",
+    "discoverEffective":"Discover effective solutions to overcome your procurement challenges.",
+    "signInToYourAccount": "Sign In To Your Account",
+    "enterToLogIn": "Enter Your Username & Password To Log In",
+    "forgotPassword": "Forgot Password?",
+    "rememberPassword": "Remember Password",
+    "newProcurelinker":"New to Procurelinker ?!",
+    "createNewAccount":"Create New account",
+    "signIn":"Sign In"
+  },
+  "labels":{
+    "username":"Username",
+    "password":"Password"
+  },
+  "placeholders":{
+    "username":"Enter Username",
+    "password":"Enter Password"
+  },
+  "validations":{
+    "username":"Username is required",
+    "password":"Password is required"
+  },
   "footer": {
     "allRight": "All Rights Reserved © 2022.",
     "contactUs": "Contact Us",

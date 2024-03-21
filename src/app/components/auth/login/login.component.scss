@@ -1,0 +1,52 @@
+#login {
+  .form-logo {
+    width: 4rem;
+  }
+  .or {
+    color: #035397 !important;
+    font-size: 17px;
+    font-style: italic;
+    &::before,
+    &::after {
+      position: absolute;
+      width: 47%;
+      border: 1px dashed #035397;
+      top: 50%;
+    }
+    &::before {
+      content: "";
+      right: 0rem;
+    }
+    &::after {
+      content: "";
+      left: 0rem;
+    }
+  }
+  .newProcurelinker {
+    color: #023058;
+  }
+  .createAccount {
+    color: #e8630a;
+  }
+  .form-btn {
+    background-color: var(--bg-main-color);
+    border-color: var(--bg-main-color);
+    color: var(--text-white-color);
+    height: 3.7rem;
+    border-radius: var(--border-input-radius);
+  }
+}
+@media (max-width: 587px) {
+  #login {
+    .fs-1 {
+      font-size: 1.4rem !important;
+    }
+    .description {
+      font-size: 0.9rem;
+    }
+    .newProcurelinker,
+    .createAccount {
+      font-size: 1rem !important;
+    }
+  }
+}

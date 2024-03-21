@@ -6,7 +6,7 @@ import { keys } from '../../configs/localstorage-key';
 @Component({
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
-  selector: 'app-language-selector',
+  selector: 'language-selector',
   templateUrl: './language-selector.component.html',
   styleUrls: ['./language-selector.component.scss']
 })

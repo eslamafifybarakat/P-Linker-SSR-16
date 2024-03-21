@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from './app.component';
+import { ToastModule } from 'primeng/toast';
 
 import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
@@ -40,6 +41,7 @@ registerLocaleData(localeAr);
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    ToastModule,
     TransferHttpCacheModule,
     TranslateModule.forRoot({
       loader: {

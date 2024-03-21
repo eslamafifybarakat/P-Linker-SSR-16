@@ -4,12 +4,20 @@ import { Routes } from '@angular/router';
 
 // TS Files for child routes
 import { placesChildrenRoutes } from './components/places/places-children-routes';
+import { authChildrenRoutes } from './components/auth/auth-children-routes';
 import { errorsChildrenRoutes } from './components/errors/errors-routes';
 
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/places', pathMatch: 'full' },
-
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  {
+    path: 'auth',
+    loadComponent: () =>
+      import('./components/auth/auth.component').then(
+        (c) => c.AuthComponent
+      ),
+    children: authChildrenRoutes
+  },
   {
     path: 'places',
     loadComponent: () =>
