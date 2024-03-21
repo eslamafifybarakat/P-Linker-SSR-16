@@ -2,7 +2,13 @@
   left: 0 !important;
   right: inherit !important;
 }
-
+.scaleX-rtl {
+  transform: scaleX(-1);
+}
+.p-input-icon-right > .p-icon-wrapper {
+  left: 0.75rem !important;
+  right: inherit !important;
+}
 // Scroll Top
 #scroll {
   left: 3.2rem !important;

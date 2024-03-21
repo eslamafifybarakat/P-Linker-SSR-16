@@ -11,11 +11,12 @@
     padding: 10px 10px !important;
     border-radius: 6px;
     &:hover {
-      background-color: #84548e36 !important;
+      background-color: #dcdcdc36 !important;
     }
   }
   .dropdown-menu {
     top: 2.5rem;
+    border-radius: 12px;
     .flag {
       width: 22px;
       height: 22px;
