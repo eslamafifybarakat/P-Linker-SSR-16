@@ -13,11 +13,11 @@
             <div>
               <a class="text-white-color d-flex align-items-center gap-2 home" [routerLink]="['/']"> <i
                   class="pi pi-arrow-left scaleX-rtl"></i>
-                <span>{{'global.backToHome'|translate}}</span></a>
+                <span>{{'general.backToHome'|translate}}</span></a>
             </div>
           </div>
           <div class="text-center">
-            <h5 class="mb-3 fs-4 text-white-color">{{'auth.welcomeBack'|translate}}</h5>
+            <h5 class="mb-3 fs-4 text-white-color">{{getTitle()|translate}}</h5>
             <p class="lh-base fs-6 text-white-50 mb-0">{{'auth.discoverEffective'|translate}}</p>
           </div>
           <div>

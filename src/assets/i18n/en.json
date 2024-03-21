@@ -29,7 +29,7 @@
       }
     }
   },
-  "global":{
+  "general":{
     "backToHome":"Back to home"
   },
   "auth":{
@@ -58,7 +58,9 @@
     "pleaseEnterValidTax":"Please enter valid value, should be Between 8 to 20 Characters Long.",
     "iAgree":"I agree and accept all",
     "termsAndConditions":"Terms and Conditions",
-    "registerNow":"Register Now"
+    "registerNow":"Register Now",
+    "expandYourNetwork":"Expand your Network",
+    "findYourBuyer":"Find Your Buyer"
   },
   "labels":{
     "username":"Username",
