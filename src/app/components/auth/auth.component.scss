@@ -16,4 +16,11 @@
   .form-logo {
     width: 3rem;
   }
+  .form-btn {
+    background-color: var(--bg-main-color);
+    border-color: var(--bg-main-color);
+    color: var(--text-white-color);
+    height: 3.7rem;
+    border-radius: var(--border-input-radius);
+  }
 }

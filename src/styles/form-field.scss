@@ -49,7 +49,9 @@ input:-webkit-autofill {
   background-color: var(--bg-main-color);
   border-color: var(--text-main-color);
 }
-
+label {
+  margin-bottom: 0.5rem;
+}
 .form-control,
 .form-control:focus,
 .form-control:focus-visible,
@@ -59,7 +61,8 @@ input:-webkit-autofill {
 .ng-select.ng-select-single .ng-select-container,
 .p-inputmask,
 .p-password-input,
-.p-calendar-w-btn .p-inputtext {
+.p-calendar-w-btn .p-inputtext,
+.p-dropdown {
   box-shadow: none !important;
   outline: none !important;
   background-color: var(--bg-input-color);
@@ -67,6 +70,9 @@ input:-webkit-autofill {
   height: 3.7rem;
   border-radius: var(--border-input-radius);
   padding: 1rem;
+}
+.p-dropdown {
+  line-height: 0;
 }
 .p-inputtext,
 .p-password {

@@ -1,0 +1,176 @@
+.p-inputtext,
+.p-dropdown,
+.p-multiselect,
+p-inputnumber,
+.p-inputnumber,
+.p-password {
+  width: 100% !important;
+}
+
+.p-inputmask {
+  border-radius: 0 var(--border-input-radius) var(--border-input-radius) 0 !important;
+  width: calc(100%) !important;
+  border-left: 0 !important;
+}
+
+// p-inputmask.ng-dirty.ng-valid > .p-inputtext,
+// .p-inputtext:enabled:focus {
+//   border: 1px solid var(--bg-input-color) !important;
+//   border-left: 0 !important;
+// }
+.p-inputtext:enabled:focus,
+.p-inputtext:enabled:hover {
+  border: 1px solid #ced4da;
+}
+p-inputmask.ng-dirty.ng-valid.is-valid > .p-inputtext {
+  border: 1px solid #198754 !important;
+}
+
+p-inputmask.ng-dirty.ng-valid.is-invalid > .p-inputtext {
+  border: 1px solid #dc3545 !important;
+}
+.p-input-icon-right > i:last-of-type {
+  z-index: 3 !important;
+}
+// .p-mask {
+//   .p-inputtext:enabled:focus,
+//   .p-inputtext:enabled:hover {
+//     border: transparent !important;
+//   }
+// }
+.p-inputmask:enabled:focus,
+.p-inputmask:enabled:hover {
+  border: transparent !important;
+}
+.p-mask.border-red {
+  .p-inputmask .p-inputtext,
+  .p-inputnumber-input,
+  .p-password > .p-inputtext {
+    border: 0 !important;
+  }
+}
+p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
+  border: 0 !important;
+}
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--bg-main-color) !important;
+  background: var(--bg-main-color) !important;
+}
+
+.p-radiobutton .p-radiobutton-box {
+  border-color: var(--bg-main-color) !important;
+  // background: rgba(140, 149, 163, 0.19) !important;
+}
+.p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+  width: 14px;
+  height: 14px;
+  background-color: var(--bg-main-color) !important;
+}
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  background-color: var(--bg-white-color) !important;
+  box-shadow: none !important;
+}
+
+.form-check-input {
+  min-width: 1.25em !important;
+  min-height: 1.25rem !important;
+}
+.form-check-input:checked[type="radio"] {
+  // background-image: url(../../../assets/image/icons/check.svg) !important;
+}
+
+.form-radio-input {
+  transform: scale(1.5) !important;
+  accent-color: rgba(140, 149, 163, 0.19) !important;
+  border: none !important;
+}
+input[type="radio"]:checked {
+  accent-color: var(--bg-main-color) !important;
+}
+
+.p-calendar {
+  width: 100% !important;
+  .p-button-text {
+    color: var(--text-main-color) !important;
+  }
+  .p-button-label {
+    color: var(--text-main-color) !important;
+  }
+  &.p-button,
+  &.p-button:hover {
+    background-color: var(--bg-input-color);
+    border-color: var(--border-input-color);
+    border-left: 0;
+    color: #6c757d;
+  }
+  .p-inputtext {
+    border-radius: var(--border-input-radius) 0 0 var(--border-input-radius);
+  }
+}
+.p-calendar-w-btn {
+  &.p-inputtext {
+    &:enabled:hover,
+    &:enabled:focus {
+      border-color: var(--bg-input-color) !important;
+    }
+  }
+  &.p-datepicker-trigger {
+    border-radius: 0 var(--border-input-radius) var(--border-input-radius) 0;
+    .pi-calendar {
+      font-size: 1.2rem !important;
+    }
+  }
+}
+.p-calendar .p-button,
+.p-calendar .p-button:hover {
+  background-color: var(--bg-input-color) !important;
+  border-left: 0;
+  border-color: #ced4da;
+  color: #6c757d;
+}
+
+.p-calendar-w-btn .p-inputtext {
+  border-right: 0 !important;
+}
+.p-datepicker-trigger {
+  border-color: var(--bg-input-color) !important;
+  border-radius: 0 var(--border-input-radius) var(--border-input-radius) 0 !important;
+}
+.p-datepicker-buttonbar .p-button {
+  color: var(--text-main-color) !important;
+}
+.p-dropdown-panel {
+  width: 100%;
+}
+.p-dropdown-item,
+.p-multiselect-item {
+  border-radius: 10px;
+}
+.p-multiselect-items {
+  padding: 0 !important;
+}
+.p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
+  height: 3.5rem;
+  align-items: center;
+  display: flex;
+}
+.p-multiselect .p-multiselect-label.p-placeholder {
+  line-height: 2 !important;
+}
+.p-multiselect.p-multiselect-chip .p-multiselect-token {
+  padding: 0.15rem 0.5rem;
+}
+.p-multiselect.p-multiselect-chip .p-multiselect-token {
+  background-color: #eee !important;
+  color: #777 !important;
+}
+.p-multiselect-label-container {
+  display: flex !important;
+  align-items: center;
+}
+.form-control::placeholder,
+.p-inputtext::placeholder,
+.p-dropdown .p-dropdown-label.p-placeholder,
+.p-multiselect .p-multiselect-label.p-placeholder {
+  color: #929191 !important;
+}

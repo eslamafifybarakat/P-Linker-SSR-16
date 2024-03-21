@@ -1,0 +1,133 @@
+<div id="address-info">
+  <h2 class="fs-1 text-center">
+    {{'auth.supplierSignUp'|translate}}
+  </h2>
+  <p class="mt-2 text-center description lh-sm">
+    {{'auth.pleaseEnterBasicInformation3'|translate}}
+  </p>
+  <form [formGroup]="addressInfoForm" (ngSubmit)="continue()" class="pt-3">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <div class="mb-4">
+          <label class="form-label required">
+            {{"labels.country"|translate}}
+          </label>
+          <span class="p-input-icon-right select-loading d-block">
+            <div
+              [class.border-red]="formControls?.country?.invalid && (formControls?.country?.dirty || formControls?.country?.touched)">
+              <p-dropdown [options]="countries" formControlName="country" optionLabel="name" [filter]="true"
+                [virtualScroll]="true" filterBy="name" appendTo="body" scrollHeight="200px" emptyMessage="nodata"
+                [showClear]="true" filterPlaceholder="{{'placeholders.search'|translate}}"
+                placeholder="{{'placeholders.country'|translate}}"
+                (onChange)="getCitiesByCountryId($event);formControls?.vatNumber?.valid&&formControls?.country?.valid?IsVatNumberAvailable(this.addressInfoForm?.value?.vatNumber,this.addressInfoForm?.value?.country):''">
+                <ng-template pTemplate="selectedItem">
+                  <div class="country-item country-item-value d-flex gap-2 align-items-center"
+                    *ngIf="addressInfoForm?.value?.country">
+                    <div>{{addressInfoForm?.value?.country?.name}}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                  <div class="country-item d-flex gap-2 align-items-center">
+                    <img [src]="country.flag" onerror="src='assets/images/not-found/no-flag.svg'"
+                      [class]="'flag flag-'" />
+                    <div>{{country.name}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+
+            </div>
+            <ng-container *ngIf="isLoadingCountries">
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-container>
+          </span>
+          <div class="my-2">
+            <ng-container
+              *ngIf="formControls?.country?.invalid && (formControls?.country?.dirty || formControls?.country?.touched)">
+              <span class="text-danger fs-8-1">
+                {{"validations.requiredField"|translate}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="mb-4">
+          <label class="form-label">
+            {{"labels.city"|translate}}
+          </label>
+          <span class="p-input-icon-right select-loading d-block">
+            <div
+              [class.border-red]="formControls?.city?.invalid && (formControls?.city?.dirty || formControls?.city?.touched)">
+              <p-dropdown [options]="cities" formControlName="city" optionLabel="name" [filter]="true"
+                [virtualScroll]="true" filterBy="name" appendTo="body" scrollHeight="200px" emptyMessage="nodata"
+                [showClear]="true" [disabled]="addressInfoForm?.value?.country==null"
+                filterPlaceholder="{{'placeholders.search'|translate}}" placeholder="{{'city'|translate}}">
+              </p-dropdown>
+            </div>
+            <ng-container *ngIf="isLoadingCities">
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-container>
+          </span>
+          <div class="my-2">
+            <ng-container
+              *ngIf="formControls?.city?.invalid && (formControls?.city?.dirty || formControls?.city?.touched)">
+              <span class="text-danger fs-8-1">
+                {{"validations.requiredField"|translate}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="mb-4">
+          <label for="vatNumber" class="vatNumber required">
+            {{'labels.vatNumber'|translate}}
+            <span class="text-secondary-color">
+              {{'auth.orTax'|translate}}
+            </span></label>
+          <span class="p-input-icon-right w-100">
+
+            <input type="number" id="vatNumber" class="form-control" formControlName="vatNumber"
+              placeholder="{{'placeholders.vatNumber'|translate}}"
+              [class.border-red]="(formControls?.vatNumber?.touched||formControls?.vatNumber?.dirty)&&formControls?.vatNumber?.invalid|| isVatNumberAvailable"
+              (input)="publicService?.clearValidationErrors(formControls?.vatNumber)"
+              (blur)="formControls?.vatNumber?.valid&&formControls?.country?.valid?IsVatNumberAvailable(this.addressInfoForm?.value?.vatNumber,this.addressInfoForm?.value?.country):''"
+              (keyup)="onKeyUpEvent()">
+            <ng-container *ngIf="isCheckVatNumber">
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-container>
+          </span>
+          <div class="mt-1">
+            <span class="text-secondary-color">{{'auth.pleaseEnterValidTax'|translate}}</span>
+            <ng-container
+              *ngIf="formControls?.vatNumber?.invalid && (formControls?.vatNumber?.dirty || formControls?.vatNumber?.touched)">
+              <ng-container *ngIf="formControls?.vatNumber?.errors?.required">
+                <span class="text-danger fs-8-1">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container *ngIf="formControls?.vatNumber?.errors?.pattern">
+                <span class="text-danger fs-8-1">
+                  {{'validations.validVatId'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="isVatNumberAvailable">
+              <span class="text-danger fs-8 d-block">
+                {{'vatId'|translate}} <span class="form-label px-1 text-main-color">
+                  {{addressInfoForm?.value?.vatNumber}}
+                </span>
+                {{'auth.isUsedBefore'|translate}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4" [disabled]="addressInfoForm?.invalid">
+      <span>
+        {{'auth.continue'|translate}}
+      </span>
+    </button>
+  </form>
+</div>

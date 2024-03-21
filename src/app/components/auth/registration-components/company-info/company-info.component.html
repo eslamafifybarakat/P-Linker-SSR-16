@@ -1,0 +1,92 @@
+<div id="company-info">
+  <h2 class="fs-1 text-center">
+    {{'auth.supplierSignUp'|translate}}
+  </h2>
+  <p class="mt-2 text-center description lh-sm">
+    {{'auth.pleaseEnterBasicInformation4'|translate}}
+  </p>
+  <form [formGroup]="companyInfoForm" (ngSubmit)="submit()" class="pt-3">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <div class="mb-4">
+          <label for="companyName" class="companyName required">{{'labels.companyName'|translate}}</label>
+          <span class="p-input-icon-right w-100">
+
+            <input type="text" id="companyName" class="form-control" formControlName="companyName"
+              placeholder="{{'placeholders.companyName'|translate}}"
+              [class.border-red]="(formControls?.companyName?.touched||formControls?.companyName?.dirty)&&formControls?.companyName?.invalid || isCompanyNameAvailable"
+              [class.is-valid]="(formControls?.companyName?.touched||formControls?.companyName?.dirty)&&formControls?.companyName?.valid&&!isCompanyNameAvailable"
+              (input)="publicService?.clearValidationErrors(formControls?.companyName)"
+              (blur)="formControls?.companyName?.valid&&companyInfoForm?.value?.companyName!=''?checkCompanyNameAvailability(this.companyInfoForm?.value?.companyName):''"
+              (keyup)="onKeyUpEvent()">
+            <ng-container *ngIf="isCheckCompanyName">
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-container>
+          </span>
+          <div class="mt-1">
+            <ng-container
+              *ngIf="formControls?.companyName?.invalid && (formControls?.companyName?.dirty || formControls?.companyName?.touched)">
+              <ng-container *ngIf="formControls?.companyName?.errors?.required">
+                <span class="text-danger fs-8-1">
+                  {{'validations.companyName'|translate}}
+                </span>
+              </ng-container>
+              <ng-container *ngIf="formControls?.companyName?.errors?.minlength">
+                <span class="text-danger fs-8-1">
+                  {{'validations.length'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="isCompanyNameAvailable">
+              <span class="text-danger fs-8 d-block">
+                {{'companyName'|translate}} <span class="form-label px-1 text-main-color">
+                  {{companyInfoForm?.value?.companyName}}</span>
+                {{'auth.isUsedBefore'|translate}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="mb-4">
+          <label for="address" class="form-label">
+            {{"labels.address"|translate}}
+          </label>
+          <input type="text" id="address" class="form-control" formControlName="address"
+            placeholder="{{'placeholders.address'|translate}}"
+            [class.border-red]="(formControls?.address?.touched||formControls?.address?.dirty)&&formControls?.address?.invalid"
+            (input)="publicService?.clearValidationErrors(formControls?.address)">
+          <div class="mt-1">
+            <ng-container
+              *ngIf="formControls?.address?.invalid && (formControls?.address?.dirty || formControls?.address?.touched)">
+              <ng-container *ngIf="formControls?.address?.errors?.required">
+                <span class="text-danger fs-8-1">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container *ngIf="formControls?.address?.errors?.minlength">
+                <span class="text-danger fs-8-1">
+                  {{'validations.addressLength'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="p-field-checkbox d-flex align-items-center gap-2">
+          <p-checkbox formControlName="terms" [binary]="true" inputId="binary"></p-checkbox>
+          <label for="binary" class="mb-0"><span>{{"auth.iAgree"|translate}}
+            </span> <u><a class="text-main-color fs-8">{{"auth.termsAndConditions"|translate}}
+              </a></u></label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4"
+      [disabled]="companyInfoForm?.invalid||isCompanyNameAvailable">
+      <span>
+        {{'auth.registerNow'|translate}}
+      </span>
+    </button>
+  </form>
+</div>

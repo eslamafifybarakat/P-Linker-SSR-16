@@ -1,0 +1,26 @@
+#company-info {
+  .form-btn {
+    background-color: var(--bg-main-color);
+    border-color: var(--bg-main-color);
+    color: var(--text-white-color);
+    height: 3.7rem;
+    border-radius: var(--border-input-radius);
+  }
+}
+:host:ng-deep {
+  #company-info {
+    .p-checkbox-box {
+      border-radius: 50% !important;
+    }
+  }
+}
+@media (max-width: 587px) {
+  #company-info {
+    .fs-1 {
+      font-size: 1.4rem !important;
+    }
+    .description {
+      font-size: 0.9rem;
+    }
+  }
+}

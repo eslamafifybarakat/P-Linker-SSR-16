@@ -1,3 +1,4 @@
+import { HomeComponent } from './components/home/home.component';
 import { Routes } from '@angular/router';
 
 // Components
@@ -9,7 +10,7 @@ import { errorsChildrenRoutes } from './components/errors/errors-routes';
 
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'auth',
     loadComponent: () =>
@@ -17,6 +18,13 @@ export const appRoutes: Routes = [
         (c) => c.AuthComponent
       ),
     children: authChildrenRoutes
+  },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./components/home/home.component').then(
+        (c) => c.HomeComponent
+      )
   },
   {
     path: 'places',
