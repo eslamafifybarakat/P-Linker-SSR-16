@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 })
 export class CompanyInfoComponent {
   private subscriptions: Subscription[] = [];
-  @Output() handleBasicInfo: EventEmitter<any> = new EventEmitter();
+  @Output() handleCompanyInfo: EventEmitter<any> = new EventEmitter();
 
   isCompanyNameAvailable: boolean = false;
   isCheckCompanyName: boolean = false;
@@ -81,7 +81,7 @@ export class CompanyInfoComponent {
 
   submit(): void {
     if (this.companyInfoForm?.valid) {
-      this.handleBasicInfo.emit({ name: 'companyInfo', companyInfo: this.companyInfoForm.value, registerNow: true });
+      this.handleCompanyInfo.emit({ name: 'companyInfo', companyInfo: this.companyInfoForm.value, registerNow: true });
     } else {
       this.publicService?.validateAllFormFields(this.companyInfoForm);
     }

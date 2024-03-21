@@ -10,6 +10,7 @@ import { CommonModule, Location } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router, RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -19,6 +20,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./supplier-registration.component.scss']
 })
 export class SupplierRegistrationComponent {
+  private subscriptions: Subscription[] = [];
+
   currentStep: number = 1;
   personalInfo: any;
   basicInfo: any;
@@ -43,28 +46,20 @@ export class SupplierRegistrationComponent {
       event.name == 'personalInfo' ? this.personalInfo = event?.personalInfo : '';
       event.name == 'basicInfo' ? this.basicInfo = event?.basicInfo : '';
       event.name == 'addressInfo' ? this.addressInfo = event?.addressInfo : '';
-      event.name == 'companyInfo' ? this.companyInfo = event?.companyInfo : '';
     } else {
+      event.name == 'companyInfo' ? this.companyInfo = event?.companyInfo : '';
       event.registerNow ? this.submit() : '';
     }
-    console.log(this.personalInfo);
-    console.log(this.basicInfo);
-    console.log(this.addressInfo);
-    console.log(this.companyInfo);
-
   }
-
 
   submit(): void {
     const formData = this.collectFormData();
+    console.log(formData);
 
     if (!formData) return;
-
     this.publicService?.show_loader?.next(true);
-
-    this.authService?.register(formData)?.subscribe(
+    let registerSubscription = this.authService?.register(formData)?.subscribe(
       (res: any) => {
-        console.log(res);
         if (res) {
           this.handleRegistrationSuccess();
         } else {
@@ -75,6 +70,7 @@ export class SupplierRegistrationComponent {
         this.handleRegistrationError(err);
       }
     );
+    this.subscriptions.push(registerSubscription);
   }
 
   collectFormData(): any {
@@ -103,5 +99,13 @@ export class SupplierRegistrationComponent {
     this.publicService?.show_loader?.next(false);
     const errorMessage = error?.error?.message || error?.message || 'An error occurred';
     this.alertsService.openToast('error', 'error', errorMessage);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      if (subscription && subscription.closed) {
+        subscription.unsubscribe();
+      }
+    });
   }
 }

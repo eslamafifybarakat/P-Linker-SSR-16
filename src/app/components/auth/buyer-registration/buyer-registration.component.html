@@ -1,1 +1,56 @@
-<p>buyer-registration works!</p>
+<div id="buyer-registration">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-md-4 mb-2">
+    <a class="text-dark pointer lh-sm" (click)="back()">
+      <i class="pi pi-arrow-left scaleX-rtl"></i>
+    </a>
+    <div class="justify-content-end d-flex me-auto">
+      {{'auth.step'|translate}} {{currentStep}} {{'auth.of'|translate}} 4
+    </div>
+  </div>
+  <div class="d-lg-none d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
+    <img src="assets/images/auth/auth-logo-dark.svg" class="form-logo mb-2 pointer" alt="logo" [routerLink]="['/']">
+  </div>
+  <!-- =========Start Personal Info============ -->
+  <ng-container *ngIf="currentStep==1">
+    <div>
+      <h2 class="fs-1 text-center">
+        {{'auth.buyerSignUp'|translate}}
+      </h2>
+      <personal-info (nextStep)="nextStep($event)"></personal-info>
+    </div>
+  </ng-container>
+  <!-- =========End Personal Info============ -->
+
+  <!-- =========Start Basic Info============ -->
+  <ng-container *ngIf="currentStep==2">
+    <div>
+      <h2 class="fs-1 text-center">
+        {{'auth.buyerSignUp'|translate}}
+      </h2>
+      <basic-info (handleBasicInfo)="nextStep($event)"></basic-info>
+    </div>
+  </ng-container>
+  <!-- =========End Basic Info============ -->
+
+  <!-- =========Start Address Info============ -->
+  <ng-container *ngIf="currentStep==3">
+    <div>
+      <h2 class="fs-1 text-center">
+        {{'auth.buyerSignUp'|translate}}
+      </h2>
+      <address-info (handleAddressInfo)="nextStep($event)"></address-info>
+    </div>
+  </ng-container>
+  <!-- =========End Address Info============ -->
+
+  <!-- =========Start Company Info============ -->
+  <ng-container *ngIf="currentStep==4">
+    <div>
+      <h2 class="fs-1 text-center">
+        {{'auth.buyerSignUp'|translate}}
+      </h2>
+      <company-info (handleCompanyInfo)="nextStep($event)"></company-info>
+    </div>
+  </ng-container>
+  <!-- =========End Company Info============ -->
+</div>

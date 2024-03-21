@@ -13,6 +13,9 @@
   <!-- =========Start Personal Info============ -->
   <ng-container *ngIf="currentStep==1">
     <div>
+      <h2 class="fs-1 text-center">
+        {{'auth.supplierSignUp'|translate}}
+      </h2>
       <personal-info (nextStep)="nextStep($event)"></personal-info>
     </div>
   </ng-container>
@@ -21,6 +24,9 @@
   <!-- =========Start Basic Info============ -->
   <ng-container *ngIf="currentStep==2">
     <div>
+      <h2 class="fs-1 text-center">
+        {{'auth.supplierSignUp'|translate}}
+      </h2>
       <basic-info (handleBasicInfo)="nextStep($event)"></basic-info>
     </div>
   </ng-container>
@@ -29,7 +35,10 @@
   <!-- =========Start Address Info============ -->
   <ng-container *ngIf="currentStep==3">
     <div>
-      <address-info (handleBasicInfo)="nextStep($event)"></address-info>
+      <h2 class="fs-1 text-center">
+        {{'auth.supplierSignUp'|translate}}
+      </h2>
+      <address-info (handleAddressInfo)="nextStep($event)"></address-info>
     </div>
   </ng-container>
   <!-- =========End Address Info============ -->
@@ -37,7 +46,10 @@
   <!-- =========Start Company Info============ -->
   <ng-container *ngIf="currentStep==4">
     <div>
-      <company-info (handleBasicInfo)="nextStep($event)"></company-info>
+      <h2 class="fs-1 text-center">
+        {{'auth.supplierSignUp'|translate}}
+      </h2>
+      <company-info (handleCompanyInfo)="nextStep($event)"></company-info>
     </div>
   </ng-container>
   <!-- =========End Company Info============ -->
