@@ -36,7 +36,7 @@
     "location": "Location",
     "availableContract": "Available for contract",
     "notAvailableContract": "Not Available for contract",
-    "errorOccur":"An Error Occur"
+    "errorOccur":"An error has occurred"
   },
   "auth": {
     "welcomeBack": "Welcome Back",
@@ -66,7 +66,12 @@
     "termsAndConditions": "Terms and Conditions",
     "registerNow": "Register Now",
     "expandYourNetwork": "Expand your network",
-    "findYourBuyer": "Find your buyer"
+    "findYourBuyer": "Find your buyer",
+    "register":"Register",
+    "notMember":"Not a member?",
+    "forgotPasswordTitle": "Forgot Password",
+    "forgetPasswordText":"Don’t worry! It happens. Please enter your email and we’ll send OTP to your email",
+    "backLogin":"Back to login"
   },
   "labels": {
     "username": "Username",

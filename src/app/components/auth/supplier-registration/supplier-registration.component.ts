@@ -97,7 +97,7 @@ export class SupplierRegistrationComponent {
 
   handleRegistrationError(error: any): void {
     this.publicService?.show_loader?.next(false);
-    const errorMessage = error?.error?.message || error?.message || 'An error occurred';
+    const errorMessage = error?.error?.message || error?.message || this.publicService.translateTextFromJson('general.errorOccur');
     this.alertsService.openToast('error', 'error', errorMessage);
   }
 

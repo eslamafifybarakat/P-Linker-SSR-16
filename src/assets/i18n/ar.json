@@ -66,7 +66,12 @@
     "termsAndConditions": "البنود والشروط",
     "registerNow": "سجل الآن",
     "expandYourNetwork": "وسع شبكتك",
-    "findYourBuyer": "ابحث عن مشترٍ"
+    "findYourBuyer": "ابحث عن مشترٍ",
+    "register": "تسجيل",
+"notMember": "لست عضوا؟",
+"forgotPasswordTitle": "نسيت كلمة المرور",
+"forgetPasswordText": "لا تقلق! هذا يحدث. يرجى إدخال بريدك الإلكتروني وسنرسل رمز التحقق إلى بريدك الإلكتروني",
+"backLogin": "العودة لتسجيل الدخول"
   },
   "labels": {
     "username": "اسم المستخدم",
