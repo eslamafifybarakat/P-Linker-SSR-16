@@ -3,7 +3,8 @@
     "projectName": "P-linker",
     "error500": "Server error",
     "login": "Login",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "allResults": "All Results"
   },
   "nav": {
     "home": "Home",
@@ -29,43 +30,47 @@
       }
     }
   },
-  "general":{
-    "backToHome":"Back to home"
+  "general": {
+    "backToHome": "Back to home",
+    "moreDetails": "More Details",
+    "location": "Location",
+    "availableContract": "Available for contract",
+    "notAvailableContract": "Not Available for contract"
   },
-  "auth":{
-    "welcomeBack":"Welcome Back",
-    "discoverEffective":"Discover effective solutions to overcome your procurement challenges.",
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "discoverEffective": "Discover effective solutions to overcome your procurement challenges.",
     "signInToYourAccount": "Sign In To Your Account",
     "enterToLogIn": "Enter Your Username & Password To Log In",
     "forgotPassword": "Forgot Password?",
     "rememberPassword": "Remember Password",
-    "newProcurelinker":"New to Procurelinker ?!",
-    "createNewAccount":"Create New account",
-    "signIn":"Sign In",
-    "buyerSignUp":"Buyer sign up",
+    "newProcurelinker": "New to Procurelinker ?!",
+    "createNewAccount": "Create New account",
+    "signIn": "Sign In",
+    "buyerSignUp": "Buyer sign up",
     "supplierSignUp": "Supplier sign up",
-    "PleaseEnterBasicInformation":"Please enter you basic information, name and email",
-    "HaveAccount":"Have an account?",
-    "login":"Login",
-    "continue":"Continue",
-    "step":"Step",
-    "of":"Of",
-    "isUsedBefore":"is used before",
-    "pleaseEnterBasicInformation2":"Please enter you basic information, user name and create password for your account",
-    "pleaseEnterBasicInformation4":"Complete your company information, company name and your company address",
-    "pleaseEnterBasicInformation3":"Enter your address, country and vat-number",
-    "orTax":"or tax id",
-    "pleaseEnterValidTax":"Please enter valid value, should be Between 8 to 20 Characters Long.",
-    "iAgree":"I agree and accept all",
-    "termsAndConditions":"Terms and Conditions",
-    "registerNow":"Register Now",
-    "expandYourNetwork":"Expand your Network",
-    "findYourBuyer":"Find Your Buyer"
+    "PleaseEnterBasicInformation": "Please enter you basic information, name and email",
+    "HaveAccount": "Have an account?",
+    "login": "Login",
+    "continue": "Continue",
+    "step": "Step",
+    "of": "Of",
+    "isUsedBefore": "is used before",
+    "pleaseEnterBasicInformation2": "Please enter you basic information, user name and create password for your account",
+    "pleaseEnterBasicInformation4": "Complete your company information, company name and your company address",
+    "pleaseEnterBasicInformation3": "Enter your address, country and vat-number",
+    "orTax": "or tax id",
+    "pleaseEnterValidTax": "Please enter valid value, should be Between 8 to 20 Characters Long.",
+    "iAgree": "I agree and accept all",
+    "termsAndConditions": "Terms and Conditions",
+    "registerNow": "Register Now",
+    "expandYourNetwork": "Expand your Network",
+    "findYourBuyer": "Find Your Buyer"
   },
-  "labels":{
-    "username":"Username",
-    "password":"Password",
-    "email":"Email",
+  "labels": {
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
     "userName": "Username",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -73,15 +78,15 @@
     "confirmPassword": "Confirm Password",
     "hashCode": "Hash Code",
     "companyName": "Company Name",
-    "country":"Country",
-    "city":"City",
-    "vatNumber":"Vat-number",
-    "address":"Address"
+    "country": "Country",
+    "city": "City",
+    "vatNumber": "Vat-number",
+    "address": "Address"
   },
-  "placeholders":{
-    "username":"Enter Username",
-    "password":"Enter Password",
-    "email":"Enter email",
+  "placeholders": {
+    "username": "Enter Username",
+    "password": "Enter Password",
+    "email": "Enter email",
     "userName": "Enter username",
     "firstName": "Enter first Name",
     "lastName": "Enter last Name",
@@ -89,32 +94,32 @@
     "confirmPassword": "Enter confirm Password",
     "hashCode": "Enter hash Code",
     "companyName": "Enter company name",
-    "search":"Search",
-    "country":"Select country",
-    "city":"Select city",
-    "vatNumber":"Enter your vat-number",
-    "address":"Enter address"
+    "search": "Search",
+    "country": "Select country",
+    "city": "Select city",
+    "vatNumber": "Enter your vat-number",
+    "address": "Enter address"
   },
-  "validations":{
-    "username":"Username is required",
-    "password":"Password is required",
-    "validator_email":"Email is required",
-    "emailNotCorrect":"please enter valid mail, (e.g., “ example@email.com ) ",
+  "validations": {
+    "username": "Username is required",
+    "password": "Password is required",
+    "validator_email": "Email is required",
+    "emailNotCorrect": "please enter valid mail, (e.g., “ example@email.com ) ",
     "userName": "Username is required",
-    "userNameNotCorrect":"User name not correct",
+    "userNameNotCorrect": "User name not correct",
     "firstName": "First Name is required",
     "lastName": "Last Name is required",
-    "length":"Length must be larger than 2",
-    "nameLength":"Name length must be larger than or equal 2",
-    "userLength":"Length must be larger than 5",
+    "length": "Length must be larger than 2",
+    "nameLength": "Name length must be larger than or equal 2",
+    "userLength": "Length must be larger than 5",
     "phone": "Phone is required",
     "confirmPassword": "Confirm Password is required",
-    "passwordPattern":"Your password must be 8 or more characters, contains upper & lower case letters, numbers, at least one special character (!%*?&|...)",
-    "notMatch":"Password didn’t match, please try again*",
+    "passwordPattern": "Your password must be 8 or more characters, contains upper & lower case letters, numbers, at least one special character (!%*?&|...)",
+    "notMatch": "Password didn’t match, please try again*",
     "hashCode": "Hash Code is required",
     "companyName": "Company name is required",
-    "requiredField":"This field is required",
-    "validVatId":"Please enter valid vat number, must be Must Be Between 11 and 20 Characters Long.",
+    "requiredField": "This field is required",
+    "validVatId": "Please enter valid vat number, must be Must Be Between 11 and 20 Characters Long.",
     "addressLength": "Sorry! The Address Must Be Between 4 And 100 Characters Long."
   },
   "footer": {
@@ -132,5 +137,14 @@
     "backToHome": "Back to home",
     "serverError": "A server error has occurred",
     "pageNotFound": "Page not found"
+  },
+  "services": {
+    "offices": {
+      "heroTitle": "Recruitment offices",
+      "heroDescription": "Enjoy the ability to communicate with a large group of licensed recruitment offices around the Kingdom to obtain the best possible employment",
+      "heroSearchPlaceHolderText": "Are you looking for a specific office?",
+      "topicTitle": "Keywords",
+      "btnText": "Do you need help?"
+    }
   }
 }

@@ -1,9 +1,9 @@
-import { HomeComponent } from './components/home/home.component';
 import { Routes } from '@angular/router';
 
 // Components
 
 // TS Files for child routes
+import { servicesChildrenRoutes } from './components/services/services-children-routes';
 import { placesChildrenRoutes } from './components/places/places-children-routes';
 import { authChildrenRoutes } from './components/auth/auth-children-routes';
 import { errorsChildrenRoutes } from './components/errors/errors-routes';
@@ -33,6 +33,14 @@ export const appRoutes: Routes = [
         (c) => c.PlacesComponent
       ),
     children: placesChildrenRoutes
+  },
+  {
+    path: 'Services',
+    loadComponent: () =>
+      import('./components/services/services.component').then(
+        (c) => c.ServicesComponent
+      ),
+    children: servicesChildrenRoutes
   },
   {
     path: ':lang/places',

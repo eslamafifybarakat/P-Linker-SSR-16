@@ -89,3 +89,16 @@
 .btn:disabled:hover {
   opacity: 0.65;
 }
+
+.btn-outline-white {
+  min-width: 7rem;
+  color: var(--text-white-color) !important;
+  background-color: transparent!important;
+  border-color: var(--text-white-color) !important;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+  z-index: 1;
+}

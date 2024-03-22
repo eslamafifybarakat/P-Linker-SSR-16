@@ -1,6 +1,11 @@
 import { RootsApi } from "../../interfaces/roots-api";
 
-export const roots: RootsApi = {
+export const roots: any = {
   doctors: 'places',
-  places: 'places'
+  places: 'places',
+  services: {
+    offices: {
+      getAll: 'offices'
+    }
+  }
 };

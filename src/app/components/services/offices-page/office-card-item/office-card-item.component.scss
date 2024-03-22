@@ -1,0 +1,105 @@
+#office-card-item {
+  border: 1.5px solid #BAC8D1;
+  border-radius: 16px;
+  padding: 1.25rem 0.75rem;
+
+  .office-image {
+    width: 70px;
+    height: 70px;
+    background-color: #DAEAF4;
+    padding: 5px;
+    border-radius: 2px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      border-radius: 2px;
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 5px;
+  }
+
+  .rate-reviews {
+    padding-bottom: 5px;
+
+    .rate {
+      .stars {}
+
+      .count {
+        font-size: 12px;
+      }
+    }
+
+    .reviews {
+      font-size: 12px;
+    }
+  }
+
+  .country {
+    .country-flag {
+      width: 20px;
+      height: 15px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        border-radius: 2px;
+      }
+    }
+
+    .country-name {
+      font-size: 12px;
+    }
+  }
+
+  .address {
+    .bi-check {
+      border-radius: 50%;
+      background: red;
+      color: red;
+    }
+
+    .address-label,
+    .address-value {
+      font-size: 14px;
+    }
+
+    .address-label {
+      font-weight: 500;
+    }
+  }
+
+  .status {
+    .status-value {
+      font-size: 14px;
+    }
+
+    .text-available {
+      color: green;
+    }
+
+    .text-not-available {
+      color: red;
+    }
+  }
+
+  .btn-outline-main {
+    width: 100%;
+    color: var(--text-main-color) !important;
+    background-color: transparent !important;
+    border-width: 1px;
+    border-color: var(--text-main-color) !important;
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    font-size: 1rem;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+  }
+}
