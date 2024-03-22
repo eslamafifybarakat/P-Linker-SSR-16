@@ -35,7 +35,8 @@
     "moreDetails": "تفاصيل أكثر",
     "location": "الموقع",
     "availableContract": "متاح للتعاقد",
-    "notAvailableContract": "غير متاح للتعاقد"
+    "notAvailableContract": "غير متاح للتعاقد",
+    "errorOccur":"حدث خطأ"
   },
   "auth": {
     "welcomeBack": "مرحبًا مجددًا",
@@ -103,7 +104,7 @@
   "validations": {
     "username": "اسم المستخدم مطلوب",
     "password": "كلمة المرور مطلوبة",
-    "validator_email": "البريد الإلكتروني مطلوب",
+    "email": "البريد الإلكتروني مطلوب",
     "emailNotCorrect": "الرجاء إدخال بريد إلكتروني صحيح، (مثال: example@email.com)",
     "userName": "اسم المستخدم مطلوب",
     "userNameNotCorrect": "اسم المستخدم غير صحيح",

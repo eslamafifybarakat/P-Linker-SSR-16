@@ -62,7 +62,6 @@
               <input type="text" id="email" class="form-control" formControlName="email"
                 placeholder="{{'placeholders.email'|translate}}"
                 [class.border-red]="(formControls?.email?.touched||formControls?.email?.dirty)&&formControls?.email?.invalid || isEmailFound"
-                [class.is-valid]="(formControls?.email?.touched||formControls?.email?.dirty)&&formControls?.email?.valid&&!isEmailFound"
                 (input)="publicService?.clearValidationErrors(formControls?.email)"
                 (blur)="formControls?.email?.valid?isEmailFounded(this.personalInfoForm?.value?.email):''"
                 (keyup)="onKeyUpEvent('email')">
@@ -95,10 +94,9 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4"
-        [disabled]="personalInfoForm?.invalid||isEmailFound">
+      <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4">
         <span>
-          {{'continue'}}
+          {{'auth.continue'|translate}}
         </span>
       </button>
     </form>

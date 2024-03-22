@@ -28,7 +28,7 @@ export class LoginComponent {
   loginForm = this.fb.group({
     userName: ['', { validators: Validators.required, updateOn: 'blur' }],
     password: ['', { validators: Validators.required, updateOn: 'blur' }],
-    remember: [true, []],
+    remember: [false, []],
   });
   get formControls(): any {
     return this.loginForm?.controls;

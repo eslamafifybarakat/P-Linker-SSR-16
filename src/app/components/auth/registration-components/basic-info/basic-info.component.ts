@@ -67,16 +67,14 @@ export class BasicInfoComponent {
       this.isUserNameFound = res.data === true;
     } else {
       this.isUserNameFound = false;
-      if (res.message) {
-        res.error?.message ? this.alertsService.openToast('error', 'error', res.error.message) : '';
-      }
+      this.handleError(res.error?.message);
     }
     this.isCheckUserName = false;
     this.cdr.detectChanges();
   };
   handleError = (err: any) => {
     if (err) {
-      this.alertsService.openToast('error', 'error', err.message);
+      this.alertsService.openToast('error', 'error', err.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
     this.isCheckUserName = false;
   };
@@ -86,7 +84,9 @@ export class BasicInfoComponent {
 
   continue(): void {
     if (this.basicInfoForm?.valid) {
+      // if (!this.isUserNameFound) {
       this.handleBasicInfo.emit({ name: 'basicInfo', basicInfo: this.basicInfoForm.value, nextStep: 3 });
+      // }
     } else {
       this.publicService?.validateAllFormFields(this.basicInfoForm);
     }

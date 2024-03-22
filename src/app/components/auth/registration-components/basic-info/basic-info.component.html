@@ -11,7 +11,6 @@
             <input type="text" id="userName" class="form-control" formControlName="userName"
               placeholder="{{'placeholders.username'|translate}}"
               [class.border-red]="(formControls?.userName?.touched||formControls?.userName?.dirty)&&formControls?.userName?.invalid || isUserNameFound"
-              [class.is-valid]="(formControls?.userName?.touched||formControls?.userName?.dirty)&&formControls?.userName?.valid&&!isUserNameFound"
               (input)="publicService?.clearValidationErrors(formControls?.userName)"
               (blur)="formControls?.userName?.valid?IsUserNameFound(this.basicInfoForm?.value?.userName):''"
               (keyup)="onKeyUpEvent()">
@@ -115,8 +114,7 @@
       </div>
 
     </div>
-    <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4"
-      [disabled]="basicInfoForm?.invalid||isUserNameFound">
+    <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4">
       <span>
         {{'auth.continue'|translate}}
       </span>
