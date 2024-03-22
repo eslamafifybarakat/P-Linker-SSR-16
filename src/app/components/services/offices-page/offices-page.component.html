@@ -105,7 +105,7 @@
                 2x
               </span>
               <span class="gradient-fast-text">
-                Faster
+                {{'summary.faster' | translate}}
               </span>
             </span>
           </h4>
@@ -120,7 +120,7 @@
                 20%
               </span>
               <span class="gradient-less-text">
-                Less
+                {{'summary.less' | translate}}
               </span>
             </span>
           </h4>
@@ -135,7 +135,7 @@
                 120+
               </span>
               <span class="gradient-count-text">
-                Office
+                {{'summary.office' | translate}}
               </span>
             </span>
           </h4>
@@ -148,10 +148,37 @@
     <!-- End Offices Summary Section -->
     <!-- Start Offices List Section -->
     <section id="list" class="mt-3 mt-md-5">
-      <div class="d-flex flex-wrap align-items-center justify-content-between">
-        <h2 class="title mb-3 fw-500">
+      <div class="d-flex flex-wrap align-items-end justify-content-between mb-3">
+        <div class="d-flex flex-column gap-2">
+          <h2 class="title text-main-color mb-0 fw-500">
+            {{'titles.advancedSearch' | translate}}
+          </h2>
+          <div class="d-flex align-items-center gap-2">
+            <span>Location</span>
+            <span>Nationality</span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-solid-main">
+            {{'labels.apply' | translate}}
+          </button>
+          <button class="btn btn-outline-danger">
+            {{'labels.cancelClassification' | translate}}
+          </button>
+        </div>
+      </div>
+      <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+        <h2 class="title text-main-color mb-0 fw-500">
           {{'titles.allResults' | translate}}
         </h2>
+        <div class="d-flex align-items-center gap-2">
+          <span class="text-capitalize">
+            {{'labels.total' | translate}}:
+          </span>
+          <span class="text-main-color fw-bold">
+            {{officesCount}}
+          </span>
+        </div>
       </div>
       <ng-container *ngIf="isLoadingOfficesList; else elseViewOfficeList">
         Loading ...
@@ -166,11 +193,9 @@
             </ng-container>
           </div>
         </div>
-        <div class="flex-auto">
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="page" [rows]="perPage"
-            [totalRecords]="120"></p-paginator>
-        </div>
       </ng-template>
+      <app-paginator [page]="page" [perPage]="perPage" [totalRecords]="officesCount"
+        (pageChange)="onOfficesPageChange($event)"></app-paginator>
     </section>
     <!-- End Offices List Section -->
   </div>

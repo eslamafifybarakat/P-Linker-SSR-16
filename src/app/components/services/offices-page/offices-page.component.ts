@@ -1,6 +1,5 @@
 // Modules
 import { TranslateModule } from '@ngx-translate/core';
-import { PaginatorModule } from 'primeng/paginator';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -11,8 +10,10 @@ import { OfficesService } from '../../../services/offices.service';
 import { Subject, Subscription } from 'rxjs';
 
 // Components
+import { PaginatorComponent } from './../../../shared/components/paginator/paginator.component';
 import { OfficeCardItemComponent } from './office-card-item/office-card-item.component';
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-offices-page',
@@ -20,12 +21,12 @@ import { Component } from '@angular/core';
   imports: [
     // Modules
     TranslateModule,
-    PaginatorModule,
     RouterModule,
     CommonModule,
 
     // Components
-    OfficeCardItemComponent
+    OfficeCardItemComponent,
+    PaginatorComponent
   ],
   templateUrl: './offices-page.component.html',
   styleUrls: ['./offices-page.component.scss']
@@ -43,7 +44,7 @@ export class OfficesPageComponent {
   /* --- Start Offices List Section Variables --- */
   isLoadingOfficesList: boolean = false;
   officesList: any[] = [];
-  placesCount: number = 0;
+  officesCount: number = 0;
   page: number = 1;
   perPage: number = 18;
 
@@ -55,6 +56,8 @@ export class OfficesPageComponent {
   locationId: number | string;
   nationalityId: number | string;
   /*  --- End Offices List Section Variables ---  */
+
+  translatedText: any = {};
 
   constructor(
     private metadataService: MetadataService,
@@ -71,6 +74,7 @@ export class OfficesPageComponent {
     this.updateMetaTagsForSEO();
     this.getOfficesList();
   }
+
   private updateMetaTagsForSEO(): void {
     this.metadataService.updateTitle(`المكاتب`);
     this.metadataService.updateMetaTagsName([
@@ -116,7 +120,7 @@ export class OfficesPageComponent {
         if (res.code == 200) {
           if (res.data) {
             this.officesList = res.data.items;
-            this.placesCount = res.data.total;
+            this.officesCount = res.data.total;
           }
         } else {
           this.handleError(res?.message);
@@ -147,8 +151,9 @@ export class OfficesPageComponent {
         available: true
       });
     });
+    this.officesCount = 3225;
   }
-  onPageChange(event: any) {
+  onOfficesPageChange(event: any) {
     console.log(event);
     this.page = event.first;
     this.getOfficesList();

@@ -1,10 +1,17 @@
 {
+  "paginator": {
+    "first": "First",
+    "last": "Last",
+    "next": "Next",
+    "previous": "Previous"
+  },
   "titles": {
     "projectName": "P-linker",
     "error500": "Server error",
     "login": "Login",
     "signUp": "Sign Up",
-    "allResults": "All Results"
+    "allResults": "All Results",
+    "advancedSearch": "Advanced Search"
   },
   "nav": {
     "home": "Home",
@@ -37,6 +44,11 @@
     "availableContract": "Available for contract",
     "notAvailableContract": "Not Available for contract"
   },
+  "summary": {
+    "faster": "Faster",
+    "less": "Less",
+    "office": "Office"
+  },
   "auth": {
     "welcomeBack": "Welcome Back",
     "discoverEffective": "Discover effective solutions to overcome your procurement challenges.",
@@ -68,6 +80,9 @@
     "findYourBuyer": "Find Your Buyer"
   },
   "labels": {
+    "apply": "Apply",
+    "cancelClassification": "Reset",
+    "total": "Total",
     "username": "Username",
     "password": "Password",
     "email": "Email",

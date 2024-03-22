@@ -84,6 +84,12 @@
       color: green;
     }
 
+    svg.bi-check {
+      &:dir(rtl) {
+        transform: initial !important;
+      }
+    }
+
     .text-not-available {
       color: red;
     }

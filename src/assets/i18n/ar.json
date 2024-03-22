@@ -1,10 +1,17 @@
 {
+  "paginator": {
+    "first": "الأول",
+    "last": "الأخير",
+    "next": "التالي",
+    "previous": "السابق"
+  },
   "titles": {
     "projectName": "استقدام",
     "error500": "خطأ في الخادم",
     "login": "تسجيل الدخول",
     "signUp": "إنشاء حساب",
-    "allResults": "جميع النتائج"
+    "allResults": "جميع النتائج",
+    "advancedSearch": "بحث متقدم"
   },
   "nav": {
     "home": "الرئيسية",
@@ -37,6 +44,11 @@
     "availableContract": "متاح للتعاقد",
     "notAvailableContract": "غير متاح للتعاقد"
   },
+  "summary": {
+    "faster": "أٍسرع",
+    "less": "أٌقل",
+    "office": "مكتب"
+  },
   "auth": {
     "welcomeBack": "مرحبًا مجددًا",
     "discoverEffective": "اكتشف الحلول الفعّالة للتغلب على تحديات التوريد الخاصة بك.",
@@ -68,6 +80,9 @@
     "findYourBuyer": "ابحث عن مشترٍ"
   },
   "labels": {
+    "apply": "تطبيق",
+    "cancelClassification": "إلغاء التصنيف",
+    "total": "الإجمالي",
     "username": "اسم المستخدم",
     "password": "كلمة المرور",
     "email": "البريد الإلكتروني",

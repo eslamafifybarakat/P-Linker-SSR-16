@@ -1,0 +1,73 @@
+::ng-deep {
+  .p-paginator {
+    .p-paginator-pages {
+      .p-paginator-page {
+        margin: 0 0.2rem;
+        background-color: var(--bg-white-color);
+        border: none;
+        color: #213039;
+        width: 2rem;
+        height: 2rem;
+
+        &.p-highlight {
+          background-color: var(--bg-white-color);
+          color: var(--text-main-color);
+          border: 1px solid var(--text-main-color);
+          border-radius: 9px;
+        }
+      }
+    }
+
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-first,
+    .p-paginator-last {
+      &::before {
+        display: inline-block;
+        background-color: var(--bg-white-color);
+        color: var(--text-main-color);
+        border: 1px solid var(--text-main-color);
+        border-radius: 9px;
+        width: auto;
+        height: 2rem;
+        padding: 0.2rem 0.35rem;
+        margin-inline-start: 0.2rem;
+        margin-inline-end: 0.2rem;
+      }
+
+      &.p-disabled::before {
+        background-color: var(--bg-white-color);
+        color: #a5a5a5 !important;
+        border-color: #a5a5a5 !important;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      svg,
+      .pi-chevron-left,
+      .pi-chevron-right,
+      .pi-step-backward,
+      .pi-step-forward {
+        display: none !important;
+      }
+    }
+
+    .p-paginator-prev::before {
+      content: "Previous";
+    }
+
+    .p-paginator-next::before {
+      content: "Next";
+    }
+
+    .p-paginator-first::before {
+      content: "First";
+    }
+
+    .p-paginator-last::before {
+      content: "Last";
+    }
+  }
+}

@@ -1,15 +1,21 @@
 #offices {
   padding-top: 5rem;
+  padding-bottom: 3rem;
 
   // Start Hero Section
   #hero-secion {
     min-height: 70vh;
     background-color: var(--bg-main-color);
     border-radius: 20px;
-    background-image: url('./../../../../assets/images/services/offices/bg-offices-hero.webp'); // Replace with your actual image path
+    background-image: url('./../../../../assets/images/services/offices/bg-offices-hero-ltr.webp'); // Replace with your actual image path
     background-size: cover; // Adjust as needed (e.g., 'contain', '100% auto', etc.)
     background-repeat: no-repeat;
     background-position: center center;
+
+    // Change background image when direction is right-to-left (RTL)
+    &:dir(rtl) {
+      background-image: url('./../../../../assets/images/services/offices/bg-offices-hero-rtl.webp') !important; // Path to RTL background image
+    }
 
     padding: 4rem;
     color: var(--text-white-color);
@@ -19,7 +25,7 @@
     flex-direction: column;
 
     .title {
-      font-size: 35px;
+      font-size: 33px;
       line-height: 53.57px;
     }
 
@@ -30,7 +36,7 @@
 
     // Start Hero Section Search
     .searchbar {
-      font-size: 15px;
+      font-size: 13px;
       color: var(--text-white-color);
       display: flex;
       z-index: 3;
@@ -130,7 +136,7 @@
         flex: 100%;
         white-space: pre;
         height: 34px;
-        font-size: 16px;
+        font-size: 14px;
       }
 
       .searchbar-input {
@@ -145,7 +151,7 @@
         flex: 100%;
         margin-top: -37px;
         height: 34px;
-        font-size: 16px;
+        font-size: 14px;
         max-width: 100%;
         width: 100%;
 
@@ -185,7 +191,7 @@
       }
 
       .topic-item {
-        font-size: 1rem;
+        font-size: 0.8rem;
         padding-inline-start: 0.8rem;
         padding-inline-end: 0.8rem;
         background-color: #c5c4c4;
@@ -206,10 +212,46 @@
     border-color: var(--text-white-color) !important;
     border-radius: 0.5rem;
     padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+  }
+
+  .btn-solid-main {
+    min-width: 7rem;
+    color: var(--text-white-color) !important;
+    background-color: var(--bg-main-color) !important;
+    border-color: var(--text-main-color) !important;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.25rem;
     font-size: 1rem;
     position: relative;
     transition: all 0.4s ease-in-out;
     z-index: 1;
+  }
+
+  .btn-solid-main:hover,
+  .btn-solid-main:focus {
+    color: var(--text-white-color) !important;
+  }
+
+  .btn-outline-danger {
+    min-width: 7rem;
+    color: red !important;
+    background-color: var(--bg-white-color) !important;
+    border-color: red !important;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    font-size: 1rem;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+  }
+
+  .btn-outline-danger :hover,
+  .btn-outline-danger :focus {
+    color: red !important;
   }
 
   // End Hero Section
@@ -218,7 +260,7 @@
   #summary {
     .summary-item {
       .summary-item-title {
-        font-size: 32px;
+        font-size: 28px;
       }
 
       .gradient-fast-level {
@@ -260,16 +302,26 @@
 
     .item-vlaue {
       color: #213039;
-      font-size: 17px;
+      font-size: 14px;
     }
   }
 
   // End Offices Summary Section
+
+  // End Offices List Section
+  #list {
+    .title {
+      font-size: 25px;
+    }
+  }
+
+  // End Offices List Section
 }
 
 @media only screen and (max-width: 600px) {
   #offices {
     padding-top: 1rem;
+    padding-bottom: 1rem;
 
     // Start Hero Section
     #hero-secion {
@@ -299,34 +351,5 @@
     }
 
     // End Hero Section
-  }
-}
-
-::ng-deep {
-  .p-paginator {
-    .p-paginator-pages {
-      .p-paginator-page {
-        margin: 0 0.2rem;
-        background-color: var(--bg-white-color);
-        border: none;
-        color: #213039;
-        width: 2rem;
-        height: 2rem;
-      }
-
-      .p-paginator-page.p-highlight {
-        background-color: var(--bg-white-color);
-        /* Active index background color */
-        color: var(--text-main-color);
-        /* Active index text color */
-        border-width: 1px;
-        border-radius: 9px;
-        border-style: solid;
-        border-color: var(--text-main-color);
-        /* Active index border color */
-        width: 2rem;
-        height: 2rem;
-      }
-    }
   }
 }
