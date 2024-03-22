@@ -22,6 +22,7 @@ import { Subscription } from 'rxjs';
 })
 export class ResetPasswordComponent {
   private subscriptions: Subscription[] = [];
+
   isLoadingBtn: boolean = false;
   showEye: boolean = false;
   data: any;
@@ -29,9 +30,9 @@ export class ResetPasswordComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private authUserService: AuthService,
     private publicService: PublicService,
     private alertsService: AlertsService,
+    private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private _location: Location,
     private fb: FormBuilder,
@@ -85,7 +86,7 @@ export class ResetPasswordComponent {
       emailAddress: this.data?.email,
       newPassword: this.resetPasswordForm?.value?.password
     };
-    let resetPasswordSubscription: any = this.authUserService?.resetNewPassword(data)?.subscribe(
+    let resetPasswordSubscription: any = this.authService?.resetNewPassword(data)?.subscribe(
       (res: any) => {
         this.isLoadingBtn = false;
         if (res?.success === true) {

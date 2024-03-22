@@ -22,7 +22,7 @@ export class ForgetPasswordComponent {
   isLoadingBtn: boolean = false;
 
   constructor(
-    public authUserService: AuthService,
+    public authService: AuthService,
     public publicService: PublicService,
     public alertsService: AlertsService,
     public fb: FormBuilder,
@@ -52,7 +52,7 @@ export class ForgetPasswordComponent {
       emailAddress: this.forgetPasswordForm?.value?.email
     };
 
-    let forgetPasswordSubscription = this.authUserService?.forgetPassword(data)?.subscribe(
+    let forgetPasswordSubscription = this.authService?.forgetPassword(data)?.subscribe(
       (res: any) => {
         this.isLoadingBtn = false;
         if (res?.success === true) {

@@ -1,1 +1,61 @@
-<p>verification-code works!</p>
+<div id="verification-code" class="py-4 auth-form">
+  <div class="d-flex justify-content-between align-items-center gap-2 mb-5">
+    <a (click)="back()">
+      <i class="fas fa-arrow-left scaleX-rtl"></i>
+    </a>
+    <language-selector></language-selector>
+  </div>
+  <div class="d-lg-none d-flex justify-content-center">
+    <img src="assets/images/auth/auth-logo-dark.svg" class="form-logo mb-2" alt="logo" [routerLink]="['']">
+  </div>
+  <h2 class="fs-1 text-center">
+    {{'auth.verificationOtp'|translate}}
+  </h2>
+  <p class="mt-2 text-center w-75 m-auto lh-base"><span>
+      {{'auth.checkEmail'|translate}}
+    </span>
+    <span class="ps-1">{{email}}</span>
+  </p>
+  <form (ngSubmit)="submit()" class="py-sm-5 py-4">
+    <div class="mb-3 otp-code">
+      <code-input class="justify-content-center gap-2" [initialFocusField]="0" [code]="codeLength"
+        [isCodeHidden]="false" [isCodeHidden]="false" [codeLength]="4" (codeChanged)="onCodeChanged($event)"
+        (codeCompleted)="onCodeCompleted($event)">
+      </code-input>
+    </div>
+
+    <button type="submit" class="btn w-100 btn-solid-main form-btn mt-4"
+      [disabled]="isLoadingBtn || codeLength?.length < 4">
+      <span>
+        {{'auth.continue'|translate}}
+      </span>
+      <ng-container *ngIf="isLoadingBtn">
+        <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+      </ng-container>
+    </button>
+    <div class="text-center mt-4">
+      <p class="text-desc-color d-flex justify-content-center"> <span>
+          {{'auth.notReceive'|translate}}
+        </span>
+        <ng-container *ngIf="isWaiting">
+          <a (click)="resendCode(true)" class="text-main-color ps-1">
+            {{'auth.resend'|translate}}
+          </a>
+        </ng-container>
+        <ng-container *ngIf="!isWaiting">
+          <countdown [customTitle]="minute" (emitServicePrice)="printTimeEnd($event)"></countdown>
+        </ng-container>
+      </p>
+    </div>
+  </form>
+
+  <div class="text-center mt-5">
+    <p><span>
+        {{'auth.HaveAccount'|translate}}
+      </span>
+      <a class="text-main-color ps-1" [routerLink]="['/auth/login']">
+        {{'auth.login'|translate}}
+      </a>
+    </p>
+  </div>
+</div>

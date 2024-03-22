@@ -73,7 +73,11 @@
     "forgetPasswordText":"Don’t worry! It happens. Please enter your email and we’ll send OTP to your email",
     "backLogin":"Back to login",
     "resetPassword":"Reset Password",
-    "confirmPassword":"Confirm password"
+    "confirmPassword":"Confirm password",
+    "verificationOtp":"Verification OTP",
+    "checkEmail":"Check your mail, we’ve send you the OTP to",
+    "notReceive":"Didn’t receive the OTP?",
+    "resend":"Resend"
   },
   "labels": {
     "username": "Username",
