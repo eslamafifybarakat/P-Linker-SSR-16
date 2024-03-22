@@ -50,4 +50,16 @@ export class AuthService {
   register(data: any): Observable<any> {
     return this.http?.post<any>(this.apiUrl + roots?.auth?.register, data);
   }
+  forgetPassword(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots.auth.forgetPassword, data);
+  }
+  validateResetCode(data: any): Observable<any> {
+    return this.http.post<any>(
+      this.apiUrl + roots.auth.validateCode,
+      data
+    );
+  }
+  resetNewPassword(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots.auth.resetNewPassword, data);
+  }
 }
