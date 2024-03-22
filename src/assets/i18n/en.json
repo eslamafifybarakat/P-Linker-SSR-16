@@ -71,7 +71,9 @@
     "notMember":"Not a member?",
     "forgotPasswordTitle": "Forgot Password",
     "forgetPasswordText":"Don’t worry! It happens. Please enter your email and we’ll send OTP to your email",
-    "backLogin":"Back to login"
+    "backLogin":"Back to login",
+    "resetPassword":"Reset Password",
+    "confirmPassword":"Confirm password"
   },
   "labels": {
     "username": "Username",
@@ -87,7 +89,8 @@
     "country": "Country",
     "city": "City",
     "vatNumber": "Vat-number",
-    "address": "Address"
+    "address": "Address",
+    "newPassword":"New Password"
   },
   "placeholders": {
     "username": "Enter username",
@@ -104,7 +107,8 @@
     "country": "Select country",
     "city": "Select city",
     "vatNumber": "Enter your vat-number",
-    "address": "Enter address"
+    "address": "Enter address",
+    "newPassword":"Enter new password"
   },
   "validations": {
     "username": "Username is required",
@@ -126,7 +130,13 @@
     "companyName": "Company name is required",
     "requiredField": "This field is required",
     "validVatId": "Please enter valid vat number, must be Must Be Between 11 and 20 Characters Long.",
-    "addressLength": "Sorry! The Address Must Be Between 4 And 100 Characters Long."
+    "addressLength": "Sorry! The Address Must Be Between 4 And 100 Characters Long.",
+    "pickPassword":"Pick a password",
+    "oneLowerCase":"At least one lowercase",
+    "oneUppercase":"At least one uppercase",
+    "oneNumeric":"At least one numeric",
+    "eightChars":"Minimum 8 characters",
+    "specialChar":"At least one special character (!%*?&|@...)"
   },
   "footer": {
     "allRight": "All Rights Reserved © 2022.",

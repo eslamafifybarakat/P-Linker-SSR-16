@@ -176,12 +176,14 @@ input::-webkit-inner-spin-button {
   background-color: var(--bg-main-color);
   border-color: var(--bg-main-color) !important;
 }
-.p-icon-wrapper svg {
-  color: var(--text-white-color);
-}
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
   border-color: #ced4da !important;
 }
 .p-checkbox .p-checkbox-box.p-highlight:hover {
   border-color: var(--bg-main-color) !important;
+}
+.border-red {
+  .p-inputtext {
+    border: 0;
+  }
 }

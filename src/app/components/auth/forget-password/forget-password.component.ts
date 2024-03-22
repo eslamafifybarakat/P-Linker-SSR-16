@@ -1,14 +1,14 @@
 import { LanguageSelectorComponent } from './../../../shared/components/language-selector/language-selector.component';
-import { patterns } from './../../../shared/configs/patterns';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AlertsService } from './../../../services/generic/alerts.service';
 import { PublicService } from './../../../services/generic/public.service';
 import { AuthService } from './../../../services/auth.service';
+import { patterns } from './../../../shared/configs/patterns';
+import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
