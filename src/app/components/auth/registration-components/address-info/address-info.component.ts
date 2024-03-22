@@ -76,7 +76,7 @@ export class AddressInfoComponent {
   };
   handleCountriesError = (err: any) => {
     if (err) {
-      this.alertsService.openToast('error', 'error', err.message);
+      this.alertsService.openToast('error', 'error', err.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
     this.isLoadingCountries = false;
   };
@@ -109,7 +109,7 @@ export class AddressInfoComponent {
   };
   handleCitiesError = (err: any) => {
     if (err) {
-      this.alertsService.openToast('error', 'error', err.message);
+      this.alertsService.openToast('error', 'error', err.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
     this.isLoadingCities = false;
   };
@@ -135,16 +135,14 @@ export class AddressInfoComponent {
       this.isVatNumberAvailable = res.data === true;
     } else {
       this.isVatNumberAvailable = false;
-      if (res.message) {
-        res.error?.message ? this.alertsService.openToast('error', 'error', res.error.message) : '';
-      }
+      this.handleError(res.error?.message);
     }
     this.isCheckVatNumber = false;
     this.cdr.detectChanges();
   };
   handleError = (err: any) => {
     if (err) {
-      this.alertsService.openToast('error', 'error', err.message);
+      this.alertsService.openToast('error', 'error', err.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
     this.isCheckVatNumber = false;
   };

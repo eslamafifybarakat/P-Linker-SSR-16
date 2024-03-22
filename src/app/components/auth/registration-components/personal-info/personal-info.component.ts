@@ -62,16 +62,14 @@ export class PersonalInfoComponent {
       this.isEmailFound = res.data === true;
     } else {
       this.isEmailFound = false;
-      if (res.message) {
-        res.error?.message ? this.alertsService.openToast('error', 'error', res.error.message) : '';
-      }
+      this.handleError(res.error?.message);
     }
     this.isCheckEmail = false;
     this.cdr.detectChanges();
   };
   handleError = (err: any) => {
     if (err) {
-      this.alertsService.openToast('error', 'error', err.message);
+      this.alertsService.openToast('error', 'error', err.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
     this.isCheckEmail = false;
   };
@@ -81,7 +79,9 @@ export class PersonalInfoComponent {
   }
   continue(): void {
     if (this.personalInfoForm?.valid) {
+      // if (!this.isEmailFound) {
       this.nextStep.emit({ name: 'personalInfo', personalInfo: this.personalInfoForm.value, nextStep: 2 });
+      // }
     } else {
       this.publicService?.validateAllFormFields(this.personalInfoForm);
     }

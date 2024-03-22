@@ -42,7 +42,8 @@
     "moreDetails": "تفاصيل أكثر",
     "location": "الموقع",
     "availableContract": "متاح للتعاقد",
-    "notAvailableContract": "غير متاح للتعاقد"
+    "notAvailableContract": "غير متاح للتعاقد",
+    "errorOccur":"حدث خطأ"
   },
   "summary": {
     "faster": "أٍسرع",
@@ -77,7 +78,18 @@
     "termsAndConditions": "البنود والشروط",
     "registerNow": "سجل الآن",
     "expandYourNetwork": "وسع شبكتك",
-    "findYourBuyer": "ابحث عن مشترٍ"
+    "findYourBuyer": "ابحث عن مشترٍ",
+    "register": "تسجيل",
+"notMember": "لست عضوا؟",
+"forgotPasswordTitle": "نسيت كلمة المرور",
+"forgetPasswordText": "لا تقلق! هذا يحدث. يرجى إدخال بريدك الإلكتروني وسنرسل رمز التحقق إلى بريدك الإلكتروني",
+"backLogin": "العودة لتسجيل الدخول",
+"resetPassword": "إعادة تعيين كلمة المرور",
+"confirmPassword": "تأكيد كلمة المرور",
+"verificationOtp": "تحقق من رمز OTP",
+"checkEmail": "تحقق من بريدك الإلكتروني، لقد أرسلنا لك رمز OTP إلى",
+"notReceive": "لم تتلقى رمز OTP؟",
+"resend": "إعادة إرسال"
   },
   "labels": {
     "apply": "تطبيق",
@@ -96,7 +108,8 @@
     "country": "البلد",
     "city": "المدينة",
     "vatNumber": "رقم الضريبة",
-    "address": "العنوان"
+    "address": "العنوان",
+    "newPassword":"كلمة المرور الجديدة"
   },
   "placeholders": {
     "username": "أدخل اسم المستخدم",
@@ -113,12 +126,13 @@
     "country": "اختر البلد",
     "city": "اختر المدينة",
     "vatNumber": "أدخل رقم الضريبة القيمة المضافة",
-    "address": "أدخل العنوان"
+    "address": "أدخل العنوان",
+    "newPassword":"أدخل كلمة المرور الجديدة"
   },
   "validations": {
     "username": "اسم المستخدم مطلوب",
     "password": "كلمة المرور مطلوبة",
-    "validator_email": "البريد الإلكتروني مطلوب",
+    "email": "البريد الإلكتروني مطلوب",
     "emailNotCorrect": "الرجاء إدخال بريد إلكتروني صحيح، (مثال: example@email.com)",
     "userName": "اسم المستخدم مطلوب",
     "userNameNotCorrect": "اسم المستخدم غير صحيح",
@@ -130,12 +144,18 @@
     "phone": "الهاتف مطلوب",
     "confirmPassword": "تأكيد كلمة المرور مطلوب",
     "passwordPattern": "يجب أن تحتوي كلمة المرور على 8 أحرف أو أكثر، وتحتوي على أحرف كبيرة وصغيرة وأرقام، وعلى الأقل رمز خاص (!%*؟&|...)",
-    "notMatch": "كلمة المرور غير متطابقة، يرجى المحاولة مرة أخرى*",
+    "notMatch": "كلمة المرور غير متطابقة، يرجى المحاولة مرة أخرى",
     "hashCode": "الرمز التجزئة مطلوب",
     "companyName": "اسم الشركة مطلوب",
     "requiredField": "هذا الحقل مطلوب",
     "validVatId": "الرجاء إدخال رقم ضريبة صالح، يجب أن يكون بين 11 و 20 حرفًا.",
-    "addressLength": "عذرًا! يجب أن يكون العنوان بين 4 و 100 حرف."
+    "addressLength": "عذرًا! يجب أن يكون العنوان بين 4 و 100 حرف.",
+    "pickPassword":"اختر كلمة مرور",
+    "oneLowerCase":"على الأقل حرف صغير واحد",
+    "oneUppercase":"على الأقل حرف كبير واحد",
+    "oneNumeric": "على الأقل رقم واحد",
+    "eightChars":"الحد الأدنى لعدد الأحرف هو ٨",
+    "specialChar": "على الأقل حرف خاص واحد (!%*?&|@...)"
   },
   "footer": {
     "allRight": "جميع الحقوق محفوظة © 2022.",

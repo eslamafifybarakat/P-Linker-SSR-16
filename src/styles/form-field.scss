@@ -168,16 +168,22 @@ input::-webkit-inner-spin-button {
   content: "*";
   color: #dc3545;
 }
-#login {
-  .p-checkbox .p-checkbox-box {
-    box-shadow: none;
-  }
-  .p-checkbox .p-checkbox-box.p-highlight {
-    background-color: var(--bg-white-color);
-    color: var(--text-main-color);
-    border-color: var(--bg-main-color);
-  }
-  .p-icon-wrapper svg {
-    color: var(--text-main-color);
+
+.p-checkbox .p-checkbox-box {
+  box-shadow: none;
+}
+.p-checkbox .p-checkbox-box.p-highlight {
+  background-color: var(--bg-main-color);
+  border-color: var(--bg-main-color) !important;
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  border-color: #ced4da !important;
+}
+.p-checkbox .p-checkbox-box.p-highlight:hover {
+  border-color: var(--bg-main-color) !important;
+}
+.border-red {
+  .p-inputtext {
+    border: 0;
   }
 }

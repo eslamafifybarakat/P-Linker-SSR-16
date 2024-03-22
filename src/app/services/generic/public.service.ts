@@ -1,6 +1,7 @@
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,12 @@ import { Subject } from 'rxjs';
 export class PublicService {
   show_loader = new Subject<boolean>();
 
-  constructor() { }
-
+  constructor(
+    private translate: TranslateService,
+  ) { }
+  translateTextFromJson(text: string): any {
+    return this.translate.instant(text);
+  }
   createGoogleMapsLink(latitude: number, longitude: number): string {
     const baseUrl = "https://www.google.com/maps/search/?api=1&query=";
     return `${baseUrl}${latitude},${longitude}`;

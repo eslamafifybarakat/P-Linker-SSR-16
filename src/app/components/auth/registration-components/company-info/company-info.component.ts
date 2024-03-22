@@ -62,16 +62,14 @@ export class CompanyInfoComponent {
       this.isCompanyNameAvailable = res.data === true;
     } else {
       this.isCompanyNameAvailable = false;
-      if (res.message) {
-        res.error?.message ? this.alertsService.openToast('error', 'error', res.error.message) : '';
-      }
+      this.handleError(res.error?.message);
     }
     this.isCheckCompanyName = false;
     this.cdr.detectChanges();
   };
   handleError = (err: any) => {
     if (err) {
-      this.alertsService.openToast('error', 'error', err.message);
+      this.alertsService.openToast('error', 'error', err.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
     this.isCheckCompanyName = false;
   };
@@ -81,7 +79,9 @@ export class CompanyInfoComponent {
 
   submit(): void {
     if (this.companyInfoForm?.valid) {
+      // if (!this.isCompanyNameAvailable) {
       this.handleCompanyInfo.emit({ name: 'companyInfo', companyInfo: this.companyInfoForm.value, registerNow: true });
+      // }
     } else {
       this.publicService?.validateAllFormFields(this.companyInfoForm);
     }

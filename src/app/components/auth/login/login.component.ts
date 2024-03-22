@@ -28,7 +28,7 @@ export class LoginComponent {
   loginForm = this.fb.group({
     userName: ['', { validators: Validators.required, updateOn: 'blur' }],
     password: ['', { validators: Validators.required, updateOn: 'blur' }],
-    remember: [true, []],
+    remember: [false, []],
   });
   get formControls(): any {
     return this.loginForm?.controls;
@@ -66,11 +66,11 @@ export class LoginComponent {
     if (res?.success == true) {
       window.localStorage.setItem(keys.userData, JSON.stringify(res?.data));
     } else {
-      this.handleError(res?.error?.message || 'An error has occurred');
+      this.handleError(res?.error?.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }
   }
   private handleError(err: any): any {
-    this.setErrorMessage(err || 'An error has occurred');
+    this.setErrorMessage(err || this.publicService.translateTextFromJson('general.errorOccur'));
   }
   private setErrorMessage(message: string): void {
     this.alertsService.openToast('error', 'error', message);

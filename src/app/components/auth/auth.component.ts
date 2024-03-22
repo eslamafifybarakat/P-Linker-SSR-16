@@ -22,8 +22,9 @@ export class AuthComponent {
     }
     if (this.router.url.includes('buyer')) {
       return 'auth.findYourBuyer'
-    } else {
-      return '';
+    }
+    else {
+      return 'auth.welcomeBack';
     }
   }
 }

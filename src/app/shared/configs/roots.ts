@@ -6,6 +6,9 @@ export const roots = {
     isVatIdAvailableRegister: '/Application/IsVatNumberAvailable',
     checkCompanyNameAvailability: 'Supplier/checkCompanyNameAvailability',
     register: "/Application/Register",
+    forgetPassword: '/Account/ForgetPassword',
+    validateCode: '/Account/ValidateCode',
+    resetNewPassword: '/Account/ResetPassword'
   },
   supplier: {
     getCountries: "/Country/GetCountrys",

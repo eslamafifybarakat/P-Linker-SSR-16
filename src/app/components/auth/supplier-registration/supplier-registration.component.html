@@ -3,8 +3,13 @@
     <a class="text-dark pointer lh-sm" (click)="back()">
       <i class="pi pi-arrow-left scaleX-rtl"></i>
     </a>
-    <div class="justify-content-end d-flex me-auto">
-      {{'auth.step'|translate}} {{currentStep}} {{'auth.of'|translate}} 4
+    <div class="d-flex justify-content-end align-items-center gap-3">
+      <span>
+        {{'auth.step'|translate}} {{currentStep}} {{'auth.of'|translate}} 4
+      </span>
+      <span>
+        <language-selector></language-selector>
+      </span>
     </div>
   </div>
   <div class="d-lg-none d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">

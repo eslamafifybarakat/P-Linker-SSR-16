@@ -1,0 +1,43 @@
+#verification-code {
+  .form-logo {
+    width: 4rem;
+  }
+  .form-btn {
+    background-color: var(--bg-main-color);
+    border-color: var(--bg-main-color);
+    color: var(--text-white-color);
+    height: 3.7rem;
+    border-radius: var(--border-input-radius);
+  }
+}
+:host::ng-deep {
+  .otp-code {
+    input {
+      height: 3.9rem !important;
+      width: 5rem !important;
+      background-color: #f2f7fa !important;
+      border-color: var(--border-input-color) !important;
+      border-radius: 0.625rem !important;
+      cursor: pointer;
+      font-weight: bold !important;
+      font-size: 25px !important;
+    }
+
+    span {
+      flex: 0 !important;
+    }
+  }
+
+  .otp-code {
+    input {
+      width: 4rem !important;
+    }
+  }
+}
+@media (max-width: 587px) {
+  #verification-code {
+    .fs-1 {
+      font-size: 1.4rem !important;
+    }
+  }
+}
