@@ -13,9 +13,7 @@
     <bottom-navigation class="d-block d-xl-none"></bottom-navigation>
   </footer>
 </main>
-<p-toast [showTransformOptions]="'translateX(-100%)'" [showTransitionOptions]="'500ms'"
-  [hideTransitionOptions]="'500ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
 
-<scroll-top></scroll-top>''
-<p-toast position="top-right" [baseZIndex]="50000000000000" showTransitionOptions="0"
+<scroll-top></scroll-top>
+<p-toast position="top-right" [baseZIndex]="50000000000000" showTransitionOptions="0" [preventOpenDuplicates]="true"
   [breakpoints]="{'786px': {width: '100%', right: '0', left: '0'}}"></p-toast>
