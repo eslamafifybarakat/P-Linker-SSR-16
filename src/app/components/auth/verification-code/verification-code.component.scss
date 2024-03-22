@@ -27,6 +27,12 @@
       flex: 0 !important;
     }
   }
+
+  .otp-code {
+    input {
+      width: 4rem !important;
+    }
+  }
 }
 @media (max-width: 587px) {
   #verification-code {
