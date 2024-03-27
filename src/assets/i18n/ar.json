@@ -43,7 +43,8 @@
     "location": "الموقع",
     "availableContract": "متاح للتعاقد",
     "notAvailableContract": "غير متاح للتعاقد",
-    "errorOccur":"حدث خطأ"
+    "errorOccur":"حدث خطأ",
+    "sendMessage":"ارسل الرسالة"
   },
   "summary": {
     "faster": "أٍسرع",
@@ -109,7 +110,10 @@
     "city": "المدينة",
     "vatNumber": "رقم الضريبة",
     "address": "العنوان",
-    "newPassword":"كلمة المرور الجديدة"
+    "newPassword":"كلمة المرور الجديدة",
+    "fullName":"الاسم الكامل",
+"subject":"الموضوع",
+"message":"الرسالة"
   },
   "placeholders": {
     "username": "أدخل اسم المستخدم",
@@ -127,7 +131,10 @@
     "city": "اختر المدينة",
     "vatNumber": "أدخل رقم الضريبة القيمة المضافة",
     "address": "أدخل العنوان",
-    "newPassword":"أدخل كلمة المرور الجديدة"
+    "newPassword":"أدخل كلمة المرور الجديدة",
+    "fullName":"أدخل الاسم الكامل",
+"subject":"أدخل الموضوع",
+"message":"أدخل الرسالة"
   },
   "validations": {
     "username": "اسم المستخدم مطلوب",

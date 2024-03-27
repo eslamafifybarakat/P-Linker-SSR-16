@@ -27,6 +27,13 @@ export const appRoutes: Routes = [
       )
   },
   {
+    path: 'Contact-Us',
+    loadComponent: () =>
+      import('./components/home/contact-us/contact-us.component').then(
+        (c) => c.ContactUsComponent
+      )
+  },
+  {
     path: 'places',
     loadComponent: () =>
       import('./components/places/places.component').then(

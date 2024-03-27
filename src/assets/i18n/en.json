@@ -43,7 +43,8 @@
     "location": "Location",
     "availableContract": "Available for contract",
     "notAvailableContract": "Not Available for contract",
-    "errorOccur":"An error has occurred"
+    "errorOccur":"An error has occurred",
+    "sendMessage":"Send Message"
   },
   "summary": {
     "faster": "Faster",
@@ -109,12 +110,15 @@
     "city": "City",
     "vatNumber": "Vat-number",
     "address": "Address",
-    "newPassword":"New Password"
+    "newPassword":"New Password",
+    "fullName":"Full Name",
+    "subject":"Subject",
+    "message":"Message"
   },
   "placeholders": {
     "username": "Enter username",
     "password": "Enter password",
-    "email": "Enter email",
+    "email": "Enter email address",
     "userName": "Enter username",
     "firstName": "Enter first name",
     "lastName": "Enter last name",
@@ -127,7 +131,10 @@
     "city": "Select city",
     "vatNumber": "Enter your vat-number",
     "address": "Enter address",
-    "newPassword":"Enter new password"
+    "newPassword":"Enter new password",
+    "fullName":"Enter Full Name",
+    "subject":"Enter subject",
+    "message":"Enter message"
   },
   "validations": {
     "username": "Username is required",

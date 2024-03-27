@@ -1,0 +1,139 @@
+<div class="pt-5 main-page-form" id="contactUs">
+  <section id="hero-section" class="d-flex align-items-center justify-content-center position-relative">
+    <div class="container ">
+      <div class="w-100 d-flex align-items-center justify-content-center">
+        <div>
+          <h1 class="f-28 title text-white-color fw-bold position-relative text-center" data-aos="fade-right"
+            data-aos-easing="ease-in-out" data-aos-duration="900">{{'nav.support.items.contactUs'|translate}}
+          </h1>
+          <div class="d-flex justify-content-center align-items-center gap-1">
+            <a class="fs-6 text-white-color" [routerLink]="'/'">{{'nav.home'|translate}}</a>
+            <i class="pi pi-circle-fill text-main-color"></i>
+            <a class="fs-6 text-white-color">{{'nav.support.items.contactUs'|translate}}</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="my-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <form [formGroup]="detailsForm" (ngSubmit)="submit()">
+            <div class="global-card p-4">
+              <div class="mb-3">
+                <label for="fullName" class="form-label required">
+                  {{'labels.fullName'|translate}}
+                </label>
+                <input type="text" id="fullName" class="form-control" formControlName="fullName"
+                  placeholder="{{'placeholders.fullName'|translate}}"
+                  [class.border-red]="(formControls?.fullName?.touched||formControls?.fullName?.dirty)&&formControls?.fullName?.invalid"
+                  [class.valid]="(formControls?.fullName?.touched||formControls?.fullName?.dirty)&&formControls?.fullName?.valid"
+                  (input)="publicService?.clearValidationErrors(formControls?.fullName)">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="formControls?.fullName?.invalid && (formControls?.fullName?.dirty || formControls?.fullName?.touched)">
+                    <ng-container *ngIf="formControls?.fullName?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validations.requiredField'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="formControls?.fullName?.errors?.minlength||formControls?.fullName?.errors?.maxlength">
+                      <span class="text-danger fs-8">
+                        {{'validations.nameLength'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label required">
+                  {{'labels.email'|translate}}
+                </label>
+                <span class="p-input-icon-right w-100">
+                  <input type="text" id="email" class="form-control" formControlName="email"
+                    placeholder="{{'placeholders.email'|translate}}"
+                    [class.border-red]="(formControls?.email?.touched||formControls?.email?.dirty)&&formControls?.email?.invalid"
+                    [class.valid]="(formControls?.email?.touched||formControls?.email?.dirty)&&formControls?.email?.valid "
+                    (input)="publicService?.clearValidationErrors(formControls?.email)">
+
+                </span>
+                <ng-container
+                  *ngIf="formControls?.email?.invalid && (formControls?.email?.dirty || formControls?.email?.touched)">
+                  <div class="mt-1">
+                    <ng-container *ngIf="formControls?.email?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validations.requiredField'|translate}}
+                      </span>
+                    </ng-container>
+
+                    <ng-container *ngIf="formControls?.email?.errors?.pattern">
+                      <span class="text-danger fs-8">
+                        {{'validations.emailNotCorrect'|translate}}
+                      </span>
+                    </ng-container>
+                  </div>
+                </ng-container>
+
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label required">
+                  {{'labels.subject'|translate}}
+                </label>
+                <input type="text" id="subject" class="form-control" formControlName="subject"
+                  placeholder="{{'placeholders.subject'|translate}}"
+                  [class.border-red]="(formControls?.subject?.touched||formControls?.subject?.dirty)&&formControls?.subject?.invalid"
+                  [class.valid]="(formControls?.subject?.touched||formControls?.subject?.dirty)&&formControls?.subject?.valid"
+                  (input)="publicService?.clearValidationErrors(formControls?.subject)">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="formControls?.subject?.invalid && (formControls?.subject?.dirty || formControls?.subject?.touched)">
+                    <ng-container *ngIf="formControls?.subject?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validations.requiredField'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="massage" class="form-label required">
+                  {{'labels.message'|translate}}
+                </label>
+                <textarea type="text" id="massage" class="form-control textarea" formControlName="massage"
+                  placeholder="{{'placeholders.message'|translate}}" [minlength]="5" [maxlength]="200"
+                  [class.border-red]="(formControls?.massage?.touched||formControls?.massage?.dirty)&&formControls?.massage?.invalid"
+                  [class.valid]="(formControls?.massage?.touched||formControls?.massage?.dirty)&&formControls?.massage?.valid&&detailsForm?.value?.massage!=''"
+                  (input)="publicService?.clearValidationErrors(formControls?.massage)"></textarea>
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="formControls?.massage?.invalid && (formControls?.massage?.dirty || formControls?.massage?.touched)">
+                    <ng-container *ngIf="formControls?.massage?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validations.requiredField'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="formControls?.massage?.errors?.minlength||formControls?.massage?.errors?.maxlength">
+                      <span class="text-danger fs-8">
+                        {{'validations.descriptionLength'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <button class="btn btn-solid-main w-100">
+                {{'general.sendMessage'|translate}}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6 d-md-block d-none">
+          <img src="assets/images/contactUs/contact-img.svg" alt="contact" class="w-100" />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

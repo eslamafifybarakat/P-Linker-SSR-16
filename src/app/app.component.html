@@ -1,5 +1,6 @@
 <main style="transition: 0.5s" class="main-wrapper" [style.opacity]="isServer ? 0 : 1">
-  <div class="d-none d-xl-block" *ngIf="shouldRender">
+  <div *ngIf="shouldRender">
+    <!-- <div class="d-none d-xl-block" *ngIf="shouldRender"> -->
     <top-navbar></top-navbar>
     <app-navbar></app-navbar>
   </div>

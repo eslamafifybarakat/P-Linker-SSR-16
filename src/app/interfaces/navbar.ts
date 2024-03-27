@@ -58,7 +58,7 @@ export const navItems = [
       {
         title: 'nav.support.items.contactUs',
         label: 'nav.support.items.contactUs',
-        route: '/Services/ContactUs',
+        route: '/Contact-Us',
         icon: ''
       },
       {
