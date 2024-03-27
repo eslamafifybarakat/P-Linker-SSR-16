@@ -1,92 +1,86 @@
-<footer class="footer">
-  <div id="footer" class="position-relative">
-    <div class="bg-footer">
-      <div class="container">
-        <div class="row py-4 pb-lg-4 pb-0">
-          <div class="col-lg-4 col-md-6 col-sm-6 mb-lg-0 mb-4">
-            <div class="border-right">
-              <h5 class="text-white-color fw-bold">
-                {{'footer.contactUs' | translate}}
-              </h5>
-              <ul class="d-flex align-items-center gap-3 all-social mt-3 p-0">
-                <li>
-                  <a [href]="facebookLink" target="_blank" aria-label="facebook" title="facebook">
-                    <i class="pi pi-facebook fs-5 text-white-color"></i>
-                  </a>
-                </li>
-                <li>
-                  <a [href]="'https://wa.me/' + whatsappLink" target="_blank" aria-label="whatsapp" title="whatsapp">
-                    <i class="pi pi-whatsapp fs-5 text-white-color"></i>
-                  </a>
-                </li>
-                <li>
-                  <a [href]="instagramLink" target="_blank" aria-label="instagram" title="instagram">
-                    <i class="pi pi-instagram fs-5 text-white-color"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+<footer class="footer pt-5 m-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-4">
+          <div class="d-flex gap-2 flex-wrap">
+            <img src="assets/images/logo/logo.svg" alt="logo" class="logo" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="1000">
           </div>
-          <div class="col-lg-4 col-md-6 col-sm-6 mb-lg-0 mb-4">
-            <div class="border-right">
-              <h5 class="text-white-color fw-bold">
-                {{'footer.subscribeNewsletter' | translate}}
-              </h5>
-              <div class="my-3 pe-4">
-                <div class="input-group bg-white-color rounded-pill py-1">
-                  <input type="text" class="form-control border-0 bg-transparent"
-                    placeholder="{{'footer.emailAddress' | translate}}" aria-label="Username"
-                    aria-describedby="basic-addon1">
-                  <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
-                    <button class="text-uppercase rounded-pill px-3 py-1 join-btn text-white-color border-0">
-                      {{'footer.join' | translate}}
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-6 mb-lg-0 mb-4">
-            <div class="">
-              <h5 class="text-white-color fw-bold">{{'footer.download' | translate}}</h5>
-              <ul class="d-flex gap-3 flex-wrap p-0 mt-3">
-                <li>
-                  <a class="text-white-color" title="google-play">
-                    <img src="assets/images/footer/google-play.png" class="app-img" alt="google-play">
-                  </a>
-                </li>
-                <li>
-                  <a class="text-white-color" title="app-store">
-                    <img src="assets/images/footer/app-store.png" class="app-img" alt="app-store">
-                  </a>
-                </li>
-                <li>
-                  <a class="text-white-color" title="appgallery">
-                    <img src="assets/images/footer/appgallery.png" class="app-img" alt="appgallery">
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="py-3 d-flex justify-content-between flex-wrap gap-2">
-          <p class="mb-0 text-white-color">
-            {{'footer.allRight' | translate}}
+          <p class="w-90 w-sm-100 lh-base mt-4 desc" data-aos="fade-right" data-aos-easing="ease-in-out"
+            data-aos-duration="1100">
+            {{data?.description}}
           </p>
-          <ul class="d-flex gap-3 flex-wrap p-0">
-            <li>
-              <a class="text-white-color" title="terms" [routerLink]="'terms'">
-                {{'footer.terms' | translate}}
-              </a>
-            </li>
-            <li>
-              <a class="text-white-color" title="privacy" [routerLink]="'privacy'">
-                {{'footer.privacy' | translate}}
-              </a>
-            </li>
+
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <div data-aos="fade-down" data-aos-easing="ease-in-out" data-aos-duration="1000">
+          <h5 class="fs-5-1 mb-4 title fw-bold">
+            {{'footer.mainLinks'|translate}}
+          </h5>
+          <ul class="p-0">
+            <ng-container *ngFor="let item of data?.mainLinks">
+              <li class="pb-3"><a class="text-dark-color">{{item}}</a></li>
+            </ng-container>
           </ul>
         </div>
+      </div>
+      <div class="col-lg-5 col-md-8">
+        <div data-aos="fade-down" data-aos-easing="ease-in-out" data-aos-duration="1000">
+          <h5 class="fs-5-1 mb-3 title fw-bold">
+            {{'footer.joinOurNewsletter'|translate}}
+          </h5>
+          <p class="fs-6 desc">
+            {{'footer.subscribeOurNewsletter'|translate}}
+          </p>
+
+          <form class="d-flex position-relative mt-4" [formGroup]="form" (submit)="submit()"
+            class="d-flex align-items-center gap-3">
+            <input class="form-control bg-white-color" type="email" placeholder="{{'placeholders.email'|translate}}"
+              formControlName="email">
+            <button class="btn btn-solid-main p-2" type="submit" [disabled]="form?.invalid">
+              {{'home.submit'|translate}}</button>
+          </form>
+          <div class="mt-4">
+            <h6 class="fs-6 mb-3 title fw-bold">
+              {{'nav.support.items.contactUs'|translate}}
+            </h6>
+            <ul class="p-0">
+              <ng-container *ngFor="let item of data?.contactUs">
+                <li class="pb-3"><u class="text-main-color"><a class="text-main-color" target="_blank"
+                      [routerLink]="[item?.link]">{{item?.name}}</a></u>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="m-0 mt-4">
+    <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+      <div class="d-flex gap-3 py-4">
+        <ng-container *ngFor="let item of data?.contact">
+          <li><u class="text-main-color"><a class="text-main-color">{{item}}</a></u></li>
+        </ng-container>
+      </div>
+      <p class="mb-0 text-center">
+        {{'footer.allRights'|translate}}
+      </p>
+      <div class="d-flex align-items-center gap-3 icons" data-aos="fade-down" data-aos-easing="ease-in-out"
+        data-aos-duration="1200">
+        <a [href]="data?.facebookLink" class="d-flex justify-content-center align-items-center" target="_blank">
+          <i class="pi pi-facebook fs-4"></i>
+        </a>
+        <a class="d-flex justify-content-center align-items-center">
+          <i class="pi pi-twitter fs-4"></i>
+        </a>
+        <a class="d-flex justify-content-center align-items-center">
+          <i class="pi pi-instagram fs-5"></i>
+        </a>
+        <a [href]="data?.whatsappLink" class="d-flex justify-content-center align-items-center" target="_blank">
+          <i class="pi pi-whatsapp fs-4"></i>
+        </a>
       </div>
     </div>
   </div>

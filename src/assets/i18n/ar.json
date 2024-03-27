@@ -157,17 +157,31 @@
     "eightChars":"الحد الأدنى لعدد الأحرف هو ٨",
     "specialChar": "على الأقل حرف خاص واحد (!%*?&|@...)"
   },
-  "footer": {
-    "allRight": "جميع الحقوق محفوظة © 2022.",
-    "contactUs": "اتصل بنا",
-    "subscribeNewsletter": "اشترك",
-    "terms": "الشروط والأحكام",
-    "privacy": "سياسة الخصوصية",
-    "websiteMap": "خريطة الموقع",
-    "emailAddress": "عنوان البريد الإلكتروني",
-    "join": "انضم",
-    "download": "حمل تطبيقنا الجوال"
-  },
+  "home": {
+    "getStarted": "ابدأ الآن",
+    "howSupplierWork": "كيف يعمل بوابة الموردين؟",
+    "activateSupplierAccount": "قم بتنشيط حساب المورد الخاص بك",
+    "askDemo": "اطلب عرضًا توضيحيًا",
+    "helpSupplier": "كيف يمكن لـ ProcureLinker مساعدة سلسلة التوريد الخاصة بك؟",
+    "subscribe": "الاشتراك في النشرة الإخبارية",
+    "subscribeDescription": "سجل في رسائل البريد الإلكتروني لـ Procurelinker لتكون أول من يرى محتوى ملهمًا وأخبارًا وعروضًا حصرية.",
+    "features": "الميزات",
+    "readMore": "اقرأ المزيد",
+    "submit": "إرسال"
+},
+"footer": {
+  "allRight": "كل الحقوق محفوظة © 2022.",
+  "contactUs": "اتصل بنا",
+  "subscribeNewsletter": "الاشتراك في النشرة الإخبارية",
+  "terms": "الشروط والأحكام",
+  "privacy": "سياسة الخصوصية",
+  "websiteMap": "خريطة الموقع",
+  "emailAddress": "عنوان البريد الإلكتروني",
+  "allRights": "حقوق النشر © 2023 Procurelinker. جميع الحقوق محفوظة.",
+  "mainLinks": "الروابط الرئيسية",
+  "joinOurNewsletter": "انضم إلى نشرتنا الإخبارية",
+  "subscribeOurNewsletter": "اشترك في نشرتنا الإخبارية للحصول على تحديثات حول خدماتنا وعروضنا"
+},
   "errors": {
     "backToHome": "العودة إلى الصفحة الرئيسية",
     "serverError": "حدث خطأ في الخادم",

@@ -1,0 +1,41 @@
+<div class="bg-main-color w-100 py-2 header">
+  <div class="container">
+    <div class=" d-flex justify-content-end gap-3 flex-wrap w-100">
+      <!-- <div class="d-flex align-items-center gap-3 social-icons"
+           data-aos="fade-down"
+           data-aos-easing="ease-in-out"
+           data-aos-duration="1200">
+        <a [href]=""
+           class="d-flex justify-content-center align-items-center"
+           target="_blank">
+          <i class="pi pi-facebook fs-4"></i>
+        </a>
+        <a class="d-flex justify-content-center align-items-center">
+          <i class="pi pi-twitter fs-4"></i>
+        </a>
+        <a class="d-flex justify-content-center align-items-center">
+          <i class="pi pi-instagram fs-5"></i>
+        </a>
+        <a [href]=""
+           class="d-flex justify-content-center align-items-center"
+           target="_blank">
+          <i class="pi pi-whatsapp fs-4"></i>
+        </a>
+      </div> -->
+      <ul class="d-flex align-items-center gap-3 flex-wrap p-0">
+        <li class="nav-item" [ngClass]="currentLanguage=='ar'?'header-item-ar':'header-item'">
+          <a class="nav-link text-white-color"
+            [routerLink]="'/auth/supplier-registration'">{{'auth.registerNow'|translate}}</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-white-color" [routerLink]="'/login'">{{'auth.login'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link bg-btn text-white-color rounded" [routerLink]="'/contactUs'">
+            {{'nav.support.items.contactUs'|translate}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

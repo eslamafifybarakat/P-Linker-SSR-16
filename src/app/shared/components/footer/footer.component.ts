@@ -1,7 +1,10 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage, isPlatformBrowser } from '@angular/common';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { keys } from '../../configs/localstorage-key';
 import { TranslateModule } from '@ngx-translate/core';
+import { footerDataAr, footerDataEn } from './footer';
 import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -10,40 +13,28 @@ import { Component } from '@angular/core';
     NgOptimizedImage,
     TranslateModule,
     CommonModule,
-    RouterModule
+    RouterModule, FormsModule, ReactiveFormsModule
   ],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+  data: any;
+  currentLanguage: any;
+  form: any = this.fb.group({
+    email: ['']
+  });
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private fb: FormBuilder,
+  ) { }
 
-  restaurantCategories: any = [];
-  storesCategoriesList: any = [];
-  categoriesList: any = [];
-
-  facebookLink: string = 'face';
-  instagramLink: string = 'instagram';
-  whatsappLink: string = 'whatsapp';
-
-  constructor() {
-    this.restaurantCategories = [
-      { name: 'Riyadh Season' },
-      { name: ' Jeddah Events Calendar' },
-      { name: ' Diriyah Season' }
-    ];
-    this.storesCategoriesList = [
-      { name: 'Riyadh Season' },
-      { name: ' Jeddah Events Calendar' },
-      { name: ' Diriyah Season' }
-    ];
-    this.categoriesList = [
-      { name: 'Riyadh Season' },
-      { name: ' Jeddah Events Calendar' },
-      { name: ' Diriyah Season' }
-    ];
+  ngOnInit(): void {
+    // Aos.init();
+    if (isPlatformBrowser(this.platformId)) {
+      this.currentLanguage = window?.localStorage?.getItem(keys?.language);
+    }
+    this.currentLanguage == 'ar' ? this.data = footerDataAr : this.data = footerDataEn;
   }
-
-  openStoresWithCategoryId(storeCat: any): void { }
-  openPlaceWithCategoryId(catId: any): void { }
-  openRestaurantWithCategoryId(restaurant: any): void { }
+  submit(): void { }
 }

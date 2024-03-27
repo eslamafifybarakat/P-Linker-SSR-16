@@ -32,7 +32,7 @@
     "support": {
       "title": "Support",
       "items": {
-        "contactUs": "Contact Us",
+      "contactUs": "Contact Us",
         "faqs": "FAQs"
       }
     }
@@ -157,6 +157,18 @@
     "eightChars":"Minimum 8 characters",
     "specialChar":"At least one special character (!%*?&|@...)"
   },
+  "home":{
+    "getStarted":"Get Started",
+    "howSupplierWork":"How does Supplier Portal work?",
+"activateSupplierAccount":"Activate your supplier account",
+"askDemo":"Ask Demo",
+"helpSupplier":"How can ProcureLinker help your supply chain?",
+"subscribe":"Subscribe Newsletter",
+"subscribeDescription":" Sign up for Procurelinker emails to be the first to see inspiring content, news,and exclusive offers.",
+"features":"Features",
+"readMore":"Read More",
+"submit":"Submit"
+  },
   "footer": {
     "allRight": "All Rights Reserved © 2022.",
     "contactUs": "Contact Us",
@@ -165,8 +177,10 @@
     "privacy": "Privacy Policy",
     "websiteMap": "Website Map",
     "emailAddress": "Email Address",
-    "join": "Join",
-    "download": "Download our mobile app"
+    "allRights":"Copyright © 2023 Procurelinker  All rights reserved.",
+    "mainLinks":"Main links",
+    "joinOurNewsletter":"Join our newsletter",
+    "subscribeOurNewsletter":"Subscribe our newsletter to get update about our services and offers"
   },
   "errors": {
     "backToHome": "Back to home",

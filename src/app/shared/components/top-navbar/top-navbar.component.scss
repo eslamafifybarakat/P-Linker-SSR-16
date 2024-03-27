@@ -1,0 +1,32 @@
+.header-item,
+.header-item-ar {
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    border: 1px solid var(--bg-secondary-color);
+    height: 80%;
+    // background-color: var(--bg-secondary-color);
+    top: 4px;
+  }
+}
+.header-item::after {
+  right: -9px !important;
+}
+.header-item-ar::after {
+  left: -9px !important;
+}
+.bg-btn {
+  background-color: #fff !important;
+  color: var(--bg-main-color) !important;
+  font-size: 14px !important;
+  padding: 8px 12px !important;
+  font-weight: 500;
+}
+.social-icons a {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: var(--bg-secondary-color);
+}

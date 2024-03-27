@@ -1,69 +1,67 @@
-.footer-vector {
-  height: 4rem;
-  filter: invert(9%) sepia(100%) saturate(4754%) hue-rotate(297deg)
-    brightness(93%) contrast(104%);
-}
-#footer {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #1B2940;
+.footer {
+  background-color: #0353972b;
+  border-radius: 30px 30px 0 0;
   .logo {
-    width: 5.2rem;
-    height: 3rem;
+    width: 15rem;
+    object-fit: contain;
   }
-  .border-right {
-    border-right: 1px solid #ccc;
-    height: 100%;
+  .logo2 {
+    // width: 250px;
+    object-fit: fill;
   }
-  .footer-title:after {
-    position: absolute;
-    content: "";
-    height: 2px;
-    width: 3rem;
-    background-color: #1B2940;
-    top: -13px;
-    left: 0;
+  .title {
+    color: #333333;
   }
-  .container {
-    z-index: 1 !important;
+  .btn-submit {
+    right: 0;
+    top: 50%;
+    transform: translate(-10%, -50%);
   }
-  .bg-footer {
-    background-color: #1B2940;
+  .browser {
+    width: 25px;
   }
-  .join-btn {
-    background-color: #1B2940;
+
+  a {
+    color: #595959;
+    font-size: 16px !important;
   }
-  .app-img {
-    width: 100px;
+  .desc {
+    color: #595959;
+    font-size: 15px !important;
   }
-}
-:host::ng-deep {
-  hr {
-    border-color: #ffe6d880 !important;
+  li {
+    list-style: none !important;
   }
 }
-@media (max-width: 1200px) {
-  #footer {
-    padding-bottom: 4rem !important;
-  }
+.icons a {
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: var(--bg-main-color);
 }
-@media (max-width: 991px) {
-  #footer {
-    padding-bottom: 3.1rem !important;
-    padding-top: 1.5rem !important;
-    .ps-md-5 {
-      padding: 0 !important;
-    }
-  }
+.icons .pi {
+  font-size: 1.2rem !important;
+  color: var(--text-main-color) !important;
 }
-@media (max-width: 992px) and (min-width: 576px) {
-  .border-right.second-border {
-    border-right: none !important;
-  }
+.form-control,
+.btn {
+  height: 2.9rem;
+  border-radius: 7px;
 }
-@media (max-width: 575px) {
-  .border-right {
-    border-bottom: 1px solid #ccc;
-    border-right: 0 !important;
-  }
+.w-90 {
+  width: 90%;
+}
+.btn-solid-main {
+  min-width: 7rem;
+  height: 2.9rem;
+  color: var(--text-white-color);
+  background-color: var(--bg-main-color);
+  border-color: var(--text-main-color);
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+  z-index: 1;
 }

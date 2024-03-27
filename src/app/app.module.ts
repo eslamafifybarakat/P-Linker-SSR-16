@@ -22,6 +22,7 @@ import { NavbarMobileComponent } from './shared/components/navbar-mobile/navbar-
 import { ScrollTopComponent } from './shared/components/scroll-top/scroll-top.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { TopNavbarComponent } from './shared/components/top-navbar/top-navbar.component';
 
 registerLocaleData(localeAr);
 
@@ -33,6 +34,7 @@ registerLocaleData(localeAr);
     BottomNavigationComponent,
     NavbarMobileComponent,
     ScrollTopComponent,
+    TopNavbarComponent,
     NavbarComponent,
     FooterComponent,
 
