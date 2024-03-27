@@ -16,46 +16,35 @@
     </button>
     <div class="collapse navbar-collapse m-auto" id="navbarSupportedContent" [class.show]="collapsedMenu">
       <ul class="navbar-nav m-auto mb-2 mb-lg-0 gap-4">
-        <!-- <li class="nav-item">
-                  <a class="nav-link"
-                     [routerLink]="['/features']"
-                     [routerLinkActive]="'active'"
-                     (click)="collapsedMenu == true ? collapsedMenu = false :''">
-                    {{publicService?.translateTextFromJson('features')}}
-                  </a>
-                </li> -->
-
-        <!-- <li class="nav-item">
-          <a class="nav-link"
-             [routerLink]="['/main']"
-             [routerLinkActive]="'active'">
-            {{publicService?.translateTextFromJson('home')}}
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="['/Home']" [routerLinkActive]="'active'">
+            {{'nav.home'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-             [routerLink]="['/resources']"
-             [routerLinkActive]="'active'"
-             (click)="collapsedMenu == true ? collapsedMenu = false :''">
-            {{publicService?.translateTextFromJson('resource')}}
+          <a class="nav-link text-capitalize" [routerLink]="['/Features']" [routerLinkActive]="'active'"
+            (click)="collapsedMenu == true ? collapsedMenu = false :''">
+            {{'nav.features'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-             [routerLink]="['/Contact-Us']"
-             routerLinkActive="active"
-             (click)="collapsedMenu == true ? collapsedMenu = false :''">
-            {{publicService?.translateTextFromJson('contactUs')}}
+          <a class="nav-link text-capitalize" [routerLink]="['/Resources']" [routerLinkActive]="'active'"
+            (click)="collapsedMenu == true ? collapsedMenu = false :''">
+            {{'nav.resource'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-             [routerLink]="['/aboutUs']"
-             routerLinkActive="active"
-             (click)="collapsedMenu == true ? collapsedMenu = false :''">
-            {{publicService?.translateTextFromJson('about')}}
+          <a class="nav-link text-capitalize" [routerLink]="['/Contact-Us']" routerLinkActive="active"
+            (click)="collapsedMenu == true ? collapsedMenu = false :''">
+            {{'nav.contactUs'|translate}}
           </a>
-        </li> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="['/About-Us']" routerLinkActive="active"
+            (click)="collapsedMenu == true ? collapsedMenu = false :''">
+            {{'nav.about'|translate}}
+          </a>
+        </li>
       </ul>
       <div class="d-flex align-items-center justify-content-md-center gap-4 py-lg-0 py-3">
         <ng-container *ngIf="!isLoggedIn">

@@ -15,6 +15,10 @@
   },
   "nav": {
     "home": "Home",
+    "contactUs":"Contact Us",
+    "about":"About",
+    "resource":"Resource",
+    "features":"Features",
     "services": {
       "title": "Services",
       "items": {
@@ -44,7 +48,10 @@
     "availableContract": "Available for contract",
     "notAvailableContract": "Not Available for contract",
     "errorOccur":"An error has occurred",
-    "sendMessage":"Send Message"
+    "sendMessage":"Send Message",
+    "readMore":"Read More",
+    "readArticle":"Read article",
+    "learnMore":"Learn More"
   },
   "summary": {
     "faster": "Faster",
@@ -113,7 +120,9 @@
     "newPassword":"New Password",
     "fullName":"Full Name",
     "subject":"Subject",
-    "message":"Message"
+    "message":"Message",
+    "jobTitle":"Job Title",
+    "corporateEmail":"Corporate Email"
   },
   "placeholders": {
     "username": "Enter username",
@@ -134,7 +143,8 @@
     "newPassword":"Enter new password",
     "fullName":"Enter Full Name",
     "subject":"Enter subject",
-    "message":"Enter message"
+    "message":"Enter message",
+    "jobTitle":"Enter job title"
   },
   "validations": {
     "username": "Username is required",
@@ -175,6 +185,25 @@
 "features":"Features",
 "readMore":"Read More",
 "submit":"Submit"
+  },
+  "features":{
+    "watchDemo": "Watch Demo",
+    "achievable":"ACHIEVABLE KpIs",
+    "whatCanAchievable":"What can you achieve with procurelinker?",
+    "faqs":"FAQS",
+    "valueDrivers":"VALUE DRIVERS",
+"solution":"SOLUTION OVERVIEW"
+  },
+  "about":{
+    "KnowUsBetter":"Know us Better",
+"whoWeAre":"Who We Are",
+"ourMission":"Our Mission",
+"ourVision":"our vision",
+"ourValue":"our value",
+"discoverEffectiveSolutions":"Discover effective solutions",
+"watchThisDemo":"Watch this demo to know more and to overcome your procurement challenges",
+"KnowMore":"Know us more",
+"KnowMoreOvercome":"know more and to overcome your procurement challenges"
   },
   "footer": {
     "allRight": "All Rights Reserved © 2022.",

@@ -1,3 +1,4 @@
+import { FeatureDetailsComponent } from './components/home/features/feature-details/feature-details.component';
 import { Routes } from '@angular/router';
 
 // Components
@@ -10,7 +11,7 @@ import { errorsChildrenRoutes } from './components/errors/errors-routes';
 
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/Home', pathMatch: 'full' },
   {
     path: 'auth',
     loadComponent: () =>
@@ -20,10 +21,45 @@ export const appRoutes: Routes = [
     children: authChildrenRoutes
   },
   {
-    path: 'home',
+    path: 'Home',
     loadComponent: () =>
       import('./components/home/home.component').then(
         (c) => c.HomeComponent
+      )
+  },
+  {
+    path: 'Features',
+    loadComponent: () =>
+      import('./components/home/features/features.component').then(
+        (c) => c.FeaturesComponent
+      )
+  },
+  {
+    path: 'Features-Details/:id',
+    loadComponent: () =>
+      import('./components/home/features/feature-details/feature-details.component').then(
+        (c) => c.FeatureDetailsComponent
+      )
+  },
+  {
+    path: 'Resources',
+    loadComponent: () =>
+      import('./components/home/resources/resources.component').then(
+        (c) => c.ResourcesComponent
+      )
+  },
+  {
+    path: 'Resource-Details/:id',
+    loadComponent: () =>
+      import('./components/home/resources/resource-details/resource-details.component').then(
+        (c) => c.ResourceDetailsComponent
+      )
+  },
+  {
+    path: 'About-Us',
+    loadComponent: () =>
+      import('./components/home/about/about.component').then(
+        (c) => c.AboutComponent
       )
   },
   {

@@ -1,0 +1,104 @@
+#feature-details {
+  #hero-section {
+    min-height: 100vh !important;
+    background-image: url("../../../../../assets/images/features/feature-details-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .arrow {
+    width: 200px;
+    left: 0;
+    top: 30%;
+    z-index: -1;
+  }
+  .description {
+    &::before {
+      content: "";
+      width: 3px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: var(--bg-main-color);
+      border-radius: 10px;
+    }
+    &:dir(rtl) {
+      &::before {
+        right: 0;
+        left: inherit;
+      }
+    }
+  }
+  .feature-img {
+    border-radius: 15px !important;
+  }
+  .play-icon {
+    min-width: 35px;
+    min-height: 35px;
+    border: 1px solid var(--bg-main-color);
+  }
+  #details {
+    background-image: url(../../../../../assets/images/features/details-bg.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .check {
+    // background-color: #0353973b;
+    //   color: #035397;
+    width: 35px;
+    height: 35px;
+    // border-radius: 50%;
+  }
+  .pi-check-circle {
+    font-size: 1.4rem;
+  }
+  .valueDrivers {
+    background-image: url(../../../../../assets/images/features/value-bg.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+.solution-card {
+  background-color: rgba(237, 247, 255, 1);
+}
+.solution-img {
+  width: 85px;
+}
+.layer1 {
+  width: 400px;
+  height: 100%;
+  border-radius: 30px;
+}
+.layer1 {
+  background-color: #e8630a29;
+  rotate: 5deg;
+  top: 20px;
+}
+.title-line {
+  position: relative;
+  margin-bottom: 1.5rem;
+  &:after {
+    position: absolute;
+    content: "";
+    bottom: -8px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid var(--text-secondary-color);
+    width: 3rem;
+  }
+}
+.order-1 {
+  order: 1 !important;
+}
+.order-2 {
+  order: 2 !important;
+}
+@media (min-width: 768px) {
+  .order-md-1 {
+    order: 1 !important;
+  }
+  .order-md-2 {
+    order: 2 !important;
+  }
+}

@@ -1,0 +1,31 @@
+:host::ng-deep {
+  #faq {
+    .p-accordion-header.p-highlight {
+      .p-accordion-header-link {
+        border-radius: 12px 12px 0 0;
+      }
+    }
+    .p-accordion-tab {
+      margin-bottom: 0.6rem;
+    }
+    .p-accordion-header-link {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      gap: 5px;
+      background-color: var(--bg-main-color) !important;
+      border-radius: 12px;
+      color: #fff;
+      .pi-icon-wrapper {
+        margin: 0;
+      }
+    }
+    .p-accordion-content {
+      border: 0 !important;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+      border-radius: 0 0 12px 12px !important;
+      background-image: url(../../../../assets/images/features/circles.svg);
+      background-repeat: no-repeat;
+      background-position: top right;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<section id="contact" class="position-relative d-flex justify-content-center align-items-center">
+  <div class="overlay position-absolute"></div>
+  <div class="container">
+    <div class="contact-content pb-5">
+      <h5 class="text-center text-white mb-0 title">{{'nav.contactUs'|translate}}</h5>
+
+      <div class="contact-card">
+        <div class="row">
+          <ng-container *ngFor="let item of data?.content">
+            <div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+              <div class="d-flex justify-content-center align-items-center flex-column gap-3 global-card h-100">
+                <img [src]="item?.image" alt="" class="contact-icon">
+                <div>
+                  <h6 class="text-center">{{item?.title}}</h6>
+                  <p class="mb-0 text-center">{{item?.description}}</p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

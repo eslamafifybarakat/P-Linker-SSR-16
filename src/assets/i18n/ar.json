@@ -15,6 +15,10 @@
   },
   "nav": {
     "home": "الرئيسية",
+    "contactUs":"اتصل بنا",
+    "about":"معلومات عنا",
+    "resource":"المصادر",
+    "features":"الخصائص",
     "services": {
       "title": "الخدمات",
       "items": {
@@ -44,7 +48,10 @@
     "availableContract": "متاح للتعاقد",
     "notAvailableContract": "غير متاح للتعاقد",
     "errorOccur":"حدث خطأ",
-    "sendMessage":"ارسل الرسالة"
+    "sendMessage":"ارسل الرسالة",
+    "readMore":"اقرأ المزيد",
+    "readArticle":"اقرأ المقال",
+    "learnMore":"تعلم المزيد"
   },
   "summary": {
     "faster": "أٍسرع",
@@ -113,7 +120,10 @@
     "newPassword":"كلمة المرور الجديدة",
     "fullName":"الاسم الكامل",
 "subject":"الموضوع",
-"message":"الرسالة"
+"message":"الرسالة",
+"jobTitle":"عنوان الوظيفة",
+"corporateEmail":"البريد الإلكتروني للشركة"
+
   },
   "placeholders": {
     "username": "أدخل اسم المستخدم",
@@ -134,7 +144,8 @@
     "newPassword":"أدخل كلمة المرور الجديدة",
     "fullName":"أدخل الاسم الكامل",
 "subject":"أدخل الموضوع",
-"message":"أدخل الرسالة"
+"message":"أدخل الرسالة",
+"jobTitle":"أدخل عنوان الوظيفة"
   },
   "validations": {
     "username": "اسم المستخدم مطلوب",
@@ -175,6 +186,25 @@
     "features": "الميزات",
     "readMore": "اقرأ المزيد",
     "submit": "إرسال"
+},
+"features":{
+  "watchDemo": "شاهد العرض التوضيحي",
+  "achievable":"مؤشرات الأداء الرئيسية التي يمكن تحقيقها",
+  "whatCanAchievable":"ما الذي يمكنك تحقيقه مع procurelinker؟",
+  "faqs":"أسئلة وأجوبة",
+  "valueDrivers":"أقراص القيمة",
+"solution":"حل نظرة عامة"
+},
+"about":{
+  "KnowUsBetter":"تعرف علينا بشكل أفضل",
+"whoWeAre":"من نحن",
+"ourMission":"مهمتنا",
+"ourVision":"رؤيتنا",
+"ourValue":"قيمتنا",
+"discoverEffectiveSolutions":"اكتشف الحلول الفعالة",
+"watchThisDemo":"شاهد هذا العرض التوضيحي لمعرفة المزيد وللتغلب على تحديات الشراء الخاصة بك",
+"KnowMore":"تعرف علينا أكثر",
+"KnowMoreOvercome":"معرفة المزيد والتغلب على تحديات الشراء الخاصة بك"
 },
 "footer": {
   "allRight": "كل الحقوق محفوظة © 2022.",

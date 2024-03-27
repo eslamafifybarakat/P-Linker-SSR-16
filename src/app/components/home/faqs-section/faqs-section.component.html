@@ -1,0 +1,19 @@
+<div id="faq" class="py-5">
+  <div class="container">
+    <h4 class="text-center mb-5">{{'features.faqs'|translate}}</h4>
+    <div class="row">
+      <div class="col-lg-6 d-flex justify-content-lg-start justify-content-center">
+        <img src="assets/images/features/faqs.svg" alt="faqs" class="w-75">
+      </div>
+      <div class="col-lg-6">
+        <p-accordion [expandIcon]="'pi pi-plus'" [collapseIcon]="'pi pi-minus'">
+          <ng-container *ngFor="let item of data?.faqs;let i=index">
+            <p-accordionTab [header]="item?.title" [selected]="i==0?true:false">
+              {{item?.description}}
+            </p-accordionTab>
+          </ng-container>
+        </p-accordion>
+      </div>
+    </div>
+  </div>
+</div>

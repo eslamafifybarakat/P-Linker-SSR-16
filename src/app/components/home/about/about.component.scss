@@ -1,0 +1,93 @@
+#about {
+  #hero-section {
+    min-height: 100vh !important;
+    background-image: url("../../../../assets/images/about/about-bg.svg");
+    background-color: rgba(10, 232, 143, 0.03);
+    background-repeat: no-repeat;
+    background-position: left;
+    .title {
+      font-size: 3.5rem !important;
+      line-height: inherit;
+      line-height: 1.3;
+      z-index: 1;
+      position: relative;
+    }
+  }
+  .title-before {
+    &::before {
+      content: "";
+      width: 2px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: var(--bg-secondary-color);
+      border-radius: 10px;
+    }
+  }
+  .linear-bg {
+    background-image: url("../../../../assets/images/about/linear-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .video {
+    width: 100%;
+    height: 400px;
+    min-height: 250px;
+    border-radius: 100px 0 100px 0;
+    z-index: 3;
+    position: relative;
+    object-fit: cover;
+  }
+  .play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    img {
+      width: 100px;
+    }
+  }
+  .know-more-img {
+    width: 120px;
+  }
+}
+.carousel-img {
+  width: 100px !important;
+}
+:host::ng-deep {
+  .owl-theme .owl-dots .owl-dot.active span {
+    background-color: rgba(232, 99, 10, 1) !important;
+    width: 23px !important;
+  }
+  .owl-theme .owl-dots .owl-dot span {
+    width: 7px !important;
+    height: 7px !important;
+    border: 1px solid rgba(232, 99, 10, 1) !important;
+    background-color: transparent !important;
+  }
+  .owl-carousel .owl-stage {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+.knowMore-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, #e8630a 1px -1px 0px 2px;
+}
+.order-1 {
+  order: 1 !important;
+}
+.order-2 {
+  order: 2 !important;
+}
+@media (min-width: 768px) {
+  .order-md-1 {
+    order: 1 !important;
+  }
+  .order-md-2 {
+    order: 2 !important;
+  }
+}

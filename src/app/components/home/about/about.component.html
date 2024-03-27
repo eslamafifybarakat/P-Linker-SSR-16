@@ -1,0 +1,126 @@
+<div id="about">
+  <section id="hero-section" class="d-flex align-items-center justify-content-center position-relative">
+    <div class="container ">
+      <div class="row min-h-100 w-100 align-items-center pt-4">
+        <div class="col-md-6 d-flex align-items-center order-md-1 order-2">
+          <div>
+            <h1 class="home-title text-dark-color fw-bold position-relative" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="900">{{data?.title}}
+            </h1>
+            <span class="d-block mt-4 fs-5-1 lh-base description px-2 position-relative" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="1200">
+              {{data?.description}}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 order-md-2 order-1 pt-md-0 pt-5">
+          <div class="d-flex justify-content-lg-end justify-content-center position-relative">
+            <div class="w-100">
+              <img [src]="data?.image" data-aos="fade-down" data-aos-duration="500" alt="hero-img"
+                class="w-100 shadow-sm">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="pt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <img [src]="data?.whoWeAre?.image" alt="whoWeAre" class="w-100">
+        </div>
+        <div class="col-md-6">
+          <h6 class="text-secondary-color mt-3">{{'about.KnowUsBetter'|translate}}</h6>
+          <h4 class="title-before position-relative px-2">{{'about.whoWeAre'|translate}}</h4>
+
+          <p class="text-muted fs-6 mt-3">{{data?.whoWeAre?.description}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-5 mt-5 linear-bg">
+    <div class="container">
+      <div>
+        <h4 class="text-center px-2">{{'about.ourMission'|translate}}</h4>
+        <p class="text-muted fs-6 text-center mt-4">
+          {{data?.ourMission}}
+        </p>
+      </div>
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-6 order-md-1 order-2 mt-md-0 mt-3">
+          <h4 class="title-before position-relative px-2">{{'about.ourVision'|translate}}</h4>
+          <p class="text-muted fs-6 mt-3">{{data?.ourVision?.description}}</p>
+        </div>
+        <div class="col-lg-5 col-md-6 order-md-2 order-1">
+          <img [src]="data?.ourVision?.image" alt="ourVision" class="w-100">
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4">
+        <div class="col-lg-5 col-md-6">
+          <img [src]="data?.ourValue?.image" alt="ourValue" class="w-100">
+        </div>
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h4 class="title-before position-relative px-2">{{'about.ourValue'|translate}}</h4>
+
+          <p class="text-muted fs-6 mt-3">{{data?.ourValue?.description}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <h2 class="mb-5 text-center">{{'about.procurelinkerSolutions'|translate}}
+        <span class="px-1 text-secondary-color">{{data?.organizationsNumber}}</span>
+        {{'about.organizations'|translate}}
+      </h2>
+      <!-- <owl-carousel-o [options]="owlcarousel1Options">
+        <ng-template carouselSlide class="item" *ngFor="let item of data?.organizations">
+          <div class=" owl-card">
+            <img class="carousel-img" [src]="item?.image" alt="asp">
+          </div>
+        </ng-template>
+      </owl-carousel-o> -->
+    </div>
+  </section>
+  <section class="pt-5">
+    <div class="container">
+      <h4 class="text-center position-relative px-2">
+        {{'about.discoverEffectiveSolutions'|translate}}</h4>
+      <p class="text-muted text-center fs-6 mt-3">{{'about.watchThisDemo'|translate}}</p>
+      <div class="position-relative mt-5" data-aos="fade-left" data-aos-easing="ease-in-out" data-aos-duration="800">
+        <video class="video" id="videoPlayer" #videoPlayer controls [poster]="data?.thumbnailImage">
+          <source [src]="data?.demo" type="video/mp4">
+          <source src="movie.ogg" type="video/ogg">
+        </video>
+        <ng-container *ngIf="!isPlay">
+          <a (click)="playVideo()" class="play d-block">
+            <img src="assets/images/about/about-play-video.svg" alt="play"></a>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <h4 class="text-center position-relative px-2">{{'about.KnowMore'|translate}}</h4>
+      <p class="text-muted text-center fs-6 mt-3">{{'about.KnowMoreOvercome'|translate}}</p>
+      <div class="row mt-5 justify-content-center">
+        <ng-container *ngFor="let item of data?.knowMore">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div
+              class="global-card d-flex flex-column justify-content-center align-items-center gap-3 py-4 h-100 knowMore-card">
+              <h6 class="text-center fw-bold">{{item?.title}}</h6>
+              <img class="know-more-img" [src]="item?.image" alt="sourcing-software">
+              <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-outline-main rounded-pill">{{'general.learnMore'|translate}}</button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <contact-us-section></contact-us-section>
+</div>

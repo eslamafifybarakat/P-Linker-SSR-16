@@ -1,0 +1,42 @@
+#resources {
+  #hero-section {
+    min-height: 100vh !important;
+    background-image: url("../../../../assets/images/resources/resources-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    .title {
+      font-size: 3.5rem !important;
+      line-height: inherit;
+      line-height: 1.3;
+      z-index: 1;
+      position: relative;
+    }
+
+    .play-icon {
+      min-width: 35px;
+      min-height: 35px;
+      border: 1px solid var(--bg-main-color);
+    }
+  }
+  .solution-card {
+    border-radius: 0 60px 0 60px !important;
+  }
+  .solution-desc {
+    height: 4.5rem;
+    overflow: hidden;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    width: 100%;
+  }
+}
+:host::ng-deep {
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: #e8630a;
+    color: #fff;
+    border-radius: 10px;
+  }
+  .p-paginator .p-paginator-pages .p-paginator-page {
+    box-shadow: none !important;
+  }
+}

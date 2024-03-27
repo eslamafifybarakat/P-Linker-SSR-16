@@ -1,0 +1,161 @@
+<div id="features">
+  <section id="hero-section" class="d-flex align-items-center justify-content-center position-relative">
+    <div class="container ">
+      <div class="row min-h-100 w-100 align-items-center pt-4">
+        <div class="col-md-6 d-flex align-items-center order-md-1 order-2">
+          <div>
+            <h1 class="fs-1 title home-title text-dark-color fw-bold" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="900">{{data?.title}}</h1>
+            <span class="d-block mt-4 fs-5-1 lh-base description px-2 position-relative" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="1200">
+              {{data?.description}}
+            </span>
+            <div class="d-flex align-items-center gap-2  text-main-color mt-5" data-aos="fade-up"
+              data-aos-easing="ease-in-out" data-aos-duration="1300" (click)="openVideo()">
+              <div class="play-icon rounded-circle d-flex justify-content-center align-items-center">
+                <i class="pi pi-play"></i>
+              </div>
+              <a>{{'features.watchDemo'|translate}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 order-md-2 order-1 pt-md-0 pt-5">
+          <div class="d-flex justify-content-lg-end justify-content-center position-relative">
+            <div class="w-100">
+              <img [src]="data?.image" data-aos="fade-down" data-aos-duration="500" data-aos-delay="1000" alt="hero-img"
+                class="hero-img mt-5 w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="features py-5 features-bg">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h6 class="text-secondary-color">{{'home.features'|translate}}</h6>
+          <h5 class="">{{data?.featureTitle}}</h5>
+        </div>
+        <div class="d-flex gap-4">
+          <a [class.disabled]="page<=1" (click)="page<=1?'':previous()"> <i
+              class="pi pi-arrow-left text-main-color scaleX-rtl pointer"></i></a>
+          <a (click)="page==pageCount?'':next()">
+            <i class="pi pi-arrow-right text-main-color scaleX-rtl pointer" [class.disabled]="page==pageCount">
+            </i>
+          </a>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <ng-container *ngFor="let item of cardsData;let i=index">
+          <!-- <div class="col-lg-6 mb-4">
+            <div class="row global-card p-0 overflow-hidden m-0 h-100">
+              <div class="col-md-4 p-0">
+                <img [src]="item?.image"
+                     class="w-100 h-100 feature-img p-2"
+                     alt="feature" />
+              </div>
+              <div class="col-md-8">
+                <div class="h-100 p-3 d-flex flex-column justify-content-between">
+                  <div class="">
+                    <h5 class="mb-2">{{item?.title}}</h5>
+                    <p class="fs-8 feature-desc mb-0">{{item?.description}}</p>
+                  </div>
+                  <div class="d-flex mt-4">
+                    <a class="d-flex align-items-center gap-2 text-main-color"
+                       [routerLink]="['/features-detailF/',item.Dd]">{{publicService?.translateTextFromJson('readMore')}} <i class="pi pi-angle-right scaleX-rtl"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="global-card p-0 h-100  d-flex flex-column justify-content-between">
+              <div>
+                <img [src]="item?.image" class="w-100 feature-img p-2" alt="feature" />
+                <div class="pt-2 px-3 pb-3">
+                  <div class="">
+                    <h5 class="mb-2">{{item?.title}}</h5>
+                    <p class="fs-8">{{item?.description}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end p-3">
+                <a class="d-flex align-items-center gap-2 text-main-color"
+                  [routerLink]="['/Features-Details/',item.id]">{{'general.readMore'|translate}} <i
+                    class="pi pi-angle-right scaleX-rtl"></i></a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-5 achievable">
+    <div class="container">
+      <h6 class="text-center text-secondary-color title-line">{{'features.achievable'|translate}}
+      </h6>
+      <h5 class="text-center">{{'features.whatCanAchievable'|translate}}</h5>
+      <!-- <div class="row mt-5">
+        <ng-container *ngFor="let item of data?.achievable;let i=index">
+          <div class="col-lg-4 col-md-6">
+            <div class="position-relative p-3-1">
+              <div class="achievable-icon d-flex justify-content-center align-items-center m-auto"
+                   [class.bg-danger]="i==0"
+                   [class.bg-warning]="i==1"
+                   [class.bg-main-color]="i==2">
+                <div class="w-100 h-100 shadow rounded-circle d-flex justify-content-center align-items-center bg-white">
+                  <i class="pi {{item.icon}}"
+                     [class.text-danger]="i==0"
+                     [class.text-warning]="i==1"
+                     [class.text-main-color]="i==2"></i>
+                </div>
+              </div>
+              <div class="global-card text-center py-4 achievable-content d-flex justify-content-center align-items-center flex-column">
+                <h1 class="fs-1">{{item?.percentage}}%</h1>
+                <p>{{item?.description}}</p>
+              </div>
+              <div class="achievable-bg position-absolute"
+                   [class.bg-danger]="i==0"
+                   [class.bg-warning]="i==1"
+                   [class.bg-main-color]="i==2"
+                   [style]="i==1?'top:88px':''"></div>
+            </div>
+          </div>
+        </ng-container>
+      </div> -->
+
+      <div class="row mt-5 justify-content-center">
+        <ng-container *ngFor="let item of data?.achievable;let i=index">
+          <div class="col-lg-4 col-md-6">
+            <div class="statistic-card">
+              <div class="percent">
+                <svg>
+                  <circle cx="105" cy="105" r="100"></circle>
+                  <circle cx="105" cy="105" r="100" style="--percent: {{item?.percentage}}"
+                    [style.stroke]="item?.color"></circle>
+                </svg>
+                <div class="number">
+                  <h3>{{item?.percentage}}<span>%</span></h3>
+                </div>
+              </div>
+              <div class="d-flex align-items-center gap-2 mt-3">
+                <img [src]="item?.image" alt="statistic" class="statistic-img">
+                <p class="fs-6 mb-0">{{item?.description}}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <contact-us-section></contact-us-section>
+
+  <faqs-section></faqs-section>
+
+</div>

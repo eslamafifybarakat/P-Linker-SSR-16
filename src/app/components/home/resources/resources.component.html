@@ -1,0 +1,64 @@
+<div id="resources">
+  <section id="hero-section" class="d-flex align-items-center justify-content-center position-relative">
+    <div class="container ">
+      <div class="row min-h-100 w-100 align-items-center pt-4">
+        <div class="col-md-6 d-flex align-items-center order-md-1 order-2">
+          <div>
+            <h1 class="fs-1 title home-title text-dark-color fw-bold position-relative" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="900">{{data?.title}}
+            </h1>
+            <span class="d-block mt-5 fs-5-1 lh-base description px-2 position-relative" data-aos="fade-right"
+              data-aos-easing="ease-in-out" data-aos-duration="1200">
+              {{data?.description}}
+            </span>
+            <div class="d-flex align-items-center gap-2  text-main-color mt-5" data-aos="fade-up"
+              data-aos-easing="ease-in-out" data-aos-duration="1300" (click)="openVideo()">
+              <div class="play-icon rounded-circle d-flex justify-content-center align-items-center">
+                <i class="pi pi-play"></i>
+              </div>
+              <a>{{'features.watchDemo'|translate}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 order-md-2 order-1 pt-md-0 pt-5">
+          <div class="d-flex justify-content-lg-end justify-content-center position-relative">
+
+            <div class="w-100">
+              <img [src]="data?.image" data-aos="fade-down" data-aos-duration="500" alt="hero-img" class="w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="mt-5">
+    <div class="container">
+      <div class="row">
+        <ng-container *ngFor="let item of data?.resources?.slice(first, first + rows); let i = index;">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="global-card p-0 solution-card">
+              <img [src]="item?.image" alt="resources" class="w-100">
+              <div class="p-3 pb-4">
+                <h5 class="text-main-color">{{item?.title}}</h5>
+                <p class="text-muted fs-6 solution-desc">{{item?.description}}</p>
+                <div class="d-flex justify-content-center">
+                  <button [routerLink]="['/Resource-Details/', item?.id]" routerLinkActive="router-link-active" class="
+                                 btn
+                                 btn-outline-main mt-3">{{'general.readArticle'|translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="d-flex justify-content-center py-4">
+        <p-paginator [rows]="rows" [totalRecords]="totalRecords" [styleClass]="'justify-content-end'" [first]="first"
+          (onPageChange)="onPageChange($event)" [pageLinkSize]="3"></p-paginator>
+      </div>
+    </div>
+  </section>
+  <contact-us-section></contact-us-section>
+
+
+</div>

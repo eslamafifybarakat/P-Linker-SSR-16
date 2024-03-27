@@ -1,0 +1,21 @@
+#contact {
+  background-image: url("../../../../assets/images/contactUs/contactUs-bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  // min-height: 350px;
+  margin-bottom: 7rem;
+}
+#contact .container {
+  z-index: 1;
+}
+.contact-icon {
+  width: 40px;
+}
+.contact-card {
+  bottom: -7rem;
+  position: relative;
+}
+.title {
+  position: relative;
+  top: 3rem;
+}
