@@ -117,7 +117,7 @@ export class VerificationCodeComponent {
     this.isLoadingBtn = false;
 
     if (res?.success === true && res?.result === true) {
-      this.router.navigate(['/auth/reset-password', { email: this.email, code: this.codeLength }]);
+      this.router.navigate(['/Auth/Reset-Password', { email: this.email, code: this.codeLength }]);
     } else {
       if (res?.result === false) {
         this.alertsService?.openToast('error', 'error', 'Invalid OTP Code');

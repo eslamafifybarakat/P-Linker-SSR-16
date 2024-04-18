@@ -103,7 +103,7 @@ export class ResetPasswordComponent {
     this.cdr?.detectChanges();
   }
   private handleSuccess(): void {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/Auth/Login']);
     this.resetPasswordForm?.reset();
   }
   private handleError(error: any): void {

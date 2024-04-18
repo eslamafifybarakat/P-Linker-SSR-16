@@ -1,4 +1,3 @@
-import { FeatureDetailsComponent } from './components/home/features/feature-details/feature-details.component';
 import { Routes } from '@angular/router';
 
 // Components
@@ -13,12 +12,19 @@ import { errorsChildrenRoutes } from './components/errors/errors-routes';
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   {
-    path: 'auth',
+    path: 'Auth',
     loadComponent: () =>
       import('./components/auth/auth.component').then(
         (c) => c.AuthComponent
       ),
     children: authChildrenRoutes
+  },
+  {
+    path: 'Supplier-Register',
+    loadComponent: () =>
+      import('./components/auth/supplier-registration-stepper/supplier-registration-stepper.component').then(
+        (c) => c.SupplierRegistrationStepperComponent
+      )
   },
   {
     path: 'Home',

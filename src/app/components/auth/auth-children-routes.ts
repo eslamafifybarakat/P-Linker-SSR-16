@@ -7,34 +7,34 @@ import { ErrorsComponent } from "../errors/errors.component";
 import { LoginComponent } from "./login/login.component";
 
 export const authChildrenRoutes: any[] = [
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/Auth/Login', pathMatch: 'full' },
   {
-    path: 'login',
+    path: 'Login',
     component: LoginComponent,
     pathMatch: 'full'
   },
   {
-    path: 'supplier-registration',
+    path: 'Supplier-Registration',
     component: SupplierRegistrationComponent,
     pathMatch: 'full'
   },
   {
-    path: 'buyer-registration',
+    path: 'Buyer-Registration',
     component: BuyerRegistrationComponent,
     pathMatch: 'full'
   },
   {
-    path: 'forget-password',
+    path: 'Forget-Password',
     component: ForgetPasswordComponent,
     pathMatch: 'full'
   },
   {
-    path: 'verification-code',
+    path: 'Verification-Code',
     component: VerificationCodeComponent,
     pathMatch: 'full'
   },
   {
-    path: 'reset-password',
+    path: 'Reset-Password',
     component: ResetPasswordComponent,
     pathMatch: 'full'
   },

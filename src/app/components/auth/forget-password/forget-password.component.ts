@@ -69,7 +69,7 @@ export class ForgetPasswordComponent {
   }
 
   private handleSuccess(res: any): void {
-    this.router.navigate(['/auth/verification-code', { email: this.forgetPasswordForm?.value?.email }]);
+    this.router.navigate(['/Auth/Verification-Code', { email: this.forgetPasswordForm?.value?.email }]);
     this.forgetPasswordForm?.reset();
   }
 
