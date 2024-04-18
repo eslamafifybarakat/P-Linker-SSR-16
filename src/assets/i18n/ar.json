@@ -99,6 +99,11 @@
 "notReceive": "لم تتلقى رمز OTP؟",
 "resend": "إعادة إرسال"
   },
+  "supplierRegister":{
+    "supplierRegister": "نموذج تسجيل المورد",
+"fillSteps":"يرجى ملء خطوات النموذج لإكمال التسجيل",
+"suppliersDetails": "تفاصيل المورد"
+  },
   "labels": {
     "apply": "تطبيق",
     "cancelClassification": "إلغاء التصنيف",

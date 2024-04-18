@@ -1,3 +1,4 @@
+import { supplierRegisterChildrenRoutes } from './components/auth/supplier-registration-stepper/supplier-register-children-routes';
 import { Routes } from '@angular/router';
 
 // Components
@@ -6,8 +7,8 @@ import { Routes } from '@angular/router';
 import { servicesChildrenRoutes } from './components/services/services-children-routes';
 import { placesChildrenRoutes } from './components/places/places-children-routes';
 import { authChildrenRoutes } from './components/auth/auth-children-routes';
-import { errorsChildrenRoutes } from './components/errors/errors-routes';
 import { homeChildrenRoutes } from './components/home/home-children-routes';
+import { errorsChildrenRoutes } from './components/errors/errors-routes';
 
 
 export const appRoutes: Routes = [
@@ -25,7 +26,8 @@ export const appRoutes: Routes = [
     loadComponent: () =>
       import('./components/auth/supplier-registration-stepper/supplier-registration-stepper.component').then(
         (c) => c.SupplierRegistrationStepperComponent
-      )
+      ),
+    children: supplierRegisterChildrenRoutes
   },
   {
     path: '',

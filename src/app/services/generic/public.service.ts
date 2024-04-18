@@ -1,7 +1,9 @@
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { keys } from './../../shared/configs/localstorage-key';
 import { TranslateService } from '@ngx-translate/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,15 @@ export class PublicService {
   show_loader = new Subject<boolean>();
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
   ) { }
+
+  getCurrentLanguage(): string | any {
+    if (isPlatformBrowser(this.platformId)) {
+      return window?.localStorage?.getItem(keys?.language);
+    }
+  }
   translateTextFromJson(text: string): any {
     return this.translate.instant(text);
   }

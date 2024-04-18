@@ -1,1 +1,13 @@
-<p>supplier-registration-stepper works!</p>
+<div id="supplier-registration" class="py-4">
+  <div class="container-fluid">
+    <div>
+      <h4>
+        {{'supplierRegister.supplierRegister'|translate}}
+      </h4>
+      <p class="text-desc-color">
+        {{'supplierRegister.fillSteps'|translate}}
+      </p>
+    </div>
+    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+  </div>
+</div>

@@ -99,6 +99,11 @@
     "notReceive":"Didn’t receive the OTP?",
     "resend":"Resend"
   },
+  "supplierRegister":{
+    "supplierRegister": "Supplier Registration Form",
+    "fillSteps":"Fill out Steps of the form to complete the registration",
+    "suppliersDetails": "Supplier's Details"
+  },
   "labels": {
     "apply": "Apply",
     "cancelClassification": "Reset",
