@@ -127,8 +127,22 @@
 "subject":"الموضوع",
 "message":"الرسالة",
 "jobTitle":"عنوان الوظيفة",
-"corporateEmail":"البريد الإلكتروني للشركة"
-
+"corporateEmail":"البريد الإلكتروني للشركة",
+"aliasCompanyName":"اسم الشركة المستعار",
+"vatId":" معرف ضريبة القيمة المضافة",
+"taxId":"معرف ضريبي",
+"dunsNumber":"D-U-N-S Number",
+"companyDescription":"وصف الشركة",
+"typeName":"اسم النوع",
+"link":"الرابط",
+"addAnother":"إضافة أخر",
+"enterMaximum":"أقصي عدد 3",
+"saveChanges":"حفظ التغييرات",
+"addNew":"إضافة جديد",
+"skip":"تخطى",
+"category":"الفئة",
+"categories":"الفئات",
+"otherOwnerShipName":"اسم اخر للمالك"
   },
   "placeholders": {
     "username": "أدخل اسم المستخدم",
@@ -164,6 +178,8 @@
     "length": "الطول يجب أن يكون أكبر من 2",
     "nameLength": "طول الاسم يجب أن يكون أكبر من أو يساوي 2",
     "userLength": "الطول يجب أن يكون أكبر من 5",
+    "descriptionLength": "طول الحرف يجب ان يكون من 50 ل 200 حرف",
+    "minLengthChar": "الطول يجب أن يكون أكبر من 2",
     "phone": "الهاتف مطلوب",
     "confirmPassword": "تأكيد كلمة المرور مطلوب",
     "passwordPattern": "يجب أن تحتوي كلمة المرور على 8 أحرف أو أكثر، وتحتوي على أحرف كبيرة وصغيرة وأرقام، وعلى الأقل رمز خاص (!%*؟&|...)",

@@ -1,10 +1,10 @@
 import { PublicService } from './../../../services/generic/public.service';
+import { supplierItemsAr, supplierItemsEn } from './supplier';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { StepsModule } from 'primeng/steps';
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { supplierItemsAr, supplierItemsEn } from './supplier';
 
 @Component({
   standalone: true,
