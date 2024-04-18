@@ -9,41 +9,18 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
+  imports: [RouterModule],
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  @ViewChild("videoPlayer") videoPlayer: ElementRef | undefined;
-  isPlay: boolean = false;
 
-  homeData: any;
-  currentLanguage: string = '';
-  activeIndex1: any;
-  form = this.fb.group({
-    email: ['']
-  })
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    public publicService: PublicService,
-    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    // Aos.init();
 
-    if (isPlatformBrowser(this.platformId)) {
-      this.currentLanguage = window?.localStorage?.getItem(keys?.language);
-    }
-    this.homeData = this.currentLanguage == 'ar' ? homeDataAr : homeDataEn;
-  }
-  openVideo(): void { }
-  submit(): void { }
-
-  playVideo(): void {
-    this.isPlay = true;
-    this.videoPlayer?.nativeElement?.play();
   }
 }
 
