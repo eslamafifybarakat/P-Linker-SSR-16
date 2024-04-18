@@ -188,7 +188,8 @@
 "crNumber":"Enter cr number",
 "category":"Select category",
 "typeOfOwnership":"Select type of ownership",
-"currentActivity":"Select current activity"
+"currentActivity":"Select current activity",
+"companyDescription":"Enter company description"
   },
   "validations": {
     "username": "Username is required",

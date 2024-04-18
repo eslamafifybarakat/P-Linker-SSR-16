@@ -93,7 +93,7 @@ label {
     border-color: #ced4da;
     height: 3.6rem;
     border-radius: var(--border-input-radius);
-    // padding: 1rem;
+    padding: 1rem;
   }
 }
 // Start Calendar Style
@@ -155,6 +155,10 @@ label {
 .p-dropdown {
   line-height: 0;
   width: 100%;
+}
+.p-dropdown-label {
+  display: flex;
+  align-items: center;
 }
 .p-multiselect {
   line-height: 2;
