@@ -70,4 +70,40 @@ export class SupplierRegisterService {
     }
     return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.isUserNameAvailable, { params: params });
   }
+  getItemsCategoryTypes(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + roots?.suppliersRegister?.getItemsCategoryTypes);
+  }
+  addAttachment(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.saveAttachmentFile, data);
+  }
+  getAttachmentsType(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + roots?.suppliersRegister?.attachmentsType);
+  }
+  completeSupplierData(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.completeSupplierData, data);
+  }
+  saveSupplierDetails(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierDetails, data);
+  }
+  saveSupplierAddress(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierAddress, data);
+  }
+  saveSupplierContacts(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierContacts, data);
+  }
+  saveSupplierBanks(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierBanks, data);
+  }
+  saveSupplierCustomerReference(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierCustomerReference, data);
+  }
+  saveSupplierRelatedCompany(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierRelatedCompany, data);
+  }
+  saveSupplierAttachment(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + roots?.suppliersRegister?.supplierAttachment, data);
+  }
+  finalizeRegistration(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + roots?.suppliersRegister?.finalize);
+  }
 }

@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class PublicService {
-  show_loader = new Subject<boolean>();
+  showGlobalLoader = new Subject<boolean>();
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,

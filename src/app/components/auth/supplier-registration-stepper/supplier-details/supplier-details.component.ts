@@ -13,6 +13,7 @@ import { AlertsService } from './../../../../services/generic/alerts.service';
 import { patterns } from './../../../../shared/configs/patterns';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Subscription, catchError, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -84,6 +85,7 @@ export class SupplierDetailsComponent {
     public publicService: PublicService,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
+    private router: Router,
   ) { }
 
   detailsForm: any = this.fb?.group({
@@ -378,8 +380,16 @@ export class SupplierDetailsComponent {
   checkId(arr?: any, id?: any): void {
     return arr?.some(obj => obj?.id === id);
   }
-
+  // Start Add Supplier Details
   submit(): void {
+    if (this.detailsForm?.valid) {
+      const data = this.extractFormData();
+      this.saveSupplierDetails(data);
+    } else {
+      this.publicService?.validateAllFormFields(this.detailsForm);
+    }
+  }
+  private extractFormData(): any {
     let detailsInfo: any = this.detailsForm?.value;
     let dataActivitiesIds: any = [];
     detailsInfo?.dataActivities?.forEach((item: any) => {
@@ -394,7 +404,7 @@ export class SupplierDetailsComponent {
       descArr?.push(item?.description);
     });
     let ownerShip: any = this.checkId(detailsInfo?.ownerShip, 5);
-    let data: any = {
+    return {
       companyName: detailsInfo?.companyName,
       companyNameAr: detailsInfo?.companyNameAr ? detailsInfo?.companyNameAr : null,
       firstName: detailsInfo?.firstName,
@@ -421,30 +431,25 @@ export class SupplierDetailsComponent {
       description: detailsInfo?.companyDescription ? detailsInfo?.companyDescription : null,
       website: detailsInfo?.websiteAddress ? detailsInfo?.websiteAddress : null,
     };
-    if (this.detailsForm?.valid) {
-      // this.publicService?.show_loader?.next(true);
-      // this.supplierService?.saveSupplierDetails(data)?.subscribe(
-      //   (res: any) => {
-      //     if (res) {
-      //       stepper?.next();
-      //       this.refreshSupplier(true);
-      //       this.publicService?.show_loader?.next(false);
-      //     } else {
-      //       this.publicService?.show_loader?.next(false);
-      //       res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.err?.message) : '';
-      //     }
-      //   },
-      //   (err: any) => {
-      //     this.publicService?.show_loader?.next(false);
-      //     err ? this.alertsService?.openSweetAlert('error', err) : '';
-      //   }
-      // );
-    }
-    else {
-      this.publicService?.validateAllFormFields(this.detailsForm);
+  }
+  private saveSupplierDetails(data: any): void {
+    this.publicService?.showGlobalLoader?.next(true);
+    let subscribeSaveSupplierDetails: Subscription = this.supplierRegisterService?.saveSupplierDetails(data).pipe(
+      tap(res => this.handleSaveSupplierDetailsSuccess(res)),
+      catchError(err => this.handleError(err))
+    ).subscribe();
+    this.subscriptions.push(subscribeSaveSupplierDetails);
+  }
+  private handleSaveSupplierDetailsSuccess(response: any): void {
+    this.publicService?.showGlobalLoader?.next(false);
+    if (response) {
+      this.handleSuccess(response?.message);
+      this.router.navigate(['/Supplier-Register/Address']);
+    } else {
+      this.handleError(response?.message);
     }
   }
-
+  // End Add Supplier Details
 
   /* --- Handle api requests messages --- */
   private handleSuccess(msg: any): any {

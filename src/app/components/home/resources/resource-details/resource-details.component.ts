@@ -80,18 +80,18 @@ export class ResourceDetailsComponent {
         companyName: this.detailsForm?.value?.companyName,
         countryId: this.detailsForm?.value?.country?.id,
       }
-      this.publicService?.show_loader?.next(true);
+      this.publicService?.showGlobalLoader?.next(true);
       // this.mainService?.submitResourceDetails(data)?.subscribe(
       //   (res: any) => {
       //     if (res) {
-      //       this.publicService?.show_loader?.next(false);
+      //       this.publicService?.showGlobalLoader?.next(false);
       //     } else {
-      //       this.publicService?.show_loader?.next(false);
+      //       this.publicService?.showGlobalLoader?.next(false);
       //       res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.err?.message) : '';
       //     }
       //   },
       //   (err: any) => {
-      //     this.publicService?.show_loader?.next(false);
+      //     this.publicService?.showGlobalLoader?.next(false);
       //     err ? this.alertsService?.openSweetAlert('error', err) : '';
       //   }
       // );
