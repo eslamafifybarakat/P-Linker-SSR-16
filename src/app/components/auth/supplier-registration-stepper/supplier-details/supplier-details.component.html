@@ -516,7 +516,7 @@
                   [class.border-red]="(formControls?.dunsNumber?.touched||formControls?.dunsNumber?.dirty)&&formControls?.dunsNumber?.invalid || isDunsNumberAvailable"
                   [class.valid]="(formControls?.dunsNumber?.touched||formControls?.dunsNumber?.dirty)&&formControls?.dunsNumber?.valid &&detailsForm?.value?.dunsNumber!=''"
                   (input)="publicService?.clearValidationErrors(formControls?.dunsNumber)"
-                  (blur)="formControls?.dunsNumber?.valid&&detailsForm?.value?.dunsNumber!=''?IsDunsNumberAvailable(this.detailsForm?.value?.dunsNumber):''"
+                  (blur)="formControls?.dunsNumber?.valid&&detailsForm?.value?.dunsNumber!=''?IsDunsNumberAvailable():''"
                   (keyup)="onKeyUpEvent('dunsNumber')">
                 <ng-container *ngIf="isLoadingCheckDunsNumber">
                   <i class="pi pi-spin pi-spinner"></i>
@@ -556,7 +556,7 @@
                   [class.border-red]="(formControls?.CRNumber?.touched||formControls?.CRNumber?.dirty)&&formControls?.CRNumber?.invalid || isCRNumberAvailable"
                   [class.valid]="(formControls?.CRNumber?.touched||formControls?.CRNumber?.dirty)&&formControls?.CRNumber?.valid&&detailsForm?.value?.CRNumber!=null"
                   (input)="publicService?.clearValidationErrors(formControls?.CRNumber)"
-                  (blur)="formControls?.CRNumber?.valid&&detailsForm?.value?.CRNumber!=''?IsCRNumberAvailable(this.detailsForm?.value?.CRNumber):''"
+                  (blur)="formControls?.CRNumber?.valid&&detailsForm?.value?.CRNumber!=''?IsCRNumberAvailable():''"
                   (keyup)="onKeyUpEvent('CRNumber')">
                 <ng-container *ngIf="isLoadingCheckCRNumber">
                   <i class="pi pi-spin pi-spinner"></i>

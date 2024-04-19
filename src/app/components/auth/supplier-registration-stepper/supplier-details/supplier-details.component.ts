@@ -1,4 +1,3 @@
-import { SupplierRegisterService } from './../../../../services/supplier-register.service copy';
 // Modules
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -8,6 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
 
 //Services
+import { SupplierRegisterService } from '../../../../services/supplier-register.service';
 import { PublicService } from './../../../../services/generic/public.service';
 import { AlertsService } from './../../../../services/generic/alerts.service';
 import { patterns } from './../../../../shared/configs/patterns';
@@ -274,48 +274,65 @@ export class SupplierDetailsComponent {
   }
   // End Check If Tax Id Unique
 
-  IsDunsNumberAvailable(dunsNumber: any): any {
+  // Start Check If Duns Number Unique
+  IsDunsNumberAvailable(): void {
+    if (!this.formControls?.dunsNumber?.valid) {
+      return; // Exit early if Duns Number is not valid
+    }
+    const dunsNumber: string = this.detailsForm?.value?.dunsNumber;
     this.isLoadingCheckDunsNumber = true;
-    // this.supplierService?.IsTaxIdAvailable(dunsNumber)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.isDunsNumberAvailable = false;
-    //       this.isCheckDunsNumber = false;
-    //       this.cdr.detectChanges();
-    //     } else {
-    //       this.isDunsNumberAvailable = true;
-    //       if (res?.message) {
-    //         res?.error?.message ? this.alertsService.openSweetAlert('error', res?.error?.message) : '';
-    //       }
-    //       this.isCheckDunsNumber = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService.openSweetAlert('error', err?.message) : '';
-    //     this.isCheckDunsNumber = false;
-    //   })
+    let checkDunsNumberSubscription: Subscription = this.supplierRegisterService?.IsTaxIdAvailable(dunsNumber).pipe(
+      tap(res => this.handleDunsNumberResponse(res)),
+      catchError(err => this.handleDunsNumberError(err))
+    ).subscribe();
+    this.subscriptions.push(checkDunsNumberSubscription);
   }
-  IsCRNumberAvailable(cr: any): void {
+  private handleDunsNumberResponse(res: any): void {
+    if (res) {
+      this.isDunsNumberAvailable = false;
+    } else {
+      this.isDunsNumberAvailable = true;
+      this.handleDunsNumberError(res?.message);
+    }
+    this.isLoadingCheckDunsNumber = false;
+    this.cdr.detectChanges();
+  }
+  private handleDunsNumberError(err: any): any {
+    this.isDunsNumberAvailable = true;
+    this.isLoadingCheckDunsNumber = false;
+    this.handleError(err);
+  }
+  // End Check If Duns Number Unique
+
+  // Start Check If CR Number Unique
+  IsCRNumberAvailable(): void {
+    if (!this.formControls?.CRNumber?.valid) {
+      return; // Exit early if CR Number is not valid
+    }
+    const CRNumber: string = this.detailsForm?.value?.CRNumber;
     this.isLoadingCheckCRNumber = true;
-    // this.supplierService?.IsCRNumberAvailable(cr)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.isCRNumberAvailable = false;
-    //       this.isCheckCRNumber = false;
-    //       this.cdr.detectChanges();
-    //     } else {
-    //       this.isCRNumberAvailable = true;
-    //       if (res?.message) {
-    //         res?.error?.message ? this.alertsService.openSweetAlert('error', res?.error?.message) : '';
-    //       }
-    //       this.isCheckCRNumber = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService.openSweetAlert('error', err?.message) : '';
-    //     this.isCheckCRNumber = false;
-    //   })
+    let checkCRNumberSubscription: Subscription = this.supplierRegisterService?.IsCRNumberAvailable(CRNumber).pipe(
+      tap(res => this.handleCRNumberResponse(res)),
+      catchError(err => this.handleCRNumberError(err))
+    ).subscribe();
+    this.subscriptions.push(checkCRNumberSubscription);
   }
+  private handleCRNumberResponse(res: any): void {
+    if (res) {
+      this.isCRNumberAvailable = false;
+    } else {
+      this.isCRNumberAvailable = true;
+      this.handleCRNumberError(res?.message);
+    }
+    this.isLoadingCheckCRNumber = false;
+    this.cdr.detectChanges();
+  }
+  private handleCRNumberError(err: any): any {
+    this.isCRNumberAvailable = true;
+    this.isLoadingCheckCRNumber = false;
+    this.handleError(err);
+  }
+  // End Check If CR Number Unique
 
   onKeyUpEvent(type?: any): void {
     if (type == 'vatId') {
@@ -342,6 +359,7 @@ export class SupplierDetailsComponent {
       event.preventDefault();
     }
   }
+
   checkCertified(event): void {
     const descriptionsArray = this.detailsForm?.get('descriptions') as FormArray;
     if (event?.target?.defaultValue == 'yes') {
@@ -356,6 +374,7 @@ export class SupplierDetailsComponent {
       });
     }
   }
+
   checkId(arr?: any, id?: any): void {
     return arr?.some(obj => obj?.id === id);
   }
