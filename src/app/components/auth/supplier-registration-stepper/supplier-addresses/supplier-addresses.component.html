@@ -1,1 +1,294 @@
-<p>supplier-addresses works!</p>
+<div class="global-card border  mt-5">
+  <h5 class="mb-3 d-flex align-items-center gap-2">
+    <i class="pi pi-info-circle text-main-color fs-5"></i>
+    {{'suppliersAddress'|translate}}
+  </h5>
+  <hr>
+  <form [formGroup]="addressForm" class="mt-4">
+    <div formArrayName="addresses" class="w-100">
+      <ng-container *ngFor="let add of address.controls; let i=index">
+        <div [formGroupName]="i">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label for="title" class="form-label"
+                  [class.required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''">
+                  {{"label_title"|translate}}
+                </label>
+                <input type="text" id="title" class="form-control" formControlName="title"
+                  placeholder="{{'placeholder_title'|translate}}"
+                  [class.border-red]="(address.controls[i]?.get('title')?.touched||address.controls[i]?.get('title')?.dirty)&&address.controls[i]?.get('title')?.invalid"
+                  [class.valid]="(address.controls[i]?.get('title')?.touched||address.controls[i]?.get('title')?.dirty)&&address.controls[i]?.get('title')?.valid"
+                  (input)="publicService?.clearValidationErrors(address.controls[i]?.get('title'))">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==null">
+                    <span class="text-main-color d-flex align-items-center gap-1">
+                      <i class="pi pi-info-circle"></i>
+                      {{'enterNameFirst'|translate}}
+                    </span>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="(address.controls[i]?.get('title')?.touched||address.controls[i]?.get('title')?.dirty)&&address.controls[i]?.get('title')?.invalid">
+                    <ng-container *ngIf="address.controls[i]?.get('title')?.['required']">
+                      <span class="text-danger fs-8">
+                        {{'validator_required_field'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="address.controls[i]?.get('title')?.errors?.['minlength']">
+                      <span class="text-danger fs-8">
+                        {{'validator_length'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"
+                  [class.required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''">
+                  {{"label_country"|translate}}
+                </label>
+                <span class="p-input-icon-right select-loading d-block"
+                  [class.disabled-dropdown]="addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==''">
+                  <div
+                    [class.border-red]="address.controls[i]?.get('country')?.invalid && (address.controls[i]?.get('country')?.dirty || address.controls[i]?.get('country')?.touched)"
+                    [class.valid]="address.controls[i]?.get('country')?.valid && (address.controls[i]?.get('country')?.dirty || address.controls[i]?.get('country')?.touched)&& address.controls[i]?.get('country') !=null">
+                    <p-dropdown [options]="countries" formControlName="country" optionLabel="name" [filter]="true"
+                      [virtualScroll]="true" filterBy="name" appendTo="body" scrollHeight="150px"
+                      filterPlaceholder="{{'search'|translate}}" emptyMessage="nodata" [readonly]="isLoadingCountries"
+                      [showClear]="true" placeholder="{{'country'|translate}}" (onChange)="onChangeCountry(i)"
+                      [required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''">
+                    </p-dropdown>
+                  </div>
+                  <ng-container *ngIf="isLoadingCountries">
+                    <i class="pi pi-spin pi-spinner"></i>
+                  </ng-container>
+                </span>
+                <div class="my-2">
+                  <ng-container
+                    *ngIf="address.controls[i]?.get('country')?.invalid && (address.controls[i]?.get('country')?.dirty || address.controls[i]?.get('country')?.touched)">
+                    <span class="text-danger fs-8">
+                      {{"validator_required_field"|translate}}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"
+                  [class.required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''">
+                  {{"label_city"|translate}}
+                </label>
+                <span class="p-input-icon-right select-loading d-block">
+                  <div
+                    [class.border-red]="address.controls[i]?.get('city')?.invalid && (address.controls[i]?.get('city')?.touched)"
+                    [class.valid]="addressFormControls?.city?.valid && (address.controls[i]?.get('city')?.touched) && address.controls[i]?.get('city')!=null"
+                    [class.disabled-dropdown]="address.controls[i]?.get('country')?.value ==null ||addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==''">
+                    <p-dropdown [options]="cityArray[i]?cityArray[i]:[]" formControlName="city" optionLabel="name"
+                      [filter]="true" [virtualScroll]="true" filterPlaceholder="{{'search'|translate}}" filterBy="name"
+                      appendTo="body" scrollHeight="150px" emptyMessage="nodata" [showClear]="true"
+                      [readonly]=" isLoadingCities &&currentCityIndex==i" placeholder="{{'city'|translate}}"
+                      [required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''">
+                    </p-dropdown>
+                  </div>
+                  <ng-container *ngIf="isLoadingCities&&currentCityIndex==i">
+                    <i class="pi pi-spin pi-spinner"></i>
+                  </ng-container>
+                </span>
+                <div class="my-2">
+                  <ng-container *ngIf="address.controls[i]?.get('country')?.value ==null">
+                    <span class="text-main-color fs-8 d-flex align-items-center gap-1">
+                      <i class="pi pi-info-circle fs-8"></i>
+                      {{'selectCountryFirst'|translate}}
+                    </span>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="addressFormControls?.city?.invalid && (address.controls[i]?.get('city')?.touched)">
+                    <span class="text-danger fs-8">
+                      {{"validator_required_field"|translate}}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="poBox" class="form-label">
+                  {{"label_poBox"|translate}}
+                </label>
+                <input type="text" id="poBox" class="form-control" formControlName="poBox"
+                  placeholder="{{'placeholder_poBox'|translate}}"
+                  [class.border-red]="(address.controls[i]?.get('poBox')?.touched||address.controls[i]?.get('poBox')?.dirty)&&address.controls[i]?.get('poBox')?.invalid"
+                  [class.valid]="(address.controls[i]?.get('poBox')?.touched||address.controls[i]?.get('poBox')?.dirty)&&address.controls[i]?.get('poBox')?.valid"
+                  [class.disabled]="addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==''||address.controls[i]?.get('country')?.value ==null"
+                  (input)="publicService?.clearValidationErrors(address.controls[i]?.get('poBox'))"
+                  [minlength]="address.controls[i]?.get('country')?.value?.boxNumber"
+                  [maxlength]="address.controls[i]?.get('country')?.value?.boxNumber"
+                  [pattern]="address.controls[i]?.get('country')?.value?.isBoxNumberAcceptString?'^(?=.*[a-zA-Z0-9])[a-zA-Z0-9]*[0-9][a-zA-Z0-9]*$':'^[0-9]+$'">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="address.controls[i]?.get('poBox')?.invalid && (address.controls[i]?.get('poBox')?.dirty || address.controls[i]?.get('poBox')?.touched)">
+                    <ng-container *ngIf="address.controls[i]?.get('poBox')?.errors?.['required']">
+                      <span class="text-danger fs-8">
+                        {{'validator_poBox'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="address.controls[i]?.get('country')?.value?.isBoxNumberAcceptString; else number">
+                      <ng-container
+                        *ngIf="address.controls[i]?.get('poBox')?.errors?.['pattern']||address.controls[i]?.get('poBox')?.errors?.['minlength']">
+                        <span class="text-danger fs-8">
+                          {{'enterValidPBox'|translate}}
+                          <span class="px-1">{{'length'|translate}}
+                            {{address.controls[i]?.get('country')?.value?.boxNumber}}</span>
+                        </span>
+                      </ng-container>
+                    </ng-container>
+                    <ng-template #number>
+                      <ng-container
+                        *ngIf="address.controls[i]?.get('poBox')?.errors?.['pattern']||address.controls[i]?.get('poBox')?.errors?.['minlength']">
+                        <span class="text-danger fs-8">
+                          {{'onlyNumber'|translate}}
+                          <span class="px-1">{{'length'|translate}}
+                            {{address.controls[i]?.get('country')?.value?.boxNumber}}</span>
+                        </span>
+                      </ng-container>
+                    </ng-template>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="postalCode" class="form-label">
+                  {{"label_postalCode"|translate}}
+                </label>
+                <input type="text" id="postalCode" class="form-control" formControlName="postalCode"
+                  placeholder="{{'placeholder_postalCode'|translate}}"
+                  [class.border-red]="(address?.controls[i]?.get('postalCode')?.touched||address?.controls[i]?.get('postalCode')?.dirty)&&address?.controls[i]?.get('postalCode')?.invalid"
+                  [class.valid]="(address?.controls[i]?.get('postalCode')?.touched||address?.controls[i]?.get('postalCode')?.dirty)&&address?.controls[i]?.get('postalCode')?.valid"
+                  [class.disabled]="addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==''||address.controls[i]?.get('country')?.value ==null"
+                  (input)="publicService?.clearValidationErrors(address?.controls[i]?.get('postalCode'))"
+                  [minlength]="address.controls[i]?.get('country')?.value?.postalCode"
+                  [maxlength]="address.controls[i]?.get('country')?.value?.postalCode"
+                  [pattern]="address.controls[i]?.get('country')?.value?.isPostalCodeAcceptString?'^(?=.*[a-zA-Z0-9])[a-zA-Z0-9]*[0-9][a-zA-Z0-9]*$':'^[0-9]+$'">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="address?.controls[i]?.get('postalCode')?.invalid && (address?.controls[i]?.get('postalCode')?.dirty || address?.controls[i]?.get('postalCode')?.touched)">
+                    <ng-container *ngIf="address?.controls[i]?.get('postalCode')?.errors?.['required']">
+                      <span class="text-danger fs-8">
+                        {{'validator_postalCode'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="address.controls[i]?.get('country')?.value?.isPostalCodeAcceptString; else numberPostal">
+                      <ng-container
+                        *ngIf="address.controls[i]?.get('postalCode')?.errors?.['pattern']||address.controls[i]?.get('postalCode')?.errors?.['minlength']">
+                        <span class="text-danger fs-8">
+                          {{'enterValidPostalCode'|translate}}
+                          <span class="px-1">{{'length'|translate}}
+                            {{address.controls[i]?.get('country')?.value?.postalCode}}</span>
+                        </span>
+                      </ng-container>
+                    </ng-container>
+                    <ng-template #numberPostal>
+                      <ng-container
+                        *ngIf="address.controls[i]?.get('postalCode')?.errors?.['pattern']||address.controls[i]?.get('postalCode')?.errors?.['minlength']">
+                        <span class="text-danger fs-8">
+                          {{'onlyNumber'|translate}}
+                          <span class="px-1">{{'length'|translate}}
+                            {{address.controls[i]?.get('country')?.value?.postalCode}}</span>
+                        </span>
+                      </ng-container>
+                    </ng-template>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="addressLine1" class="form-label">
+                  <!-- [class.required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''" -->
+                  {{"addressLine1"|translate}}
+                </label>
+                <textarea type="text" id="addressLine1" class="form-control textarea" formControlName="addressLine1"
+                  placeholder="{{'placeholder_addressLine1'|translate}}"
+                  [class.border-red]="(address?.controls[i]?.get('addressLine1')?.touched||address?.controls[i]?.get('addressLine1')?.dirty)&&address?.controls[i]?.get('addressLine1')?.invalid"
+                  [class.valid]="(address?.controls[i]?.get('addressLine1')?.touched||address?.controls[i]?.get('addressLine1')?.dirty)&&address?.controls[i]?.get('addressLine1')?.valid"
+                  (input)="publicService?.clearValidationErrors(address?.controls[i]?.get('addressLine1'))"
+                  [class.disabled]="addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==''"></textarea>
+                <!-- [required]="addressForm?.controls[i]?.title?.valid||address.controls[i]?.get('title')?.value!=''" -->
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="address?.controls[i]?.get('addressLine1')?.invalid && (address?.controls[i]?.get('addressLine1')?.dirty || address?.controls[i]?.get('addressLine1')?.touched)">
+                    <ng-container *ngIf="address?.controls[i]?.get('addressLine1')?.errors?.['required']">
+                      <span class="text-danger fs-8">
+                        {{'validator_addressLine1'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="address?.controls[i]?.get('addressLine1')?.errors?.['minlength']||address?.controls[i]?.get('addressLine1')?.errors?.['maxlength']">
+                      <span class="text-danger fs-8">
+                        {{'enterValidAddress'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="addressLine2" class="form-label">
+                  {{"addressLine2"|translate}}
+                </label>
+                <textarea type="text" id="addressLine2" class="form-control textarea" formControlName="addressLine2"
+                  placeholder="{{'placeholder_addressLine2'|translate}}"
+                  [class.border-red]="(address?.controls[i]?.get('addressLine2')?.touched||address?.controls[i]?.get('addressLine2')?.dirty)&&address?.controls[i]?.get('addressLine2')?.invalid"
+                  [class.valid]="(address?.controls[i]?.get('addressLine2')?.touched||address?.controls[i]?.get('addressLine2')?.dirty)&&address?.controls[i]?.get('addressLine2')?.valid||address.controls[i]?.get('addressLine2')?.value!=''"
+                  (input)="publicService?.clearValidationErrors(address?.controls[i]?.get('addressLine2'))"
+                  [class.disabled]="addressForm?.controls[i]?.title?.invalid||address.controls[i]?.get('title')?.value==null"></textarea>
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="address?.controls[i]?.get('addressLine2')?.invalid && (address?.controls[i]?.get('addressLine2')?.dirty || address?.controls[i]?.get('addressLine2')?.touched)">
+                    <ng-container *ngIf="address?.controls[i]?.get('addressLine2')?.errors?.['required']">
+                      <span class="text-danger fs-8">
+                        {{'validator_addressLine2'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="address?.controls[i]?.get('addressLine2')?.errors?.['minlength']||address?.controls[i]?.get('addressLine2')?.errors?.['maxlength']">
+                      <span class="text-danger fs-8">
+                        {{'enterValidAddress'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="position-relative">
+            <hr>
+            <ng-container *ngIf="i <addressForm?.value?.addresses?.length-1">
+              <a
+                class="badge-secondary badge remove-address position-absolute rounded-circle d-flex justify-content-center align-items-center">
+                <i class="pi pi-trash delete-hover text-danger pointer p-2" (click)="removeAddress(i)"></i>
+              </a>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-solid-main" (click)="addAddress()">
+        {{'addNewAddress'|translate}}
+      </button>
+    </div>
+  </form>
+</div>
