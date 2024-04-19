@@ -76,6 +76,7 @@ export class SupplierDetailsComponent {
   // Years Variables
   yearsExData: object[] = [];
   isLoadingYearsExData: boolean = false;
+
   maxFoundationDate: any;
   minCRValidityDate: any;
 
@@ -153,6 +154,21 @@ export class SupplierDetailsComponent {
     const today: any = new Date();
     this.minCRValidityDate = new Date(today?.getFullYear(), today?.getMonth() + 1,
       today?.getDate());
+
+    //Get Currencies
+    this.getCurrencies();
+
+    //Get Countries
+    this.getCountries();
+
+    //Get Categories
+    this.getItemsCategoryTypes();
+
+    //Get OwnerShip
+    this.getOwnerShipData();
+
+    //Get YearsExData
+    this.getYearsOnCurrentActivity();
   }
 
   // Start Check If Company Name Unique
@@ -380,6 +396,148 @@ export class SupplierDetailsComponent {
   checkId(arr?: any, id?: any): void {
     return arr?.some(obj => obj?.id === id);
   }
+
+  // Start Get Currencies
+  getCurrencies(): void {
+    this.isLoadingCurrency = true;
+    let getCurrenciesSubscription: Subscription = this.supplierRegisterService?.getCurrencies().pipe(
+      tap(res => this.handleCurrenciesResponse(res)),
+      catchError(err => this.handleCurrenciesError(err))
+    ).subscribe();
+    this.subscriptions.push(getCurrenciesSubscription);
+  }
+  private handleCurrenciesResponse(res: any): void {
+    if (res) {
+      this.currencyList = res;
+    } else {
+      this.handleCurrenciesError(res?.message);
+    }
+    this.isLoadingCurrency = false;
+    this.cdr.detectChanges();
+  }
+  private handleCurrenciesError(err: any): any {
+    this.isLoadingCurrency = false;
+    this.handleError(err);
+    this.currencyList = [
+      { id: 1, code: 'usd' }
+    ]
+  }
+  // End  Get Currencies
+
+  // Start Get Counties
+  getCountries(): void {
+    this.isLoadingCountries = true;
+    let getCountriesSubscription: Subscription = this.supplierRegisterService?.getCountries().pipe(
+      tap(res => this.handleCountriesResponse(res)),
+      catchError(err => this.handleCountriesError(err))
+    ).subscribe();
+    this.subscriptions.push(getCountriesSubscription);
+  }
+  private handleCountriesResponse(res: any): void {
+    if (res) {
+      this.countries = res;
+    } else {
+      this.handleCountriesError(res?.message);
+    }
+    this.isLoadingCountries = false;
+    this.cdr.detectChanges();
+  }
+  private handleCountriesError(err: any): any {
+    this.isLoadingCountries = false;
+    this.handleError(err);
+    this.countries = [
+      { id: 1, name: 'country1', flag: '' }
+    ]
+  }
+  // End  Get Counties
+
+  // Start Get Categories
+  getItemsCategoryTypes(): void {
+    this.isLoadingCategories = true;
+    let getCategoriesSubscription: Subscription = this.supplierRegisterService?.getItemsCategoryTypes().pipe(
+      tap(res => this.handleCategoriesResponse(res)),
+      catchError(err => this.handleCategoriesError(err))
+    ).subscribe();
+    this.subscriptions.push(getCategoriesSubscription);
+  }
+  private handleCategoriesResponse(res: any): void {
+    if (res) {
+      this.categories = res;
+    } else {
+      this.handleCategoriesError(res?.message);
+    }
+    this.isLoadingCategories = false;
+    this.cdr.detectChanges();
+  }
+  private handleCategoriesError(err: any): any {
+    this.isLoadingCategories = false;
+    this.handleError(err);
+    this.categories = [
+      { id: 1, name: 'Category1' },
+      { id: 2, name: 'Category2' },
+      { id: 3, name: 'Category3' }
+    ]
+  }
+  // End  Get Categories
+
+  // Start Get ownerShipData
+  getOwnerShipData(): void {
+    this.isLoadingOwnerShipData = true;
+    let getOwnerShipDataSubscription: Subscription = this.supplierRegisterService?.getOwnerShip().pipe(
+      tap(res => this.handleOwnerShipDataResponse(res)),
+      catchError(err => this.handleOwnerShipDataError(err))
+    ).subscribe();
+    this.subscriptions.push(getOwnerShipDataSubscription);
+  }
+  private handleOwnerShipDataResponse(res: any): void {
+    if (res) {
+      this.ownerShipData = res;
+    } else {
+      this.handleCategoriesError(res?.message);
+    }
+    this.isLoadingOwnerShipData = false;
+    this.cdr.detectChanges();
+  }
+  private handleOwnerShipDataError(err: any): any {
+    this.isLoadingOwnerShipData = false;
+    this.handleError(err);
+    this.ownerShipData = [
+      { id: 1, name: 'ownerShip1' },
+      { id: 2, name: 'ownerShip2' },
+      { id: 3, name: 'ownerShip3' }
+    ]
+  }
+  // End  Get ownerShipData
+
+  // Start Get YearsExData
+  getYearsOnCurrentActivity(): void {
+    this.isLoadingYearsExData = true;
+    let getYearsExDataSubscription: Subscription = this.supplierRegisterService?.getOwnerShip().pipe(
+      tap(res => this.handleYearsExDataResponse(res)),
+      catchError(err => this.handleYearsExDataError(err))
+    ).subscribe();
+    this.subscriptions.push(getYearsExDataSubscription);
+  }
+  private handleYearsExDataResponse(res: any): void {
+    if (res) {
+      this.yearsExData = res;
+    } else {
+      this.handleCategoriesError(res?.message);
+    }
+    this.isLoadingYearsExData = false;
+    this.cdr.detectChanges();
+  }
+  private handleYearsExDataError(err: any): any {
+    this.isLoadingYearsExData = false;
+    this.handleError(err);
+    this.yearsExData = [
+      { id: 1, name: 'years1' },
+      { id: 2, name: 'years2' },
+      { id: 3, name: 'years3' }
+    ]
+  }
+  // End  Get YearsExData
+
   // Start Add Supplier Details
   submit(): void {
     if (this.detailsForm?.valid) {

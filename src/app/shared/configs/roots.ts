@@ -47,7 +47,9 @@ export const roots = {
     submitRequestQutation: 'RequestQutation/submitRequestQutationToAdminByAdmin',
     getQutationByIdWithFiles: 'RequestQutation/getQutationByIdWithFiles',
     getSupplierQuotation: 'RequestQutation/getSupplierQuotation',
-    getRFQByIdWithFiles: 'RequestQutation/GetRFQByIdWithFiles'
+    getRFQByIdWithFiles: 'RequestQutation/GetRFQByIdWithFiles',
+    getCurrencies: "getCurrencies",
+    getOwnerShip: "getOwnerShip"
   },
   dashboard: {
     availability: {

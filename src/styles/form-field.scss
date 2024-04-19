@@ -159,6 +159,26 @@ label {
   display: flex;
   align-items: center;
 }
+.p-multiselect-panel {
+  .p-multiselect-items {
+    padding: 0;
+  }
+  .p-multiselect-items .p-multiselect-item {
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    &.p-highlight.p-focus,
+    &.p-highlight {
+      color: var(--text-dark-color);
+      background-color: #2d66971a;
+    }
+  }
+  &:dir(rtl) {
+    .p-checkbox {
+      margin-left: 0.5rem;
+      margin-right: inherit;
+    }
+  }
+}
 .p-multiselect {
   line-height: 2;
   width: 100%;

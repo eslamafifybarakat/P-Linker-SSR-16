@@ -1,9 +1,9 @@
 import { environment } from '../../environments/environment';
-import { roots } from '../shared/configs/endPoints';
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
+import { roots } from '../shared/configs/roots';
 
 @Injectable({
   providedIn: 'root'
@@ -105,5 +105,21 @@ export class SupplierRegisterService {
   }
   finalizeRegistration(): Observable<any> {
     return this.http.get<any>(this.apiUrl + roots?.suppliersRegister?.finalize);
+  }
+
+  getCurrencies(): Observable<any> {
+    return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.getCurrencies);
+  }
+
+  getCountries(search?: any): Observable<any> {
+    let params = new HttpParams();
+    if (search) {
+      params = params?.append("search", search);
+    }
+    return this.http?.get<any>(this.apiUrl + roots?.supplier?.getCountries, { params: params });
+  }
+
+  getOwnerShip(): Observable<any> {
+    return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.getOwnerShip);
   }
 }

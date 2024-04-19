@@ -356,14 +356,19 @@
                 <label for="currency" class="form-label">
                   {{"labels.currency"|translate}}
                 </label>
-                <div class=""
-                  [class.border-red]="(formControls?.currency?.touched||formControls?.currency?.dirty)&&formControls?.currency?.invalid"
-                  [class.valid]="(formControls?.currency?.touched||formControls?.currency?.dirty)&&formControls?.currency?.valid">
-                  <p-dropdown [options]="currencyList" formControlName="currency" optionLabel="code" [filter]="true"
-                    [virtualScroll]="true" filterBy="code" appendTo="body" scrollHeight="100px" emptyMessage="nodata"
-                    [showClear]="true" placeholder="{{'placeholders.currency'|translate}}">
-                  </p-dropdown>
-                </div>
+                <span class="p-input-icon-right select-loading d-block">
+                  <div class=""
+                    [class.border-red]="(formControls?.currency?.touched||formControls?.currency?.dirty)&&formControls?.currency?.invalid"
+                    [class.valid]="(formControls?.currency?.touched||formControls?.currency?.dirty)&&formControls?.currency?.valid">
+                    <p-dropdown [options]="currencyList" formControlName="currency" optionLabel="code" [filter]="true"
+                      [virtualScroll]="true" filterBy="code" appendTo="body" scrollHeight="100px" emptyMessage="nodata"
+                      [showClear]="true" placeholder="{{'placeholders.currency'|translate}}">
+                    </p-dropdown>
+                  </div>
+                  <ng-container *ngIf="isLoadingCurrency">
+                    <i class="pi pi-spin pi-spinner"></i>
+                  </ng-container>
+                </span>
                 <div class="mt-1">
                   <ng-container
                     *ngIf="formControls?.currency?.invalid && (formControls?.currency?.dirty || formControls?.currency?.touched)">
