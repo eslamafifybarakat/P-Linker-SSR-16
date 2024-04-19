@@ -51,7 +51,8 @@
     "sendMessage":"Send Message",
     "readMore":"Read More",
     "readArticle":"Read article",
-    "learnMore":"Learn More"
+    "learnMore":"Learn More",
+    "saveAndContinue":"Save And Continue"
   },
   "summary": {
     "faster": "Faster",

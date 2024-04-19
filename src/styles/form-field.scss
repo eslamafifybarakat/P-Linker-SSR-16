@@ -151,7 +151,6 @@ label {
   color: inherit;
 }
 // End Calendar Style
-
 .p-dropdown {
   line-height: 0;
   width: 100%;
@@ -215,7 +214,9 @@ label {
 .form-control-left {
   border-left: 0;
 }
-
+textarea {
+  height: 6rem !important;
+}
 .input-group {
   .input-group-text {
     background-color: var(--bg-input-color) !important;

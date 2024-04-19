@@ -1,7 +1,7 @@
-<form [formGroup]="detailsForm" class="second-form-style">
+<form [formGroup]="detailsForm" (ngSubmit)="submit()" class="second-form-style">
   <div class="row">
     <div class="col-md-8">
-      <div class="global-card border">
+      <div class="global-card border p-4">
         <div class="row">
           <div class="col-lg-6 col-md-6">
             <div class="mb-3">
@@ -14,9 +14,9 @@
                   [class.border-red]="(formControls?.companyName?.touched||formControls?.companyName?.dirty)&&formControls?.companyName?.invalid || isCompanyNameAvailable"
                   [class.valid]="(formControls?.companyName?.touched||formControls?.companyName?.dirty)&&formControls?.companyName?.valid "
                   (input)="publicService?.clearValidationErrors(formControls?.companyName)"
-                  (blur)="formControls?.companyName?.valid&&detailsForm?.value?.companyName!=''?checkCompanyNameAvailability(this.detailsForm?.value?.companyName):''"
+                  (blur)="formControls?.companyName?.valid&&detailsForm?.value?.companyName!=''?checkCompanyNameAvailability():''"
                   (keyup)="onKeyUpEvent('companyName')">
-                <ng-container *ngIf="isCheckCompanyName">
+                <ng-container *ngIf="isLoadingCheckCompanyName">
                   <i class="pi pi-spin pi-spinner"></i>
                 </ng-container>
               </span>
@@ -160,7 +160,7 @@
                   [class.border-red]="(formControls?.userName?.touched||formControls?.userName?.dirty)&&formControls?.userName?.invalid || isUserNameAvailable"
                   [class.valid]="(formControls?.userName?.touched||formControls?.userName?.dirty)&&formControls?.userName?.valid"
                   (input)="publicService?.clearValidationErrors(formControls?.userName)">
-                <ng-container *ngIf="isCheckUserName">
+                <ng-container *ngIf="isLoadingCheckUserName">
                   <i class="pi pi-spin pi-spinner"></i>
                 </ng-container>
               </span>
@@ -398,7 +398,7 @@
                         [virtualScroll]="true" filterBy="name" appendTo="body" scrollHeight="150px"
                         filterPlaceholder="{{'placeholders.search'|translate}}" emptyMessage="nodata"
                         [readonly]="isLoadingCountries" [showClear]="true"
-                        (onChange)="formControls?.vatId?.valid&&formControls?.country?.valid?IsVatIdAvailable(this.detailsForm?.value?.vatId,this.detailsForm?.value?.country?.id):''"
+                        (onChange)="formControls?.vatId?.valid&&formControls?.country?.valid?IsVatIdAvailable():''"
                         placeholder="{{'placeholders.country'|translate}}">
                       </p-dropdown>
                     </div>
@@ -431,10 +431,10 @@
                   [class.border-red]="(formControls?.vatId?.touched||formControls?.vatId?.dirty)&&formControls?.vatId?.invalid || isVatIdAvailable"
                   [class.valid]="(formControls?.vatId?.touched||formControls?.vatId?.dirty)&&formControls?.vatId?.valid"
                   (input)="publicService?.clearValidationErrors(formControls?.vatId)"
-                  (blur)="formControls?.vatId?.valid&&formControls?.country?.valid?IsVatIdAvailable(this.detailsForm?.value?.vatId,this.detailsForm?.value?.country?.id):''"
+                  (blur)="formControls?.vatId?.valid&&formControls?.country?.valid?IsVatIdAvailable():''"
                   (keyup)="onKeyUpEvent('vatId')">
 
-                <ng-container *ngIf="isCheckVatId">
+                <ng-container *ngIf="isLoadingCheckVatId">
                   <i class="pi pi-spin pi-spinner"></i>
                 </ng-container>
               </span>
@@ -474,9 +474,9 @@
                   [class.border-red]="(formControls?.taxId?.touched||formControls?.taxId?.dirty)&&formControls?.taxId?.invalid || isTaxIdAvailable"
                   [class.valid]="(formControls?.taxId?.touched||formControls?.taxId?.dirty)&&formControls?.taxId?.valid&&detailsForm?.value?.taxId!=''"
                   (input)="publicService?.clearValidationErrors(formControls?.taxId)"
-                  (blur)="formControls?.taxId?.valid&&detailsForm?.value?.tax!=''?IsTaxIdAvailable(this.detailsForm?.value?.taxId):''"
+                  (blur)="formControls?.taxId?.valid&&detailsForm?.value?.tax!=''?IsTaxIdAvailable():''"
                   (keyup)="onKeyUpEvent('taxId')">
-                <ng-container *ngIf="isCheckTaxId">
+                <ng-container *ngIf="isLoadingCheckTaxId">
                   <i class="pi pi-spin pi-spinner"></i>
                 </ng-container>
               </span>
@@ -518,7 +518,7 @@
                   (input)="publicService?.clearValidationErrors(formControls?.dunsNumber)"
                   (blur)="formControls?.dunsNumber?.valid&&detailsForm?.value?.dunsNumber!=''?IsDunsNumberAvailable(this.detailsForm?.value?.dunsNumber):''"
                   (keyup)="onKeyUpEvent('dunsNumber')">
-                <ng-container *ngIf="isCheckDunsNumber">
+                <ng-container *ngIf="isLoadingCheckDunsNumber">
                   <i class="pi pi-spin pi-spinner"></i>
                 </ng-container>
               </span>
@@ -558,7 +558,7 @@
                   (input)="publicService?.clearValidationErrors(formControls?.CRNumber)"
                   (blur)="formControls?.CRNumber?.valid&&detailsForm?.value?.CRNumber!=''?IsCRNumberAvailable(this.detailsForm?.value?.CRNumber):''"
                   (keyup)="onKeyUpEvent('CRNumber')">
-                <ng-container *ngIf="isCheckCRNumber">
+                <ng-container *ngIf="isLoadingCheckCRNumber">
                   <i class="pi pi-spin pi-spinner"></i>
                 </ng-container>
               </span>
@@ -799,5 +799,14 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-end mt-4">
+    <button class="btn btn-solid-main d-flex align-items-center justify-content-evenly gap-2 btn-hover" type="submit">
+      <span>
+        {{"general.saveAndContinue"|translate}}
+      </span>
+      <i class="pi pi-save"></i>
+    </button>
+
   </div>
 </form>

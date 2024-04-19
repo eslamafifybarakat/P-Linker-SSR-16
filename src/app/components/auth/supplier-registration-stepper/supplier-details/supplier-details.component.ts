@@ -1,3 +1,4 @@
+import { SupplierRegisterService } from './../../../../services/supplier-register.service copy';
 // Modules
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -10,8 +11,8 @@ import { CommonModule } from '@angular/common';
 import { PublicService } from './../../../../services/generic/public.service';
 import { AlertsService } from './../../../../services/generic/alerts.service';
 import { patterns } from './../../../../shared/configs/patterns';
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Subscription, catchError, tap } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -33,27 +34,27 @@ export class SupplierDetailsComponent {
 
   // Check UserName Variables
   isUserNameAvailable: boolean = false;
-  isCheckUserName: boolean = false;
+  isLoadingCheckUserName: boolean = false;
 
   // Check CompanyName Variables
   isCompanyNameAvailable: boolean = false;
-  isCheckCompanyName: boolean = false;
+  isLoadingCheckCompanyName: boolean = false;
 
   // Check TaxId Variables
   isTaxIdAvailable: boolean = false;
-  isCheckTaxId: boolean = false;
+  isLoadingCheckTaxId: boolean = false;
 
   // Check DunsNumber Variables
   isDunsNumberAvailable: boolean = false;
-  isCheckDunsNumber: boolean = false;
+  isLoadingCheckDunsNumber: boolean = false;
 
   // Check CrNumber Variables
   isCRNumberAvailable: boolean = false;
-  isCheckCRNumber: boolean = false;
+  isLoadingCheckCRNumber: boolean = false;
 
   // Check VatId Variables
   isVatIdAvailable: boolean = false;
-  isCheckVatId: boolean = false;
+  isLoadingCheckVatId: boolean = false;
 
   // Currency List Variables
   currencyList: any;
@@ -78,8 +79,10 @@ export class SupplierDetailsComponent {
   minCRValidityDate: any;
 
   constructor(
+    private supplierRegisterService: SupplierRegisterService,
     private alertsService: AlertsService,
     public publicService: PublicService,
+    private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
   ) { }
 
@@ -150,92 +153,129 @@ export class SupplierDetailsComponent {
       today?.getDate());
   }
 
-  checkCompanyNameAvailability(companyName: any): void {
-    this.isCheckCompanyName = true;
-    // this.supplierService?.checkCompanyNameAvailability(companyName)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.isCompanyNameAvailable = false;
-    //       this.isCheckCompanyName = false;
-    //       this.cdr?.detectChanges();
-    //     } else {
-    //       this.isCompanyNameAvailable = true;
-    //       if (res?.message) {
-    //         res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.error?.message) : '';
-    //       }
-    //       this.isCheckCompanyName = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService?.openSweetAlert('error', err?.message) : '';
-    //     this.isCheckCompanyName = false;
-    //   })
+  // Start Check If Company Name Unique
+  checkCompanyNameAvailability(): void {
+    if (!this.formControls?.companyName?.valid) {
+      return; // Exit early if Company Name is not valid
+    }
+    const data: string = this.detailsForm?.value?.companyName;
+    this.isLoadingCheckCompanyName = true;
+    let checkCompanyNameSubscription: Subscription = this.supplierRegisterService?.checkCompanyNameAvailability(data).pipe(
+      tap(res => this.handleCompanyNameResponse(res)),
+      catchError(err => this.handleCompanyNameError(err))
+    ).subscribe();
+    this.subscriptions.push(checkCompanyNameSubscription);
   }
-  IsUserNameAvailable(userName: any): void {
-    this.isCheckUserName = true;
-    // this.supplierService?.IsUserNameAvailable(userName)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.isUserNameAvailable = false;
-    //       this.isCheckUserName = false;
-    //       this.cdr?.detectChanges();
-    //     } else {
-    //       this.isUserNameAvailable = true;
-    //       if (res?.message) {
-    //         res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.error?.message) : '';
-    //       }
-    //       this.isCheckUserName = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService?.openSweetAlert('error', err?.message) : '';
-    //     this.isCheckUserName = false;
-    //   })
+  private handleCompanyNameResponse(res: any): void {
+    if (res) {
+      this.isCompanyNameAvailable = false;
+    } else {
+      this.isCompanyNameAvailable = true;
+      this.handleCompanyNameError(res?.message);
+    }
+    this.isLoadingCheckCompanyName = false;
+    this.cdr.detectChanges();
   }
-  IsVatIdAvailable(vatId: any, countryId: any): any {
-    // this.isCheckVatId = true;
-    // this.supplierService?.IsVatAvailable(vatId, countryId)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.isVatIdAvailable = false;
-    //       this.isCheckVatId = false;
-    //       this.cdr.detectChanges();
-    //     } else {
-    //       this.isVatIdAvailable = true;
-    //       if (res?.message) {
-    //         res?.error?.message ? this.alertsService.openSweetAlert('error', res?.error?.message) : '';
-    //       }
-    //       this.isCheckVatId = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService.openSweetAlert('error', err?.message) : '';
-    //     this.isCheckVatId = false;
-    //   })
+  private handleCompanyNameError(err: any): any {
+    this.isCompanyNameAvailable = true;
+    this.isLoadingCheckCompanyName = false;
+    this.handleError(err);
   }
-  IsTaxIdAvailable(taxId: any): any {
-    this.isCheckTaxId = true;
-    // this.supplierService?.IsTaxIdAvailable(taxId)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.isTaxIdAvailable = false;
-    //       this.isCheckTaxId = false;
-    //       this.cdr.detectChanges();
-    //     } else {
-    //       this.isTaxIdAvailable = true;
-    //       if (res?.message) {
-    //         res?.error?.message ? this.alertsService.openSweetAlert('error', res?.error?.message) : '';
-    //       }
-    //       this.isCheckTaxId = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService.openSweetAlert('error', err?.message) : '';
-    //     this.isCheckTaxId = false;
-    //   })
+  // End Check If Company Name Unique
+
+  // Start Check If User Name Unique
+  IsUserNameAvailable(): void {
+    if (!this.formControls?.userName?.valid) {
+      return; // Exit early if User Name is not valid
+    }
+    const data: string = this.detailsForm?.value?.userName;
+    this.isLoadingCheckUserName = true;
+    let checkUserNameSubscription: Subscription = this.supplierRegisterService?.IsUserNameAvailable(data).pipe(
+      tap(res => this.handleUserNameResponse(res)),
+      catchError(err => this.handleUserNameError(err))
+    ).subscribe();
+    this.subscriptions.push(checkUserNameSubscription);
   }
+  private handleUserNameResponse(res: any): void {
+    if (res) {
+      this.isUserNameAvailable = false;
+    } else {
+      this.isUserNameAvailable = true;
+      this.handleUserNameError(res?.message);
+    }
+    this.isLoadingCheckCompanyName = false;
+    this.cdr.detectChanges();
+  }
+  private handleUserNameError(err: any): any {
+    this.isUserNameAvailable = true;
+    this.isLoadingCheckUserName = false;
+    this.handleError(err);
+  }
+  // End Check If User Name Unique
+
+  // Start Check If Vat Id Unique
+  IsVatIdAvailable(): void {
+    if (!this.formControls?.vatId?.valid) {
+      return; // Exit early if Vat Id is not valid
+    }
+    const vatId: string = this.detailsForm?.value?.vatId;
+    const countryId: number | string = this.detailsForm?.value?.country?.id
+    this.isLoadingCheckVatId = true;
+    let checkVatIdSubscription: Subscription = this.supplierRegisterService?.IsVatAvailable(vatId, countryId).pipe(
+      tap(res => this.handleVatIdResponse(res)),
+      catchError(err => this.handleVatIdError(err))
+    ).subscribe();
+    this.subscriptions.push(checkVatIdSubscription);
+  }
+  private handleVatIdResponse(res: any): void {
+    if (res) {
+      this.isVatIdAvailable = false;
+    } else {
+      this.isVatIdAvailable = true;
+      this.handleVatIdError(res?.message);
+    }
+    this.isLoadingCheckVatId = false;
+    this.cdr.detectChanges();
+  }
+  private handleVatIdError(err: any): any {
+    this.isVatIdAvailable = true;
+    this.isLoadingCheckVatId = false;
+    this.handleError(err);
+  }
+  // End Check If Vat Id Unique
+
+  // Start Check If Tax Id Unique
+  IsTaxIdAvailable(): void {
+    if (!this.formControls?.taxId?.valid) {
+      return; // Exit early if Tax Id is not valid
+    }
+    const taxId: string = this.detailsForm?.value?.taxId;
+    this.isLoadingCheckVatId = true;
+    let checkTaxIdSubscription: Subscription = this.supplierRegisterService?.IsTaxIdAvailable(taxId).pipe(
+      tap(res => this.handleTaxIdResponse(res)),
+      catchError(err => this.handleTaxIdError(err))
+    ).subscribe();
+    this.subscriptions.push(checkTaxIdSubscription);
+  }
+  private handleTaxIdResponse(res: any): void {
+    if (res) {
+      this.isTaxIdAvailable = false;
+    } else {
+      this.isTaxIdAvailable = true;
+      this.handleTaxIdError(res?.message);
+    }
+    this.isLoadingCheckTaxId = false;
+    this.cdr.detectChanges();
+  }
+  private handleTaxIdError(err: any): any {
+    this.isTaxIdAvailable = true;
+    this.isLoadingCheckTaxId = false;
+    this.handleError(err);
+  }
+  // End Check If Tax Id Unique
+
   IsDunsNumberAvailable(dunsNumber: any): any {
-    this.isCheckDunsNumber = true;
+    this.isLoadingCheckDunsNumber = true;
     // this.supplierService?.IsTaxIdAvailable(dunsNumber)?.subscribe(
     //   (res: any) => {
     //     if (res) {
@@ -256,7 +296,7 @@ export class SupplierDetailsComponent {
     //   })
   }
   IsCRNumberAvailable(cr: any): void {
-    this.isCheckCRNumber = true;
+    this.isLoadingCheckCRNumber = true;
     // this.supplierService?.IsCRNumberAvailable(cr)?.subscribe(
     //   (res: any) => {
     //     if (res) {
@@ -276,9 +316,10 @@ export class SupplierDetailsComponent {
     //     this.isCheckCRNumber = false;
     //   })
   }
+
   onKeyUpEvent(type?: any): void {
     if (type == 'vatId') {
-      // this.isVatIdAvailable = false;
+      this.isVatIdAvailable = false;
     }
     if (type == 'taxId') {
       this.isTaxIdAvailable = false;
@@ -317,6 +358,85 @@ export class SupplierDetailsComponent {
   }
   checkId(arr?: any, id?: any): void {
     return arr?.some(obj => obj?.id === id);
+  }
+
+  submit(): void {
+    let detailsInfo: any = this.detailsForm?.value;
+    let dataActivitiesIds: any = [];
+    detailsInfo?.dataActivities?.forEach((item: any) => {
+      dataActivitiesIds?.push(item?.id);
+    });
+    let ownerShipIds: any = [];
+    detailsInfo?.ownerShip?.forEach((item: any) => {
+      ownerShipIds?.push(item?.id);
+    });
+    let descArr: any = [];
+    detailsInfo?.descriptions?.forEach((item: any) => {
+      descArr?.push(item?.description);
+    });
+    let ownerShip: any = this.checkId(detailsInfo?.ownerShip, 5);
+    let data: any = {
+      companyName: detailsInfo?.companyName,
+      companyNameAr: detailsInfo?.companyNameAr ? detailsInfo?.companyNameAr : null,
+      firstName: detailsInfo?.firstName,
+      lastName: detailsInfo?.lastName,
+      userName: detailsInfo?.userName,
+      commerceRecordNumber: detailsInfo?.CRNumber ? detailsInfo?.CRNumber.toString() : null,
+      numberOfEmployees: detailsInfo?.noOfEmployees ? detailsInfo?.noOfEmployees : null,
+      foundationDate: detailsInfo?.foundationDate ? detailsInfo?.foundationDate : null,
+      commerceRecordValidityDate: detailsInfo?.CRValidity ? detailsInfo?.CRValidity : null,
+      ownerName: detailsInfo?.ownerName ? detailsInfo?.ownerName : null,
+      capital: detailsInfo?.capital ? detailsInfo?.capital : null,
+      currencyId: detailsInfo?.currency?.id,
+      categories: dataActivitiesIds,
+      typeOfOwnerShipId: ownerShipIds,
+      typeOfOwnerShip: ownerShip ? detailsInfo?.otherOwnerShipName : '',
+      countryId: detailsInfo?.country?.id ? detailsInfo?.country?.id : null,
+      yearsOnCurrentActivityId: detailsInfo?.yearOfCurrentActivity?.id ? detailsInfo?.yearOfCurrentActivity?.id : null,
+      yearsOnCurrentActivity: detailsInfo?.yearOfCurrentActivity?.name ? detailsInfo?.yearOfCurrentActivity?.name : null,
+      isCertified: detailsInfo?.isCertified ? detailsInfo?.isCertified == 'yes' ? true : false : null,
+      vatNumber: detailsInfo?.vatId,
+      taxId: detailsInfo?.taxId ? detailsInfo?.taxId?.toString() : null,
+      dunsNumber: detailsInfo?.dunsNumber ? detailsInfo?.dunsNumber?.toString() : null,
+      certificates: descArr,
+      description: detailsInfo?.companyDescription ? detailsInfo?.companyDescription : null,
+      website: detailsInfo?.websiteAddress ? detailsInfo?.websiteAddress : null,
+    };
+    if (this.detailsForm?.valid) {
+      // this.publicService?.show_loader?.next(true);
+      // this.supplierService?.saveSupplierDetails(data)?.subscribe(
+      //   (res: any) => {
+      //     if (res) {
+      //       stepper?.next();
+      //       this.refreshSupplier(true);
+      //       this.publicService?.show_loader?.next(false);
+      //     } else {
+      //       this.publicService?.show_loader?.next(false);
+      //       res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.err?.message) : '';
+      //     }
+      //   },
+      //   (err: any) => {
+      //     this.publicService?.show_loader?.next(false);
+      //     err ? this.alertsService?.openSweetAlert('error', err) : '';
+      //   }
+      // );
+    }
+    else {
+      this.publicService?.validateAllFormFields(this.detailsForm);
+    }
+  }
+
+
+  /* --- Handle api requests messages --- */
+  private handleSuccess(msg: any): any {
+    this.setMessage(msg || this.publicService.translateTextFromJson('general.successRequest'), 'success');
+  }
+  private handleError(err: any): any {
+    this.setMessage(err || this.publicService.translateTextFromJson('general.errorOccur'), 'error');
+  }
+  private setMessage(message: string, type: string): void {
+    this.alertsService.openToast(type, type, message);
+    // this.publicService.showGlobalLoader.next(false);
   }
 
   ngOnDestroy(): void {

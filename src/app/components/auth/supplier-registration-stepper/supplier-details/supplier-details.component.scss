@@ -1,0 +1,10 @@
+.btn {
+  height: 2.9rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.btn-solid-main {
+  background-color: var(--bg-main-color);
+  border: 1px solid var(--bg-main-color);
+  color: var(--text-white-color);
+}
