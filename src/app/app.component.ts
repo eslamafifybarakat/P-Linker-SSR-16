@@ -117,6 +117,7 @@ export class AppComponent {
     if (
       this.router.url.includes('Auth') ||
       this.router.url.includes('Supplier-Register') ||
+      this.router.url.includes('Dashboard') ||
       this.router.url.includes('error')
     ) {
       this.shouldRender = false;

@@ -19,6 +19,7 @@
     "about":"About",
     "resource":"Resource",
     "features":"Features",
+    "dashboard":"Dashboard",
     "services": {
       "title": "Services",
       "items": {
@@ -52,7 +53,32 @@
     "readMore":"Read More",
     "readArticle":"Read article",
     "learnMore":"Learn More",
-    "saveAndContinue":"Save And Continue"
+    "saveAndContinue":"Save And Continue",
+    "successRequest": "The Request has been successed",
+    "save": "Save",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "areYouSureToLogout": "Are you sure you want to logout?",
+    "confirm_delete": "Confirm Delete",
+    "confirm_delete_qu": "Are you sure to delete",
+    "confirm_delete_item": "Are sure to delete this item ?",
+    "selected_items": "selected items",
+    "restorePassword": "Restore password",
+    "yes": "Yes",
+    "no": "No",
+    "clickToUpload": "Click to upload or drag and drop",
+    "supports": "Supports",
+    "replace": "Replace",
+    "delete": "Delete",
+    "details": "Details",
+    "edit": "Edit",
+    "no_records_found": "No records have been added yet",
+    "reset": "Reset",
+    "filter": "Filter",
+    "dataNotEditable": "This data is not editable",
+    "except": "Except through the competent authority",
+    "recordedData": "Your recorded data",
+    "noSearchResult":"There are no results for your search"
   },
   "summary": {
     "faster": "Faster",
@@ -278,6 +304,81 @@
       "heroSearchPlaceHolderText": "Are you looking for a specific office?",
       "topicTitle": "Keywords",
       "btnText": "Do you need help?"
+    }
+  },
+  "dashboard": {
+    "sideMenu": {
+      "statistics": "Statistics",
+      "clients": "Clients",
+      "sales": "Sales",
+      "products": "Products",
+      "messages": "Messages",
+      "settings": "Settings"
+    },
+    "tableHeader": {
+      "time": "Time",
+      "location": "Location",
+      "address": "Address",
+      "createdBy": "Created By",
+      "username": "Username",
+      "id": "Id",
+      "actions": "Actions",
+      "name": "Name",
+      "active": "Active",
+      "status": "Status",
+      "email": "Email",
+      "websiteLink": "Website link",
+      "mobilePhone": "Mobile Number",
+      "date": "Date",
+      "recordName": "History Name",
+      "recordNumber": "History Number",
+      "endDate": "End Date",
+      "fullName": "Full Name",
+      "residencyNumber": "Residency number",
+      "healthCertificate": "health certificate",
+      "residencePhoto": "residence photo",
+      "operatingCard": "Operating card",
+      "insuranceExpiryDate": "Insurance expiry date",
+      "formPhoto": "form photo"
+    },
+    "hello": "Hello",
+    "statistics": {
+      "hi": "Hi",
+      "welcomeBack": "Welcome Back!",
+      "pageIsDesigned": "This page is designed to give some important information about the website. Let's make someting together!",
+      "congratulations": "Congratulations",
+      "youHavePermission": "You have permission to do more operation",
+      "viewProfile": "View profile",
+      "totalRevenue": "Total Revenue",
+      "GoalVReality": "Goal versus reality",
+      "customerSatisfactio": "Customer Satisfactio"
+    },
+    "customers": {
+      "customers": "Clients",
+      "addCustomer": "Add Client",
+      "editCustomer": "Edit Client",
+      "search": "Search by client name or mobile number",
+      "customerDetails": "Client records details",
+      "recordDetails": "History details",
+      "licenseDetails": "Municipality license details",
+      "certificateDetails": "Safety certificate details",
+      "medicalDetails": "Medical insurance details",
+      "fileDetails": "Labor office file details",
+      "customerDataDetails": "Client data details"
+    },
+    "records": {
+      "records": "History",
+      "addRecord": "Add History"
+    },
+    "employees": {
+      "employees": "Employees",
+      "addEmployee": "Add Employee",
+      "editEmployee": "Edit Employee"
+    },
+    "vehicles": {
+      "vehicles": "Vehicles",
+      "addVehicle": "Add Vehicle",
+      "editVehicle": "Edit Vehicle"
     }
   }
 }

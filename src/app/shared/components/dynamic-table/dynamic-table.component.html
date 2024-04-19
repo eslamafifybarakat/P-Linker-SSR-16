@@ -1,0 +1,787 @@
+<div id="dynamic-global-data-table" class="position-relative">
+  <!-- <div *ngIf="isLoading" class="overlay position-absolute d-flex justify-content-center align-items-center">
+    <span class="loader"></span>
+  </div> -->
+  <div class="table-content">
+    <p-table #dt1 [value]="tableData" (onFilter)="customFilter($event,dt1)" [(selection)]="selectedItems" [lazy]="true"
+      [paginator]="false" [rows]="paginatorRows" [columns]="selectedColumns" responsiveLayout="scroll"
+      [rowHover]="false" [resizableColumns]="true" [customSort]="true" (onSort)="customSort($event)" dataKey="id">
+      <ng-template pTemplate="caption" *ngIf="showHeader">
+        <div class="caption d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div class="d-flex align-items-center gap-3 dropdown-arrow">
+            <p-dropdown [dropdownIcon]="'fas fa-caret-down'" #dropdown [options]="rowsPerPageOptions"
+              (onChange)="paginatorOption($event)" (onHide)="hide()"></p-dropdown>
+          </div>
+          <ng-container *ngIf="showSearch">
+            <span class="p-input-icon-right">
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText class="search-input rounded-pill" type="text" #search
+                  (keyup.enter)="searchHandlerEmit(search?.value)" placeholder="{{'placeholder.search'|translate}}" />
+              </span>
+              <ng-container *ngIf="search.value && !isLoadingSearch">
+                <i (click)="clearSearchValue(search)" class="pi pi-times text-danger cursor-pointer"></i>
+              </ng-container>
+              <ng-container *ngIf="isLoadingSearch">
+                <i class="pi pi-spin pi-spinner"></i>
+              </ng-container>
+            </span>
+          </ng-container>
+
+          <div class="d-flex flex-wrap flex-row-reverse gap-3">
+            <ng-container *ngIf="showClear">
+              <!-- label="{{'general.reset'|translate}}"  -->
+              <button pButton class="p-button-outlined p-button-secondary clear action-btn" icon="pi pi-refresh"
+                tooltipPosition="topfoo" pTooltip="{{'general.reset'|translate}}" (click)="clear(dt1)">
+              </button>
+            </ng-container>
+            <p-multiSelect [dropdownIcon]="'fas fa-caret-down'" #colVisible [(ngModel)]="selectedColumns"
+              [options]="tableHeaders" optionLabel="header" appendTo="body" selectedItemsLabel="{0} columns selected"
+              [style]="{'min-width': '200px'}" placeholder="Choose Columns" pTooltip="Column Visibility"
+              tooltipPosition="top"></p-multiSelect>
+            <!-- <a pTooltip="print" tooltipPosition="top">
+                <img src="assets/images/icons/print.svg" class="action-btn" alt="">
+              </a>
+              <a pTooltip="XLS" tooltipPosition="top">
+                <img src="assets/images/icons/xls.svg" class="action-btn" alt="">
+              </a>
+              <a pTooltip="PDF" tooltipPosition="top">
+                <img src="assets/images/icons/pdf.svg" class="action-btn" alt="">
+              </a> -->
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr [class.disabled]="isLoading" *ngIf="tableData?.length>0">
+          <ng-container *ngIf="showSelection">
+            <th>
+              <!-- <p-checkbox [(ngModel)]="selectAll" [binary]="true" (onChange)="changeSelectedAll($event)"></p-checkbox>
+              <ng-container> -->
+              <p-tableHeaderCheckbox (click)="selectionHandlerEmit()"></p-tableHeaderCheckbox>
+              <!-- </ng-container> -->
+            </th>
+          </ng-container>
+
+          <ng-container *ngIf="showArrangement">
+            <th>{{'general.arrangement'|translate}}</th>
+          </ng-container>
+
+          <ng-container *ngIf="rowExpand">
+            <th style="width: 2rem;"></th>
+          </ng-container>
+
+          <ng-container *ngFor="let col of columns">
+            <ng-container *ngIf="col?.sort || col?.filter  ||col?.filterTime ||col?.filterTimes; else elseWithoutSort">
+              <ng-container
+                *ngIf="col?.type=='text' ||col?.type== 'filterArray' || col?.type=='numeric' || col?.type=='date' || col?.type=='status' || col?.type=='boolean'|| col?.type=='time'">
+                <th>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="d-flex gap-1">
+                      <ng-container *ngIf="col?.sort">
+                        <div>
+                          <ng-container *ngIf="col?.showDefaultSort">
+                            <a (click)="toggleSort('asc',col)"><i class="sort pi pi-sort-alt"></i></a>
+                          </ng-container>
+                          <ng-container *ngIf="col?.showAscSort">
+                            <a class="sort" (click)="toggleSort('des',col)"><i class="pi pi-sort-amount-up"></i></a>
+                          </ng-container>
+                          <ng-container *ngIf="col?.showDesSort">
+                            <a class="sort" (click)="toggleSort('asc',col)"><i class="pi pi-sort-amount-down"></i></a>
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                      <span> {{ col?.header|translate }}</span>
+                    </span>
+                    <ng-container *ngIf="col?.filter">
+                      <ng-container *ngIf="col?.type!='status' && col?.type!= 'filterArray'">
+                        <ng-container *ngIf="col?.type!='time'">
+                          <p-columnFilter type="{{col?.type}}" field="{{col?.field}}" display="menu" [showMenu]="true"
+                            [showAddButton]="false">
+                          </p-columnFilter>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="col?.type== 'filterArray'">
+                        <p-columnFilter field="{{col?.field}}" matchMode="in" display="menu" [showMatchModes]="false"
+                          [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="header">
+                            <div class="px-3 pt-3 pb-0">
+                              <span class="font-bold">{{col?.label}}</span>
+                            </div>
+                          </ng-template>
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [dropdownIcon]="'fas fa-caret-down'" [ngModel]="value"
+                              [options]="col?.list=='driverStatus'?driverStatusList:''"
+                              placeholder="{{col?.placeholder}}" (onChange)="filter($event.value)" optionLabel="name">
+                              <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                  <span class="ml-1">{{option.name}}</span>
+                                </div>
+                              </ng-template>
+                            </p-multiSelect>
+                          </ng-template>
+                        </p-columnFilter>
+                      </ng-container>
+
+                      <ng-container *ngIf="col?.type=='status'">
+                        <p-columnFilter class="statusDropdown" field="status" matchMode="equals" display="menu"
+                          [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [dropdownIcon]="'fas fa-caret-down'" [ngModel]="value" [options]="statuses"
+                              (onChange)="filter($event.value)" placeholder="Any" []>
+                              <ng-template let-option pTemplate="item">
+                                <span [class]="'item-badge status-' + option.value">{{option.value}}</span>
+                              </ng-template>
+                            </p-dropdown>
+                          </ng-template>
+                        </p-columnFilter>
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="col?.filterTime">
+                      <ng-container *ngIf="col?.type=='time'">
+                        <div class="dropdown">
+                          <a class="dropdown-toggle w-100" type="button" aria-expanded="false"
+                            [attr.aria-expanded]="!collapse" (click)="collapse = !collapse;collapseEnd=false">
+                            <i class="pi pi-filter mx-2"></i>
+                          </a>
+                          <ul class="dropdown-menu filter p-4 w-100 border-0 mt-2" [class.show]="collapse">
+                            <div>
+                              <div class="mb-4">
+                                <p-dropdown [dropdownIcon]="'fas fa-caret-down'" [options]="timeList"
+                                  (onChange)="collapse=true" optionLabel="name" [filter]="true" [virtualScroll]="true"
+                                  [(ngModel)]="operator" [virtualScrollItemSize]="38" filterBy="name"
+                                  scrollHeight="200px" emptyMessage="{{'general.no_result_found'|translate}}"
+                                  [showClear]="false" placeholder="{{'placeholder.time'|translate}}" appendTo="body">
+                                </p-dropdown>
+                              </div>
+                              <div class="mb-4">
+                                <p-calendar appendTo="body" [(ngModel)]="timeValue" [showIcon]="true" inputId="icon"
+                                  [timeOnly]="true" hourFormat="12" placeholder="{{'placeholder.time'| translate}}"
+                                  [showButtonBar]="true"></p-calendar>
+                              </div>
+                              <div class="d-flex justify-content-between gap-2">
+                                <button (click)="applyTime(col?.field)" class=" btn
+                                  btn-solid-main">{{'primeng.apply'|translate}}</button>
+                                <button (click)="clearTime()"
+                                  class="btn btn-outline-main">{{'primeng.clear'|translate}}</button>
+                              </div>
+                            </div>
+                          </ul>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="col?.filterTimes">
+                      <ng-container *ngIf="col?.type=='time'">
+                        <div class="dropdown">
+                          <a class="dropdown-toggle w-100" type="button" aria-expanded="false"
+                            [attr.aria-expanded]="!collapseEnd" (click)="collapseEnd = !collapseEnd;collapse=false">
+                            <i class="pi pi-filter mx-2"></i>
+                          </a>
+                          <ul class="dropdown-menu filter p-4 w-100 border-0 mt-2" [class.show]="collapseEnd">
+                            <div>
+                              <div class="mb-4">
+                                <p-dropdown [dropdownIcon]="'fas fa-caret-down'" [options]="timeList"
+                                  (onChange)="collapse=true" optionLabel="name" [filter]="true" [virtualScroll]="true"
+                                  [(ngModel)]="operatorEnd" [virtualScrollItemSize]="38" filterBy="name"
+                                  scrollHeight="200px" emptyMessage="{{'general.no_result_found'|translate}}"
+                                  [showClear]="false" placeholder="{{'placeholder.time'|translate}}" appendTo="body">
+                                </p-dropdown>
+                              </div>
+                              <div class="mb-4">
+                                <p-calendar appendTo="body" [(ngModel)]="timeValueEnd" [showIcon]="true" inputId="icon"
+                                  [timeOnly]="true" hourFormat="12" placeholder="{{'placeholder.time'| translate}}"
+                                  [showButtonBar]="true"></p-calendar>
+                              </div>
+                              <div class="d-flex justify-content-between gap-2">
+                                <button (click)="applyTime(col?.field,'end')" class=" btn
+                                  btn-solid-main">{{'primeng.apply'|translate}}</button>
+                                <button (click)="clearTime()"
+                                  class="btn btn-outline-main">{{'primeng.clear'|translate}}</button>
+                              </div>
+                            </div>
+                          </ul>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </th>
+              </ng-container>
+            </ng-container>
+            <ng-template #elseWithoutSort>
+              <th>
+                {{ col?.header|translate }}
+              </th>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="showActions">
+            <th>{{"dashboard.tableHeader.actions"|translate}}</th>
+          </ng-container>
+          <ng-container *ngIf="showCopy">
+            <th>ID</th>
+          </ng-container>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-columns="columns" let-expanded="expanded">
+        <ng-container *ngIf="isLoading; else NoLoadingTable">
+          <tr class="bg-transparent">
+            <td class="p-0 border-0" [attr.colspan]="tableHeaders?.length+1">
+              <p-table id="table-skeleton" [value]="[1]">
+                <ng-template pTemplate="body" let-item>
+          <tr>
+            <ng-container *ngFor="let item of skeletonItems">
+              <td><p-skeleton width="50%" height="1.3rem" borderRadius="6px"></p-skeleton></td>
+            </ng-container>
+          </tr>
+      </ng-template>
+    </p-table>
+    </td>
+    </tr>
+    </ng-container>
+    <ng-template #NoLoadingTable>
+      <ng-container *ngIf="tableData?.length>0">
+        <tr>
+          <ng-container *ngIf="showSelection">
+            <!-- colspan -->
+            <td>
+              <ng-container *ngIf="showDefaultSelect">
+                <p-tableCheckbox [value]="item" (click)="selectionHandlerEmit()"></p-tableCheckbox>
+              </ng-container>
+
+              <ng-container *ngIf="!showDefaultSelect">
+                <p-checkbox [(ngModel)]="item.checked" [binary]="true"
+                  (onChange)="changeSelected($event,item)"></p-checkbox>
+              </ng-container>
+
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="showArrangement">
+            <td>
+              <a (click)="arrangeItems(item)">
+                <i class="pi pi-sort"></i>
+              </a>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="rowExpand">
+            <ng-container *ngIf="item[itemExpandKey]?.length>0; else noExpand">
+              <td>
+                <button type="button" pButton pRipple [pRowToggler]="item"
+                  class="p-button-text p-button-rounded p-button-plain row-toggle"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+              </td>
+            </ng-container>
+            <ng-template #noExpand>
+              <td></td>
+            </ng-template>
+          </ng-container>
+          <ng-container *ngFor="let col of columns">
+            <ng-container *ngIf="col?.dataType=='array'; else noChild">
+              <td>
+                <ng-container *ngIf="col?.statusClass; else noStatus">
+                  <span [class]="'item-badge status-' +  item[col.field]">{{ item[col.field]}}</span>
+                </ng-container>
+                <ng-template #noStatus>
+                  <ng-container *ngIf="item && item[col.field]">
+                    <span class="d-flex gap-2">
+                      <ng-container *ngFor="let child of item[col.field];let i=index">
+                        <ng-container *ngIf="i<2">
+                          <span class="child">{{ child[arrayChildKey] }} </span>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="item[col.field]?.length>2">
+                        <span class="child"> +{{item[col.field]?.length - 2}}</span>
+                      </ng-container>
+                    </span>
+                  </ng-container>
+                  <ng-container *ngIf="item[col.field]?.length==0">
+                    <p class="text-center noItemAdded">
+                      {{'general.noItemAdded'|translate}}
+                    </p>
+                  </ng-container>
+                </ng-template>
+
+              </td>
+            </ng-container>
+            <ng-template #noChild>
+              <ng-container *ngIf="(col?.type=='text' || col?.type=='numeric')">
+                <ng-container *ngIf="col?.enabelColEvent; else elseNoColEvent">
+                  <td>
+                    <a (click)="colEventHandlerEmit(item,col?.typeViewModal)" pTooltip="{{col?.colToolTip}}"
+                      tooltipPosition="top">
+                      <span [class.truncate-text]="col?.type=='text'" *ngIf="item && item[col.field]">
+                        {{ item[col.field] }}
+                      </span>
+                    </a>
+                  </td>
+                </ng-container>
+                <ng-template #elseNoColEvent>
+                  <td>
+                    <ng-container *ngIf="col?.enableItemLink; else normalRecord">
+                      <a (click)="itemActionEmitter(item)" class="text-decoration-underline link-color">
+                        <span [class.truncate-text]="col?.type=='text'" *ngIf="item && item[col.field]">
+                          <i class="pi pi-map-marker"></i> {{
+                          this.publicService.translateTextFromJson('dashboard.tableHeader.locationLink')}}
+                        </span>
+                      </a>
+                    </ng-container>
+                    <ng-template #normalRecord>
+                      <ng-container *ngIf="(col?.addedText);else noAddText">
+                  <td><span [class.truncate-text]="col?.type=='text'" *ngIf="item && item[col.field]">
+                      {{col?.text}}{{ item[col.field] }}
+                    </span></td>
+              </ng-container>
+              <ng-template #noAddText>
+                <span [class.truncate-text]="col?.type=='text'" *ngIf="item && item[col.field]">
+                  {{ item[col.field] }}
+                </span>
+              </ng-template>
+
+            </ng-template>
+            </td>
+    </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="col?.type=='date'">
+      <ng-container *ngIf="enableDateFormate; else initialFormate">
+        <td>
+          {{item[col?.field] | date: dateFormateString:'':currentLanguage}}
+        </td>
+      </ng-container>
+      <ng-template #initialFormate>
+        <td>
+          {{item[col?.field] | date: 'dd/MM/YYYY'}}
+        </td>
+      </ng-template>
+    </ng-container>
+    <ng-container *ngIf="col?.type=='status'">
+      <td>
+        <span [class]="'item-badge status-' +  item[col.field]">{{ item[col.field]}}</span>
+      </td>
+    </ng-container>
+    <ng-container *ngIf="col?.type=='boolean'">
+      <td>
+        <p-inputSwitch [(ngModel)]="item[col.field]" (onChange)="statusHandlerEmit(item)"
+          pTooltip="{{'general.changeStatus'|translate}}" tooltipPosition="top">
+        </p-inputSwitch>
+      </td>
+    </ng-container>
+    <ng-container *ngIf="col?.type=='time'">
+      <td>
+        {{item[col?.field]}}
+      </td>
+    </ng-container>
+    <ng-container *ngIf="col?.type=='img'">
+      <td>
+        <div class="image">
+          <p-image class="shadow" [src]="item[col.field]" [previewImageSrc]="item[col.field]" alt="Image" width="70"
+            [preview]="item[col.showPreview]?item[col.showPreview]:true"
+            (onImageError)="onImageError(item,col.field)"></p-image>
+        </div>
+      </td>
+    </ng-container>
+    </ng-template>
+    </ng-container>
+    <ng-container *ngIf="showActions">
+      <td>
+        <div class="d-flex gap-2">
+          <ng-container *ngIf="showActionsIcons">
+            <ng-container *ngIf="showDetails">
+              <a class="fw-500 details" (click)="detailsHandlerEmit(item)" pTooltip="{{'general.details'|translate}}"
+                tooltipPosition="top">
+                <i class="far fa-eye"></i>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="showEdit">
+              <a class="d-flex align-items-center
+                        gap-2" (click)="editHandlerEmit(item)" pTooltip="{{'general.edit'|translate}}"
+                tooltipPosition="top">
+                <span><i class="fas fa-pen edit"></i></span>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="showCopyAction">
+              <a class="d-flex align-items-center
+                        gap-2" (click)="copyActionHandlerEmit(item)" pTooltip="{{'general.copy'|translate}}"
+                tooltipPosition="top">
+                <span><i class="fas fa-copy"></i></span>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="showDelete">
+              <a class="d-flex align-items-center
+                        gap-2" (click)="deleteHandlerEmit(item)" pTooltip="{{'general.delete'|translate}}"
+                tooltipPosition="top">
+                <span><i class="fas fa-trash-alt remove"></i></span>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="showResetPassword">
+              <a class="d-flex align-items-center
+                        gap-2" (click)="resetPasswordHandlerEmit(item)" pTooltip="{{'form.resetPassword'|translate}}"
+                tooltipPosition="top">
+                <span><i class="pi pi-unlock
+                    reset-password fs-5-1"></i></span>
+              </a>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="showActionsButtons">
+            <ng-container *ngIf="showDetails">
+              <a class="badge-btn badge-details" (click)="detailsHandlerEmit(item)">
+                <!-- <i class="far fa-eye"></i> -->
+                {{'general.details'|translate}}
+              </a>
+            </ng-container>
+            <ng-container *ngIf="showEdit">
+              <a class="badge-btn badge-edit" (click)="editHandlerEmit(item)">
+                <!-- <span><i class="fas fa-pen edit"></i></span> -->
+                {{'general.edit'|translate}}
+              </a>
+            </ng-container>
+            <ng-container *ngIf="showDelete">
+              <a class="badge-btn badge-delete" (click)="deleteHandlerEmit(item)">
+                <!-- <span><i class="fas fa-trash-alt remove"></i></span> -->
+                {{'general.delete'|translate}}
+              </a>
+            </ng-container>
+          </ng-container>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container *ngIf="showCopy">
+      <td>
+        <div class="d-flex gap-2">
+          <a class="fw-500" (click)="copyHandlerEmit(item)">
+            <i class="pi pi-copy"></i>
+          </a>
+        </div>
+      </td>
+    </ng-container>
+    </tr>
+    </ng-container>
+    </ng-template>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-item>
+      <tr>
+        <td class="p-0" [attr.colspan]="tableHeaders.length+3">
+          <div>
+            <p-table [value]="item[itemExpandKey]" dataKey="id" id="childTable" [columns]="tableHeaders"
+              responsiveLayout="scroll" [rowHover]="false" [resizableColumns]="true" [customSort]="true"
+              (onSort)="customSort($event)">
+              <ng-template pTemplate="header" let-columns>
+                <ng-container *ngIf="showChildHeader">
+      <tr>
+        <ng-container *ngIf="showSelection">
+          <th>
+            <!-- <p-checkbox [(ngModel)]="selectAll" [binary]="true"></p-checkbox>
+
+              <ng-container> -->
+            <p-tableHeaderCheckbox (click)="selectionHandlerEmit()"></p-tableHeaderCheckbox>
+            <!-- </ng-container> -->
+
+          </th>
+        </ng-container>
+
+        <th></th>
+        <th></th>
+
+        <ng-container *ngFor="let col of columns">
+          <ng-container *ngIf="col?.sort || col?.filter; else elseWithoutSort">
+            <ng-container
+              *ngIf="col?.type=='text' ||col?.type== 'filterArray' || col?.type=='numeric' || col?.type=='date' || col?.type=='status' || col?.type=='boolean'">
+              <th pSortableColumn="{{col.field}}">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>
+                    <ng-container *ngIf="col?.sort">
+                      <p-sortIcon field="{{col?.field}}"></p-sortIcon>
+                    </ng-container>
+                    <span> {{ col?.header |translate}}</span>
+                  </span>
+                  <ng-container *ngIf="col?.filter">
+                    <ng-container *ngIf="col?.type!='status' && col?.type!= 'filterArray'">
+                      <p-columnFilter type="{{col?.type}}" field="{{col?.field}}" display="menu" [showMenu]="true"
+                        [showAddButton]="false">
+                      </p-columnFilter>
+                    </ng-container>
+
+                    <ng-container *ngIf="col?.type== 'filterArray'">
+                      <p-columnFilter field="{{col?.field}}" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
+                        <ng-template pTemplate="header">
+                          <div class="px-3 pt-3 pb-0">
+                            <span class="font-bold">{{col?.label}}</span>
+                          </div>
+                        </ng-template>
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                          <p-multiSelect [dropdownIcon]="'fas fa-caret-down'" [ngModel]="value"
+                            [options]="col?.list=='driverStatus'?driverStatusList:''" placeholder="{{col?.placeholder}}"
+                            (onChange)="filter($event.value)" optionLabel="name">
+                            <ng-template let-option pTemplate="item">
+                              <ng-container *ngIf="col?.status; else noStatus">
+                                <div [class]="'item-badge status-' + option?.value"
+                                  class="p-multiselect-representative-option">
+                                  <span class="ml-1">{{option?.name}}</span>
+                                </div>
+                              </ng-container>
+                              <ng-template #noStatus>
+                                <div class="p-multiselect-representative-option">
+                                  <span class="ml-1">{{option?.name}}</span>
+                                </div>
+                              </ng-template>
+
+                            </ng-template>
+                          </p-multiSelect>
+                        </ng-template>
+                      </p-columnFilter>
+                    </ng-container>
+
+                    <ng-container *ngIf="col?.type=='status'">
+                      <p-columnFilter field="status" matchMode="equals" display="menu" [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                          <p-dropdown [dropdownIcon]="'fas fa-caret-down'" [ngModel]="value" [options]="statuses"
+                            (onChange)="filter($event.value)" placeholder="Any">
+                            <ng-template let-option pTemplate="item">
+                              <span [class]="'item-badge status-' + option.value">{{option.label}}</span>
+                            </ng-template>
+                          </p-dropdown>
+                        </ng-template>
+                      </p-columnFilter>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </th>
+            </ng-container>
+
+          </ng-container>
+          <ng-template #elseWithoutSort>
+            <th>
+              {{ col?.header|translate }}
+            </th>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="showActions">
+          <th>{{"dashboard.tableHeader.actions"|translate}}</th>
+        </ng-container>
+        <ng-container *ngIf="showCopy">
+          <th>ID</th>
+        </ng-container>
+      </tr>
+      </ng-container>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-columns="columns">
+      <ng-container *ngIf="tableData?.length>0">
+        <tr>
+          <ng-container *ngIf="showSelection">
+            <td>
+              <ng-container *ngIf="!showDefaultSelect">
+                <p-checkbox [(ngModel)]="item.checked" [binary]="true"></p-checkbox>
+              </ng-container>
+
+              <ng-container *ngIf="showDefaultSelect">
+                <p-tableCheckbox [value]="item" (click)="selectionHandlerEmit()"></p-tableCheckbox>
+              </ng-container>
+            </td>
+          </ng-container>
+          <td></td>
+          <td></td>
+          <!-- <ng-container *ngIf="showArrangement">
+              <td>
+                <a (click)="arrangeItems(item)">
+                  <i class="pi pi-sort"></i>
+                </a>
+              </td>
+            </ng-container>
+            <ng-container *ngIf="rowExpand">
+              <ng-container *ngIf="true; else noExpand">
+                <td>
+                  <button type="button" pButton pRipple [pRowToggler]="item"
+                    class="p-button-text p-button-rounded p-button-plain row-toggle"
+                    [icon]="'pi pi-chevron-right'"></button>
+                </td>
+              </ng-container>
+              <ng-template #noExpand>
+                <td></td>
+              </ng-template>
+            </ng-container> -->
+          <ng-container *ngFor="let col of columns">
+            <ng-container *ngIf="col?.dataType=='array'; else noChild">
+              <td>
+                <ng-container *ngIf="item && item[col.field]">
+                  <span class="d-flex gap-2">
+                    <ng-container *ngFor="let child of item[col.field];let i=index">
+                      <ng-container *ngIf="i<2">
+                        <span class="child">{{ child[arrayChildKey] }} </span>
+                      </ng-container>
+
+                    </ng-container>
+                    <ng-container *ngIf="item[col.field]?.length>2">
+                      <span class="child"> +{{item[col.field]?.length - 2}}</span>
+                    </ng-container>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="item[col.field]?.length==0">
+                  <p class="text-center noItemAdded">
+                    {{'general.noItemAdded'|translate}}
+                  </p>
+                </ng-container>
+              </td>
+            </ng-container>
+            <ng-template #noChild>
+              <ng-container *ngIf="(col?.type=='text' || col?.type=='numeric')">
+                <ng-container *ngIf="col?.enabelColEvent; else elseNoColEvent">
+                  <td>
+                    <a (click)="colEventHandlerEmit(item,col?.typeViewModal)" pTooltip="{{col?.colToolTip}}"
+                      tooltipPosition="top">
+                      <span [class.truncate-text]="col?.type=='text'" *ngIf="item && item[col.field]">
+                        {{ item[col.field] }}
+                      </span>
+                    </a>
+                  </td>
+                </ng-container>
+                <ng-template #elseNoColEvent>
+                  <td>
+                    <span [class.truncate-text]="col?.type=='text'" *ngIf="item && item[col.field]">
+                      {{ item[col.field] }}
+                    </span>
+                  </td>
+                </ng-template>
+              </ng-container>
+              <ng-container *ngIf="col?.type=='date'">
+                <ng-container *ngIf="enableDateFormate; else initialFormate">
+                  <td>
+                    {{item[col?.field] | date: dateFormateString}}
+                  </td>
+                </ng-container>
+                <ng-template #initialFormate>
+                  <td>
+                    {{item[col?.field] | date: 'dd/MM/YYYY'}}
+                  </td>
+                </ng-template>
+              </ng-container>
+              <ng-container *ngIf="col?.type=='status'">
+                <td>
+                  <span [class]="'item-badge status-' + item[col.field] "> {{ item[col.field] }}</span>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="col?.type=='boolean'">
+                <td>
+                  <p-inputSwitch [(ngModel)]="item.is_active" (onChange)="statusHandlerEmit(item)"
+                    pTooltip="{{'general.changeStatus'|translate}}" tooltipPosition="top">
+                  </p-inputSwitch>
+                </td>
+              </ng-container>
+            </ng-template>
+          </ng-container>
+          <ng-container *ngIf="showActions">
+            <td>
+              <div class="d-flex gap-2">
+                <ng-container *ngIf="showDetails">
+                  <a class="fw-500 details" pTooltip="{{'general.details'|translate}}" tooltipPosition="top"
+                    (click)="detailsHandlerEmit(item)">
+                    <i class="far fa-eye"></i>
+                  </a>
+                </ng-container>
+
+                <ng-container *ngIf="showEdit">
+                  <a class="d-flex align-items-center
+                      gap-2" (click)="editChildHandlerEmit(item)" pTooltip="{{'general.edit'|translate}}"
+                    tooltipPosition="top">
+                    <span><i class="fas fa-pen edit"></i></span>
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="showCopyAction">
+                  <a class="d-flex align-items-center
+                      gap-2" (click)="copyChildHandlerEmit(item)" pTooltip="{{'general.copy'|translate}}"
+                    tooltipPosition="top">
+                    <span><i class="fas fa-copy"></i></span>
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="showDelete">
+                  <a class="d-flex align-items-center
+                      gap-2" (click)="deleteHandlerEmit(item)" pTooltip="{{'general.delete'|translate}}"
+                    tooltipPosition="top">
+                    <span><i class="fas fa-trash-alt remove"></i></span>
+                  </a>
+                </ng-container>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="showCopy">
+            <td>
+              <div class="d-flex gap-2">
+                <a class="fw-500" (click)="copyHandlerEmit(item)">
+                  <i class="pi pi-copy"></i>
+                </a>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">There are no order for this product yet.</td>
+      </tr>
+    </ng-template>
+    </p-table>
+  </div>
+  </td>
+  </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <ng-container *ngIf="!isLoading">
+      <tr class="bg-transparent">
+        <td [attr.colspan]="tableHeaders.length+1" class="border-0">
+          <div class="not-found d-flex flex-column justify-content-center align-items-center">
+            <ng-container *ngIf="!isSearch">
+              <div>
+                <app-dynamic-svg [name]="'noRecords'"></app-dynamic-svg>
+              </div>
+              <p class="fw-500 mt-3">{{notFoundText|translate}}</p>
+              <button *ngIf="showAddBtn" (click)="addHandlerEmit()"
+                class="btn btn-solid-main d-flex justify-content-center align-items-center">{{addBtnText|translate}}</button>
+            </ng-container>
+            <ng-container *ngIf="isSearch">
+              <app-dynamic-svg [name]="'noRecords'"></app-dynamic-svg>
+              <p class="fw-500 mt-3">{{"general.noSearchResult"|translate}}</p>
+              <button (click)="clearTable()"
+                class="btn btn-outline-main d-flex justify-content-center align-items-center">
+                {{'general.reset'|translate}}</button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="isLoading">
+      <tr class="bg-transparent">
+        <td class="p-0 border-0" [attr.colspan]="tableHeaders?.length+1">
+          <p-table [value]="skeletonItems">
+            <ng-template pTemplate="body" let-item>
+      <tr>
+        <ng-container *ngFor="let item of skeletonItems">
+          <td><p-skeleton width="50%" height="1.3rem" borderRadius="6px"></p-skeleton></td>
+        </ng-container>
+      </tr>
+  </ng-template>
+  </p-table>
+  </td>
+  </tr>
+  </ng-container>
+  </ng-template>
+  </p-table>
+</div>
+<ng-container *ngIf="tableData?.length>0">
+  <div class="d-flex justify-content-center my-3" [class.disabled]="isLoading">
+    <ng-container *ngIf="showPaginationText">
+      <p>Showing {{pageNumber}} to {{pages}} of {{results}} results</p>
+    </ng-container>
+    <p-paginator #paginator [rows]="paginatorRows" [totalRecords]="results" [showPageLinks]="true" [pageLinkSize]="3"
+      (onPageChange)="paginate($event)"></p-paginator>
+    <div class="d-flex align-items-center gap-3">
+      <p-dropdown [dropdownIcon]="'fas fa-caret-down'" #dropdown [options]="rowsPerPageOptions"
+        (onChange)="paginatorOption($event)" (onHide)="hide()"></p-dropdown>
+    </div>
+  </div>
+</ng-container>
+</div>

@@ -8,7 +8,8 @@ export const roots = {
     register: "/Application/Register",
     forgetPassword: '/Account/ForgetPassword',
     validateCode: '/Account/ValidateCode',
-    resetNewPassword: '/Account/ResetPassword'
+    resetNewPassword: '/Account/ResetPassword',
+    isEmailAvailable: "/Account/IsEmailAvailable",
   },
   supplier: {
     getCountries: "/Country/GetCountrys",
@@ -48,4 +49,38 @@ export const roots = {
     getSupplierQuotation: 'RequestQutation/getSupplierQuotation',
     getRFQByIdWithFiles: 'RequestQutation/GetRFQByIdWithFiles'
   },
+  dashboard: {
+    availability: {
+      IsNationalIdentityAvailable: "Client/IsIdentityAvailable",
+      IsEmailAvailable: "Client/IsEmailAvailable",
+      IsPhoneAvailable: "Client/IsPhoneNumberAvailable",
+      IsRecordNumberAvailable: "ClientHistory/IsNumberAvailable",
+      IsOperatingCardAvailable: "Employee/IsIdentityAvailable",
+      IsResidencyNumberAvailable: 'Employee/IsIdentityAvailable'
+    },
+    clients: {
+      getClients: 'Client/AllClients',
+      getSingleClient: 'Client/GetSingleClient',
+      addClient: 'Client/AddClient',
+      editClient: '/Client/UpdateClient',
+      deleteClients: '/deleteClients',
+    },
+    records: {
+      getRecords: 'ClientHistory/AllClientHistorys',
+      getSingleHistory: 'ClientHistory/GetSingleHistory',
+      addRecords: 'ClientHistory/AddClientHistory',
+      editRecords: 'ClientHistory/UpdateClientHistory'
+    },
+    employees: {
+      getEmployees: 'Employee/AllEmployees',
+      addEmployee: 'Employee/AddEmployee',
+      editEmployee: 'Employee/UpdateEmployee',
+      deleteEmployee: 'Employee/DeleteEmployee'
+    },
+    vehicles: {
+      getVehicles: 'Car/AllCars',
+      addVehicle: 'Car/AddCar',
+      editVehicle: 'Car/UpdateCar'
+    }
+  }
 }

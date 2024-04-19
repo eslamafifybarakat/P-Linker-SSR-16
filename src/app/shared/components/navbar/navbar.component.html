@@ -2,7 +2,7 @@
   [class.header-bg]="typeModule=='payments'||typeModule=='policies'||typeModule=='statistics'"
   (clickOutside)="collapsedMenu == true ? collapsedMenu = false :''">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" [routerLink]="['/home']">
+    <a class="navbar-brand d-flex align-items-center gap-2" [routerLink]="['/Main/Home']">
       <img src="assets/images/logo/logo.svg" alt="logo" class="logo h-100">
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -17,32 +17,38 @@
     <div class="collapse navbar-collapse m-auto" id="navbarSupportedContent" [class.show]="collapsedMenu">
       <ul class="navbar-nav m-auto mb-2 mb-lg-0 gap-4">
         <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="['/Home']" [routerLinkActive]="'active'">
+          <a class="nav-link text-capitalize" [routerLink]="['/Main/Home']" [routerLinkActive]="'active'">
             {{'nav.home'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="['/Features']" [routerLinkActive]="'active'"
+          <a class="nav-link text-capitalize" [routerLink]="['/Main/Features']" [routerLinkActive]="'active'"
             (click)="collapsedMenu == true ? collapsedMenu = false :''">
             {{'nav.features'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="['/Resources']" [routerLinkActive]="'active'"
+          <a class="nav-link text-capitalize" [routerLink]="['/Main/Resources']" [routerLinkActive]="'active'"
             (click)="collapsedMenu == true ? collapsedMenu = false :''">
             {{'nav.resource'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="['/Contact-Us']" routerLinkActive="active"
+          <a class="nav-link text-capitalize" [routerLink]="['/Main/Contact-Us']" routerLinkActive="active"
             (click)="collapsedMenu == true ? collapsedMenu = false :''">
             {{'nav.contactUs'|translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="['/About-Us']" routerLinkActive="active"
+          <a class="nav-link text-capitalize" [routerLink]="['/Main/About-Us']" routerLinkActive="active"
             (click)="collapsedMenu == true ? collapsedMenu = false :''">
             {{'nav.about'|translate}}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="['/Dashboard']" routerLinkActive="active"
+            (click)="collapsedMenu == true ? collapsedMenu = false :''">
+            {{'nav.dashboard'|translate}}
           </a>
         </li>
       </ul>

@@ -1,8 +1,11 @@
 import { environment } from './../../environments/environment';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { keys } from '../shared/configs/localstorage-key';
+import { isPlatformBrowser } from '@angular/common';
 import { roots } from '../shared/configs/roots';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +13,22 @@ import { Observable } from 'rxjs';
 export class AuthService {
   apiUrl: string = environment.apiUrl;
   constructor(
-    private http: HttpClient
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private http: HttpClient,
+    private router: Router,
   ) { }
-
+  getUserLoginDataLocally(): any {
+    if (isPlatformBrowser(this.platformId)) {
+      return JSON.parse(localStorage.getItem(keys.userLoginData) || '{}');
+    }
+    return {};
+  }
+  getCurrentUserInformationLocally(): any {
+    if (isPlatformBrowser(this.platformId)) {
+      return JSON.parse(localStorage.getItem(keys.currentUserInformation) || '{}');
+    }
+    return {};
+  }
   login(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + roots.auth.login, data);
   }
@@ -61,5 +77,14 @@ export class AuthService {
   }
   resetNewPassword(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + roots.auth.resetNewPassword, data);
+  }
+  signOut(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(keys.userLoginData);
+      localStorage.removeItem(keys.currentUserInformation);
+      // localStorage.removeItem(keys.accessToken);
+      // localStorage.removeItem(keys.enc_AccessToken);
+    }
+    this.router.navigate(['/Auth/Login']);
   }
 }

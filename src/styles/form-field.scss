@@ -341,3 +341,24 @@ p-dropdown .p-inputtext {
     }
   }
 }
+#modal-form {
+  .form-control,
+  .form-control:focus,
+  .form-control:focus-visible,
+  .form-select,
+  .form-select:focus,
+  .form-select:focus-visible,
+  .ng-select.ng-select-single .ng-select-container,
+  .p-inputmask,
+  .p-password-input,
+  .p-calendar-w-btn .p-inputtext,
+  .p-dropdown {
+    box-shadow: none !important;
+    outline: none !important;
+    background-color: var(--bg-white-color);
+    border-color: #ced4da;
+    height: 3.6rem;
+    border-radius: var(--border-input-radius);
+    // padding: 1rem;
+  }
+}

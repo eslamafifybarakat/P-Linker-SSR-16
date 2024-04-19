@@ -4,15 +4,15 @@ import { Routes } from '@angular/router';
 // Components
 
 // TS Files for child routes
-import { servicesChildrenRoutes } from './components/services/services-children-routes';
 import { placesChildrenRoutes } from './components/places/places-children-routes';
 import { authChildrenRoutes } from './components/auth/auth-children-routes';
 import { homeChildrenRoutes } from './components/home/home-children-routes';
 import { errorsChildrenRoutes } from './components/errors/errors-routes';
+import { dashBoardChildrenRoutes } from './components/dashboard/dashboard-children-routes';
 
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'Main', pathMatch: 'full' },
   {
     path: 'Auth',
     loadComponent: () =>
@@ -30,12 +30,28 @@ export const appRoutes: Routes = [
     children: supplierRegisterChildrenRoutes
   },
   {
-    path: '',
+    path: 'Main',
     loadComponent: () =>
       import('./components/home/home.component').then(
         (c) => c.HomeComponent
       ),
     children: homeChildrenRoutes
+  },
+  {
+    path: 'Dashboard',
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(
+        (c) => c.DashboardComponent
+      ),
+    children: dashBoardChildrenRoutes
+  },
+  {
+    path: ':lang/Dashboard',
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(
+        (c) => c.DashboardComponent
+      ),
+    children: dashBoardChildrenRoutes
   },
   {
     path: 'places',
@@ -46,19 +62,12 @@ export const appRoutes: Routes = [
     children: placesChildrenRoutes
   },
   {
-    path: 'Services',
-    loadComponent: () =>
-      import('./components/services/services.component').then(
-        (c) => c.ServicesComponent
-      ),
-    children: servicesChildrenRoutes
-  },
-  {
     path: ':lang/places',
     loadComponent: () => import('./components/places/places.component').then((c) => c.PlacesComponent),
     children: placesChildrenRoutes
     // canActivate: [LanguageGuard] // Optional: Use a guard to validate the language parameter
   },
+
   {
     path: '**', loadComponent: () =>
       import('./components/errors/errors.component').then(

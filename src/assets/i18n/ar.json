@@ -19,6 +19,7 @@
     "about":"معلومات عنا",
     "resource":"المصادر",
     "features":"الخصائص",
+    "dashboard":"لوحة التحكم",
     "services": {
       "title": "الخدمات",
       "items": {
@@ -52,7 +53,32 @@
     "readMore":"اقرأ المزيد",
     "readArticle":"اقرأ المقال",
     "learnMore":"تعلم المزيد",
-    "saveAndContinue":"حفظ و استمرار"
+    "saveAndContinue":"حفظ و استمرار",
+    "successRequest": "تم تنفيذ طلبك بنجاح",
+    "save": "حفظ",
+    "cancel": "الغاء",
+    "logout": "تسجيل خروج",
+    "areYouSureToLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "confirm_delete": "تأكيد الحذف",
+    "confirm_delete_qu": "هل حقا تريد حذف",
+    "confirm_delete_item": "هل حقا تريد حذف هذا العنصر ؟",
+    "selected_items": "العناصر المحددة",
+    "restorePassword": "إستعادة كلمة المرور",
+    "yes": "نعم",
+    "no": "لا",
+    "clickToUpload": "إنقر للتحميل أو السحب والإفلات",
+    "supports": "يدعم",
+    "replace": "تبديل",
+    "delete": "حذف",
+    "details": "تفاصيل",
+    "edit": "تحديث",
+    "no_records_found": "لم يتم إضافة سجلات حتي الآن",
+    "reset": "إعادة الضبط",
+    "filter": "فلتر",
+    "dataNotEditable":"هذه البيانات غير قابلة للتعديل",
+    "except":"إلا من خلال الجهة المختصة",
+    "recordedData":"بياناتك التي تم تسجيلها",
+    "noSearchResult":"لا يوجد نتائج للبحث"
   },
   "summary": {
     "faster": "أٍسرع",
@@ -253,6 +279,79 @@
       "heroSearchPlaceHolderText": "هل تبحث عن مكتب معين؟",
       "topicTitle": "كلمات إفتاتحية",
       "btnText": "هل تحتاج إلى مساعدة؟"
+    }
+  },
+  "dashboard": {
+    "sideMenu": {
+      "statistics": "الإحصائيات",
+      "clients": "العملاء",
+      "sales": "المبيعات ",
+      "products": "المنتجات",
+      "messages": "الرسائل",
+      "settings": "الإعدادات"
+    },
+    "hello": "مرحبًا",
+    "tableHeader": {
+      "time": "الوقت",
+      "location": "الموقع",
+      "address": "العنوان",
+      "createdBy": "منشئ الطلب",
+      "username": "اسم المستخدم",
+      "id": "الرقم التعريفي",
+      "actions": "الإجراءات",
+      "name": "الإسم",
+      "status": "الحالة",
+      "active": "نشط",
+      "mobilePhone": "رقم الهاتف",
+      "date": "التاريخ",
+      "recordName": "اسم السجل",
+      "recordNumber": "رقم السجل",
+      "endDate": "تاريخ الانتهاء",
+      "fullName": "الاسم كامل",
+      "residencyNumber": "رقم الإقامة",
+      "healthCertificate": "الشهادة الصحية",
+      "residencePhoto": "صورة الإقامة",
+      "operatingCard": "كارت التشغيل",
+      "insuranceExpiryDate": "تاريخ إنتهاء التأمين",
+      "formPhoto": "صورة الإستمارة"
+    },
+    "statistics": {
+      "hi": "أهلاً",
+      "welcomeBack": "مرحبًا بعودتك!",
+      "pageIsDesigned": "تم تصميم هذه الصفحة لإعطاء بعض المعلومات الهامة حول الموقع. دعونا نجعل بعض الوقت معا!",
+      "congratulations": "تهانينا",
+      "youHavePermission": "لديك إذن للقيام بالمزيد من العمليات",
+      "viewProfile": "عرض الصفحة الشخصية",
+      "totalRevenue": "إجمالي الإيرادات",
+      "GoalVReality": "الهدف مقابل الواقع",
+      "customerSatisfactio": "رضا العملاء"
+    },
+    "customers": {
+      "customers": "العملاء",
+      "addCustomer": "إضافة عميل",
+      "editCustomer": "تعديل العميل",
+      "search": "ابحث حسب اسم العميل أو رقم الجوال",
+      "customerDetails": "تفاصيل سجلات العميل",
+      "recordDetails": "تفاصيل السجل",
+      "licenseDetails": "تفاصيل رخصة البلدية",
+      "certificateDetails": "تفاصيل شهادة السلامة",
+      "medicalDetails": "تفاصيل التأمين الطبي",
+      "fileDetails": "تفاصيل ملف مكتب العمل",
+      "customerDataDetails": "تفاصيل بيانات العميل"
+    },
+    "records": {
+      "records": "السجلات",
+      "addRecord": "اضافة سجل"
+    },
+    "employees": {
+      "employees": "الموظفين",
+      "addEmployee": "اضافة موظف",
+      "editEmployee": "تعديل الموظف"
+    },
+    "vehicles": {
+      "vehicles": "المركبات",
+      "addVehicle": "اضافة مركبة",
+      "editVehicle": "تعديل المركبة"
     }
   }
 }

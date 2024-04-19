@@ -23,6 +23,8 @@ import { ScrollTopComponent } from './shared/components/scroll-top/scroll-top.co
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { TopNavbarComponent } from './shared/components/top-navbar/top-navbar.component';
+import { OverlayLoadingComponent } from './shared/components/overlay-loading/overlay-loading.component';
+import { SearchOverlayLoadingComponent } from './shared/components/search-overlay-loading/search-overlay-loading.component';
 
 registerLocaleData(localeAr);
 
@@ -31,7 +33,9 @@ registerLocaleData(localeAr);
     AppComponent
   ],
   imports: [
+    SearchOverlayLoadingComponent,
     BottomNavigationComponent,
+    OverlayLoadingComponent,
     NavbarMobileComponent,
     ScrollTopComponent,
     TopNavbarComponent,
