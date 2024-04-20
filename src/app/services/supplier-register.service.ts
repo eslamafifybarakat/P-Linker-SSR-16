@@ -128,4 +128,7 @@ export class SupplierRegisterService {
   getOwnerShip(): Observable<any> {
     return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.getOwnerShip);
   }
+  getTypesOfBusiness(): Observable<any> {
+    return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.getTypesOfBusiness);
+  }
 }

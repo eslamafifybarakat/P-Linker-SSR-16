@@ -1,6 +1,280 @@
-<p>supplier-bank-info works!</p>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem culpa assumenda nisi accusantium deserunt, ex illum
-  architecto facilis ratione iure aut explicabo suscipit et commodi? Nihil, deserunt. Inventore, consequuntur aliquam.
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus eum placeat deleniti, aliquid architecto quia
-  corrupti expedita voluptate corporis quidem? Odio eius natus voluptatem? Ipsa odit cumque amet incidunt velit?
-</p>
+<div class="global-card border p-4 mt-4">
+  <h5 class="mb-3 d-flex align-items-center gap-2">
+    <i class="pi pi-info-circle text-main-color fs-5"></i>
+    {{'supplierRegister.bankInfo' | translate}}
+  </h5>
+  <hr>
+  <form [formGroup]="bankInformationForm" class="mt-4 second-form-style">
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-3">
+          <label for="bankName" class="form-label" [class.required]="isEnterBankName">
+            {{"labels.bankName"|translate}}
+          </label>
+          <input type="text" id="bankName" class="form-control" formControlName="bankName"
+            placeholder="{{'placeholders.bankName'|translate}}"
+            [class.border-red]="(bankInformationFormControls?.bankName?.touched||bankInformationFormControls?.bankName?.dirty)&&bankInformationFormControls?.bankName?.invalid && !isEnterBankName"
+            [class.valid]="(bankInformationFormControls?.bankName?.touched||bankInformationFormControls?.bankName?.dirty)&&bankInformationFormControls?.bankName?.valid&&bankInformationForm?.value?.bankName!=null"
+            (input)="publicService?.clearValidationErrors(bankInformationFormControls?.bankName)">
+          <div class="mt-1">
+            <ng-container *ngIf="!isEnterBankName||bankInformationFormControls?.bankName?.invalid">
+              <span class="text-main-color d-flex align-items-center gap-1">
+                <i class="pi pi-info-circle"></i>
+                {{'supplierRegister.enterBankNameFirst'|translate}}
+              </span>
+            </ng-container>
+            <ng-container
+              *ngIf="bankInformationFormControls?.bankName?.invalid && (bankInformationFormControls?.bankName?.dirty || bankInformationFormControls?.bankName?.touched)&&!isEnterBankName">
+              <ng-container *ngIf="bankInformationFormControls?.bankName?.errors?.required&&!isEnterBankName">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="bankInformationFormControls?.bankName?.errors?.minlength||bankInformationFormControls?.bankName?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.bankNameLength'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-3">
+          <label for="branchName" class="form-label" [class.required]="isEnterBankName">
+            {{"labels.branchName"|translate}}
+          </label>
+          <input type="text" id="branchName" class="form-control" formControlName="branchName"
+            placeholder="{{'placeholders.branchName'|translate}}"
+            [class.border-red]="(bankInformationFormControls?.branchName?.touched||bankInformationFormControls?.branchName?.dirty)&&bankInformationFormControls?.branchName?.invalid"
+            [class.valid]="(bankInformationFormControls?.branchName?.touched||bankInformationFormControls?.branchName?.dirty)&&bankInformationFormControls?.branchName?.valid&&bankInformationForm?.value?.branchName!=''"
+            (input)="publicService?.clearValidationErrors(bankInformationFormControls?.branchName)"
+            [class.disabled]="!isEnterBankName">
+          <div class="mt-1">
+            <ng-container
+              *ngIf="bankInformationFormControls?.branchName?.invalid && (bankInformationFormControls?.branchName?.dirty || bankInformationFormControls?.branchName?.touched)">
+              <ng-container *ngIf="bankInformationFormControls?.branchName?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="bankInformationFormControls?.branchName?.errors?.minlength||bankInformationFormControls?.branchName?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.branchNameLength'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-3">
+          <label for="accountNo" class="form-label" [class.required]="isEnterBankName">
+            {{"labels.accountNo"|translate}}
+          </label>
+          <input type="number" id="accountNo" class="form-control" [min]="0" formControlName="accountNo"
+            placeholder="{{'placeholders.accountNo'|translate}}"
+            [class.border-red]="(bankInformationFormControls?.accountNo?.touched||bankInformationFormControls?.accountNo?.dirty)&&bankInformationFormControls?.accountNo?.invalid"
+            [class.valid]="(bankInformationFormControls?.accountNo?.touched||bankInformationFormControls?.accountNo?.dirty)&&bankInformationFormControls?.accountNo?.valid&&bankInformationForm?.value?.accountNo!=''"
+            (input)="publicService?.clearValidationErrors(bankInformationFormControls?.accountNo)"
+            [class.disabled]="!isEnterBankName">
+          <div class="mt-1">
+            <ng-container
+              *ngIf="bankInformationFormControls?.accountNo?.invalid && (bankInformationFormControls?.accountNo?.dirty || bankInformationFormControls?.accountNo?.touched)">
+              <ng-container *ngIf="bankInformationFormControls?.accountNo?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-3">
+          <label for="iban" class="form-label" [class.required]="isEnterBankName">
+            {{"labels.iban"|translate}}
+          </label>
+          <input type="text" id="iban" class="form-control" formControlName="iban"
+            placeholder="{{'placeholders.iban'|translate}}"
+            [class.border-red]="(bankInformationFormControls?.iban?.touched||bankInformationFormControls?.iban?.dirty)&&bankInformationFormControls?.iban?.invalid"
+            [class.valid]="(bankInformationFormControls?.iban?.touched||bankInformationFormControls?.iban?.dirty)&&bankInformationFormControls?.iban?.valid&&bankInformationForm?.value?.iban!=''"
+            (input)="publicService?.clearValidationErrors(bankInformationFormControls?.iban)"
+            [class.disabled]="!isEnterBankName">
+          <div class="mt-1">
+            <ng-container
+              *ngIf="bankInformationFormControls?.iban?.invalid && (bankInformationFormControls?.iban?.dirty || bankInformationFormControls?.iban?.touched)">
+              <ng-container *ngIf="bankInformationFormControls?.iban?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container *ngIf="bankInformationFormControls?.iban?.errors?.pattern">
+                <span class="text-danger fs-8">
+                  {{'validations.validIban'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-3">
+          <label for="swiftCode" class="form-label" [class.required]="isEnterBankName">
+            {{"labels.swiftCode"|translate}}
+          </label>
+          <input type="text" id="swiftCode" class="form-control" formControlName="swiftCode"
+            placeholder="{{'placeholders.swiftCode'|translate}}"
+            [class.border-red]="(bankInformationFormControls?.swiftCode?.touched||bankInformationFormControls?.swiftCode?.dirty)&&bankInformationFormControls?.swiftCode?.invalid"
+            [class.valid]="(bankInformationFormControls?.swiftCode?.touched||bankInformationFormControls?.swiftCode?.dirty)&&bankInformationFormControls?.swiftCode?.valid&&bankInformationForm?.value?.swiftCode!=''"
+            (input)="publicService?.clearValidationErrors(bankInformationFormControls?.swiftCode)"
+            [class.disabled]="!isEnterBankName">
+          <div class="mt-1">
+            <ng-container
+              *ngIf="bankInformationFormControls?.swiftCode?.invalid && (bankInformationFormControls?.swiftCode?.dirty || bankInformationFormControls?.swiftCode?.touched)">
+              <ng-container *ngIf="bankInformationFormControls?.swiftCode?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="bankInformationFormControls?.swiftCode?.errors?.minlength||bankInformationFormControls?.swiftCode?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.validSwift'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="mb-3">
+          <label class="form-label" [class.required]="isEnterBankName">
+            {{"labels.accountCurrency"|translate}}
+          </label>
+          <span class="p-input-icon-right select-loading d-block" [class.disabled-dropdown]="!isEnterBankName">
+            <div
+              [class.border-red]="bankInformationFormControls?.currency?.invalid && (bankInformationFormControls?.currency?.dirty || bankInformationFormControls?.currency?.touched)"
+              [class.valid]="bankInformationFormControls?.currency?.valid && (bankInformationFormControls?.currency?.dirty || bankInformationFormControls?.currency?.touched)&&bankInformationForm?.value?.currency!=null">
+              <p-dropdown [options]="currencyList" formControlName="currency" optionLabel="code" [filter]="true"
+                [virtualScroll]="true" filterBy="code" appendTo="body" scrollHeight="150px" emptyMessage="nodata"
+                [showClear]="true" placeholder="{{'placeholders.accountCurrency'|translate}}">
+              </p-dropdown>
+            </div>
+            <ng-container *ngIf="isLoadingCurrency">
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-container>
+          </span>
+          <div class="my-2">
+            <ng-container
+              *ngIf="bankInformationFormControls?.currency?.invalid && (bankInformationFormControls?.currency?.dirty || bankInformationFormControls?.currency?.touched)">
+              <span class="text-danger fs-8">
+                {{"validations.requiredField"|translate}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end gap-2 col-lg-12 mt-3">
+        <button (click)="resetBankInfo()"
+          class="btn btn-outline-main d-flex justify-content-center align-items-center gap-2">
+          {{'general.reset' | translate}}
+          <i class="pi pi-times"></i>
+        </button>
+        <button (click)="addBank()" class="btn btn-solid-main d-flex justify-content-center align-items-center gap-2">
+          <i class="pi pi-plus-circle"></i>
+          {{'supplierRegister.addBankInfo' | translate}}
+        </button>
+      </div>
+    </div>
+  </form>
+  <hr>
+  <!-- Start Bank Table -->
+  <div class="mt-5">
+    <p-table [value]="[1]" responsiveLayout="scroll" [rowHover]="false" [resizableColumns]="true"
+      [tableStyle]="{'min-width': '50rem'}" dataKey="id" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{ "labels.bankName" | translate }}</th>
+          <th>{{ "labels.branchName" | translate }}</th>
+          <th>{{ "labels.accountNo" | translate }}</th>
+          <th>{{ "labels.iban" | translate }}</th>
+          <th>{{ "labels.swiftCode" | translate }}</th>
+          <th>{{ "labels.accountCurrency" | translate }}</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body">
+        <ng-container *ngIf="supplierBanks?.length>0; else noBanks">
+          <tr *ngFor="let bank of supplierBanks; let i = index">
+            <td>{{ bank.bankName }}</td>
+            <td>{{ bank.branchName }}</td>
+            <td>{{ bank.accountNo }}</td>
+            <td>{{ bank.iban }}</td>
+            <td>{{ bank.swiftCode }}</td>
+            <td>{{ bank.accountCurrency }}</td>
+            <td>
+              <div class="d-flex">
+                <a class="px-2 pointer" (click)="deleteBank(i)" pTooltip="{{ 'general.delete' | translate }}"
+                  tooltipPosition="top">
+                  <span><i class="pi pi-trash remove text-muted-color"></i></span>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noBanks>
+          <tr>
+            <td colspan="7">
+              <div class="row justify-content-center">
+                <div
+                  class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                  <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                  <p>{{ 'general.no_records_found' | translate }}</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">
+            <div class="row justify-content-center">
+              <div
+                class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                <p>{{ 'general.no_records_found' | translate }}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="7">{{ 'total' | translate }} <span class="total">{{ supplierBanks?.length || 0 }}</span></td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+  <!-- End Bank Table -->
+</div>
+<div class="d-flex justify-content-end gap-3 mt-4">
+  <button (click)="goBack()" class="btn btn-outline-main text-capitalize d-flex align-items-center gap-2">
+    <span>
+      {{"back"|translate}}
+    </span>
+    <i class="pi pi-arrow-left"></i>
+  </button>
+  <button class="btn btn-solid-main d-flex align-items-center justify-content-evenly gap-2 btn-hover"
+    (click)="submit()">
+    <span>
+      {{"general.save"|translate}}
+    </span>
+    <i class="pi pi-save"></i>
+  </button>
+</div>

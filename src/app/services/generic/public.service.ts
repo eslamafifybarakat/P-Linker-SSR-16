@@ -1,5 +1,5 @@
 import { roots } from './../../shared/configs/roots';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from './../../../environments/environment';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { keys } from './../../shared/configs/localstorage-key';
@@ -70,7 +70,18 @@ export class PublicService {
       }
     });
   }
-
+  addNotRequiredValidators(form: any, control: string[], min?: any, max?: any, pattern?: any): any {
+    form.get(control)?.setValidators([Validators.minLength(min), Validators.maxLength(max), Validators.pattern(pattern)]);
+    form.get(control)?.updateValueAndValidity();
+  }
+  addAllValidators(form: any, control: string, min?: any, max?: any, pattern?: any): any {
+    form.get(control)?.setValidators([Validators.required, Validators.minLength(min), Validators.maxLength(max), Validators.pattern(pattern)]);
+    form.get(control)?.updateValueAndValidity();
+  }
+  addValidatorsWithPattern(form: any, control: string, pattern?: any): any {
+    form.get(control)?.setValidators([Validators.required, Validators.pattern(pattern)]);
+    form.get(control)?.updateValueAndValidity();
+  }
   IsNationalIdentityAvailable(data: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/' + roots.dashboard.availability.IsNationalIdentityAvailable, data);
   }
@@ -94,5 +105,4 @@ export class PublicService {
     return this.http.get<any>(
       `${this.baseUrl}/${roots?.auth.isEmailAvailable}`);
   }
-
 }

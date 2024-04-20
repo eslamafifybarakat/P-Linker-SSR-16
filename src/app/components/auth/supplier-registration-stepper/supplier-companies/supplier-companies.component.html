@@ -1,0 +1,236 @@
+<div class="global-card border p-4 mt-4">
+  <h5 class="mb-3 d-flex align-items-center gap-2">
+    <i class="pi pi-info-circle text-main-color fs-5"></i>
+    {{'PCSA' | translate}}
+  </h5>
+  <hr>
+  <form [formGroup]="parentCompaniesForm" class="mt-4 second-form-style">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="name" class="form-label" [class.required]="isEnterName">
+            {{"labels.name"|translate}}
+          </label>
+          <input type="text" id="name" class="form-control" formControlName="name"
+            placeholder="{{'placeholders.name'|translate}}"
+            [class.border-red]="(parentCompaniesFormControls?.name?.touched||parentCompaniesFormControls?.name?.dirty)&&parentCompaniesFormControls?.name?.invalid&&!isEnterName"
+            [class.valid]="(parentCompaniesFormControls?.name?.touched||parentCompaniesFormControls?.name?.dirty)&&parentCompaniesFormControls?.name?.valid&&parentCompaniesForm?.value?.name!=null"
+            (input)="publicService?.clearValidationErrors(parentCompaniesFormControls?.name)">
+          <div class="mt-1">
+            <ng-container *ngIf="parentCompaniesFormControls?.name?.invalid||!isEnterName">
+              <span class="text-main-color d-flex align-items-center gap-1">
+                <i class="pi pi-info-circle"></i>
+                {{'supplierRegister.enterNameFirst'|translate}}
+              </span>
+            </ng-container>
+            <ng-container
+              *ngIf="parentCompaniesFormControls?.name?.invalid && (parentCompaniesFormControls?.name?.dirty || parentCompaniesFormControls?.name?.touched)&&!isEnterName">
+              <ng-container *ngIf="parentCompaniesFormControls?.name?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="parentCompaniesFormControls?.name?.errors?.minlength||parentCompaniesFormControls?.name?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.nameLength'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-6">
+        <div class="mb-3">
+          <label class="form-label" [class.required]="isEnterName">
+            {{"labels.typeOfBusiness"|translate}}
+          </label>
+          <span class="p-input-icon-right select-loading d-block" [class.disabled-dropdown]="!isEnterName">
+            <div
+              [class.border-red]="parentCompaniesFormControls?.typeOfBusiness?.invalid && (parentCompaniesFormControls?.typeOfBusiness?.dirty || parentCompaniesFormControls?.typeOfBusiness?.touched)"
+              [class.valid]="parentCompaniesFormControls?.typeOfBusiness?.valid && (parentCompaniesFormControls?.typeOfBusiness?.dirty || parentCompaniesFormControls?.typeOfBusiness?.touched)&&parentCompaniesForm?.value?.typeOfBusiness!=null">
+              <p-dropdown [options]="typesOfBusiness" formControlName="typeOfBusiness" optionLabel="name"
+                [filter]="true" [readonly]="isLoadingTypesOfBusiness" [virtualScroll]="true" filterBy="name"
+                appendTo="body" scrollHeight="200px" emptyMessage="nodata" [showClear]="true"
+                placeholder="{{'placeholders.typeOfBusiness'|translate}}">
+              </p-dropdown>
+            </div>
+            <ng-container *ngIf="isLoadingTypesOfBusiness">
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-container>
+          </span>
+          <div class="my-2">
+            <ng-container
+              *ngIf="parentCompaniesFormControls?.typeOfBusiness?.invalid && (parentCompaniesFormControls?.typeOfBusiness?.dirty || parentCompaniesFormControls?.typeOfBusiness?.touched)">
+              <ng-container *ngIf="parentCompaniesFormControls?.typeOfBusiness?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{"validations.requiredField"|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="address" class="form-label" [class.required]="isEnterName">
+            {{"labels.address"|translate}}
+          </label>
+          <textarea type="text" id="address" class="form-control textarea" formControlName="address"
+            placeholder="{{'placeholders.address'|translate}}"
+            [class.border-red]="(parentCompaniesFormControls?.address?.touched||parentCompaniesFormControls?.address?.dirty)&&parentCompaniesFormControls?.address?.invalid"
+            [class.valid]="(parentCompaniesFormControls?.address?.touched||parentCompaniesFormControls?.address?.dirty)&&parentCompaniesFormControls?.address?.valid&&parentCompaniesForm?.value?.name!=''"
+            [class.disabled]="!isEnterName"
+            (input)="publicService?.clearValidationErrors(parentCompaniesFormControls?.address)"></textarea>
+          <div class="mt-1">
+            <ng-container
+              *ngIf="parentCompaniesFormControls?.address?.invalid && (parentCompaniesFormControls?.address?.dirty || parentCompaniesFormControls?.address?.touched)">
+              <ng-container *ngIf="parentCompaniesFormControls?.address?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="parentCompaniesFormControls?.address?.errors?.minlength||parentCompaniesFormControls?.address?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.enterValidAddress'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-4">
+          <label class="form-label" [class.required]="isEnterName">
+            {{'labels.relationType'|translate}}
+          </label>
+          <div class="d-flex align-items-center flex-wrap gap-4 my-2">
+            <div id="custom-radio" [class.disabled-radio]="!isEnterName" class="d-flex align-items-center gap-2">
+              <input id="company" type="radio" formControlName="relationType" value="company">
+              <label for="company" class="form-label-radio mb-0">
+                {{'labels.company'|translate}}
+              </label>
+            </div>
+            <div id="custom-radio" [class.disabled-radio]="!isEnterName" class="d-flex align-items-center gap-2">
+              <input id="subsidiary" type="radio" formControlName="relationType" value="subsidiary">
+              <label for="subsidiary" class="form-label-radio mb-0">
+                {{'labels.subsidiary'|translate}}
+              </label>
+            </div>
+            <div id="custom-radio" [class.disabled-radio]="!isEnterName" class="d-flex align-items-center gap-2">
+              <input id="associates" type="radio" formControlName="relationType" value="associates">
+              <label for="associates" class="form-label-radio mb-0">
+                {{'labels.associates'|translate}}
+              </label>
+            </div>
+          </div>
+          <div class="my-2">
+            <ng-container
+              *ngIf="parentCompaniesFormControls?.relationType?.invalid && (parentCompaniesFormControls?.relationType?.dirty || parentCompaniesFormControls?.relationType?.touched)">
+              <ng-container *ngIf="parentCompaniesFormControls?.relationType?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end gap-2 col-lg-12 mt-3">
+        <button (click)="resetParentCompanies()"
+          class="btn btn-outline-main d-flex justify-content-center align-items-center gap-2">
+          {{'general.reset' | translate}}
+          <i class="pi pi-times"></i>
+        </button>
+        <button class="btn btn-solid-main d-flex justify-content-center align-items-center gap-2"
+          (click)="addParentCompany()">
+          <i class="pi pi-plus-circle"></i>
+          {{'supplierRegister.addParent' | translate}}</button>
+      </div>
+    </div>
+  </form>
+  <hr>
+  <!-- Start Companies Table -->
+  <div class="mt-5">
+    <p-table [value]="[1]" responsiveLayout="scroll" [rowHover]="false" [resizableColumns]="true"
+      [tableStyle]="{'min-width': '50rem'}" dataKey="id" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{"labels.relationType"|translate}}</th>
+          <th>{{"labels.name"|translate}}</th>
+          <th>{{"labels.typeOfBusiness"|translate}}</th>
+          <th> {{"labels.address"|translate}}</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body">
+        <ng-container *ngIf="companies?.length>0; else noCompanies">
+          <tr *ngFor="let item of companies; let i = index">
+            <td>{{item?.relationType}}</td>
+            <td>{{item?.name}}</td>
+            <td>{{item?.typeOfBusiness}}</td>
+            <td>{{item?.address}}</td>
+            <td>
+              <div class="d-flex">
+                <a class="px-2 pointer" (click)="deleteCompany(i)" pTooltip="{{'general.delete'|translate}}"
+                  tooltipPosition="top">
+                  <span><i class="pi pi-trash remove text-muted-color"></i></span>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noCompanies>
+          <tr>
+            <td colspan="5">
+              <div class="row justify-content-center">
+                <div
+                  class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                  <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                  <p>{{ 'general.no_records_found' | translate }}</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">
+            <div class="row justify-content-center">
+              <div
+                class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                <p>{{ 'general.no_records_found' | translate }}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="5">{{'total'|translate}}
+            <span class="total">{{companies?.length||0}}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <!-- End Companies Table -->
+</div>
+<div class="d-flex justify-content-end gap-3 mt-4">
+  <button (click)="goBack()" class="btn btn-outline-main text-capitalize d-flex align-items-center gap-2">
+    <span>
+      {{"back"|translate}}
+    </span>
+    <i class="pi pi-arrow-left"></i>
+  </button>
+  <button class="btn btn-solid-main d-flex align-items-center justify-content-evenly gap-2 btn-hover"
+    (click)="submit()">
+    <span>
+      {{"general.save"|translate}}
+    </span>
+    <i class="pi pi-save"></i>
+  </button>
+</div>

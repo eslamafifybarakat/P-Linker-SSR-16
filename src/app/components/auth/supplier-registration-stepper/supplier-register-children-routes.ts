@@ -3,6 +3,8 @@ import { SupplierAddressesComponent } from "./supplier-addresses/supplier-addres
 import { SupplierBankInfoComponent } from "./supplier-bank-info/supplier-bank-info.component";
 import { SupplierDetailsComponent } from "./supplier-details/supplier-details.component";
 import { ErrorsComponent } from "../../errors/errors.component";
+import { SupplierCustomerRefComponent } from "./supplier-customer-ref/supplier-customer-ref.component";
+import { SupplierCompaniesComponent } from "./supplier-companies/supplier-companies.component";
 
 export const supplierRegisterChildrenRoutes: any[] = [
   { path: '', redirectTo: 'Details', pathMatch: 'full' },
@@ -24,6 +26,16 @@ export const supplierRegisterChildrenRoutes: any[] = [
   {
     path: 'Bank-Info',
     component: SupplierBankInfoComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'Customer-Ref',
+    component: SupplierCustomerRefComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'Companies',
+    component: SupplierCompaniesComponent,
     pathMatch: 'full'
   },
   { path: '**', component: ErrorsComponent }

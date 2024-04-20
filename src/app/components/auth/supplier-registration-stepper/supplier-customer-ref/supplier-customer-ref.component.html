@@ -1,0 +1,195 @@
+<div class="global-card border p-4 mt-4">
+  <h5 class="mb-3 d-flex align-items-center gap-2">
+    <i class="pi pi-info-circle text-main-color fs-5"></i>
+    {{'customerReferences' | translate}}
+  </h5>
+  <hr>
+  <form [formGroup]="customerReferencesForm" class="mt-4 second-form-style">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="customerName" class="form-label" [class.required]="isEnterCustomerName">
+            {{"labels.customerName"|translate}}
+          </label>
+          <input type="text" id="customerName" class="form-control" formControlName="customerName"
+            placeholder="{{'placeholders.customerName'|translate}}"
+            [class.border-red]="(customerReferencesFormControls?.customerName?.touched||customerReferencesFormControls?.customerName?.dirty)&&customerReferencesFormControls?.customerName?.invalid&&!isEnterCustomerName"
+            [class.valid]="(customerReferencesFormControls?.customerName?.touched||customerReferencesFormControls?.customerName?.dirty)&&customerReferencesFormControls?.customerName?.valid&&customerReferencesForm?.value?.customerName!=null"
+            (input)="publicService?.clearValidationErrors(customerReferencesFormControls?.customerName)">
+          <div class="mt-1">
+            <ng-container *ngIf="customerReferencesFormControls?.customerName?.invalid||!isEnterCustomerName">
+              <span class="text-main-color d-flex align-items-center gap-1">
+                <i class="pi pi-info-circle"></i>
+                {{'supplierRegister.enterCustomerNameFirst'|translate}}
+              </span>
+            </ng-container>
+            <ng-container
+              *ngIf="customerReferencesFormControls?.customerName?.invalid && (customerReferencesFormControls?.customerName?.dirty || customerReferencesFormControls?.customerName?.touched)&&!isEnterCustomerName">
+              <ng-container *ngIf="customerReferencesFormControls?.customerName?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container *ngIf="customerReferencesFormControls?.customerName?.errors?.minlength">
+                <span class="text-danger fs-8">
+                  {{'placeholders.customerNameLength'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-6">
+        <div class="mb-3">
+          <label for="product" class="form-label" [class.required]="isEnterCustomerName&&!isEnterAddressName">
+            {{"labels.product"|translate}}
+          </label>
+          <input type="text" id="product" class="form-control" formControlName="product"
+            placeholder="{{'placeholders.product'|translate}}"
+            [class.border-red]="(customerReferencesFormControls?.product?.touched||customerReferencesFormControls?.product?.dirty)&&customerReferencesFormControls?.product?.invalid"
+            [class.valid]="(customerReferencesFormControls?.product?.touched||customerReferencesFormControls?.product?.dirty)&&customerReferencesFormControls?.product?.valid&&customerReferencesForm?.value?.product!=''"
+            (input)="publicService?.clearValidationErrors(customerReferencesFormControls?.product)"
+            [class.disabled]="!isEnterCustomerName &&!isEnterAddressName">
+          <div class="mt-1">
+            <ng-container
+              *ngIf="customerReferencesFormControls?.product?.invalid && (customerReferencesFormControls?.product?.dirty || customerReferencesFormControls?.product?.touched)">
+              <ng-container *ngIf="customerReferencesFormControls?.product?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="customerReferencesFormControls?.product?.errors?.minlength||customerReferencesFormControls?.product?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.enterValidProduct'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="address" class="form-label" [class.required]="isEnterCustomerName && !isEnterProductName">
+            {{"labels.address"|translate}}
+          </label>
+          <textarea type="text" id="address" class="form-control textarea" formControlName="address"
+            placeholder="{{'placeholders.address'|translate}}"
+            [class.border-red]="(customerReferencesFormControls?.address?.touched||customerReferencesFormControls?.address?.dirty)&&customerReferencesFormControls?.address?.invalid"
+            [class.valid]="(customerReferencesFormControls?.address?.touched||customerReferencesFormControls?.address?.dirty)&&customerReferencesFormControls?.address?.valid&&customerReferencesForm?.value?.address!=''"
+            (input)="publicService?.clearValidationErrors(customerReferencesFormControls?.address)"
+            [class.disabled]="!isEnterCustomerName"></textarea>
+          <div class="mt-1">
+            <ng-container
+              *ngIf="customerReferencesFormControls?.address?.invalid && (customerReferencesFormControls?.address?.dirty || customerReferencesFormControls?.address?.touched)">
+              <ng-container *ngIf="customerReferencesFormControls?.address?.errors?.required">
+                <span class="text-danger fs-8">
+                  {{'validations.requiredField'|translate}}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="customerReferencesFormControls?.address?.errors?.minlength||customerReferencesFormControls?.address?.errors?.maxlength">
+                <span class="text-danger fs-8">
+                  {{'validations.enterValidAddress'|translate}}
+                </span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end col-lg-12 gap-2 mt-3">
+        <button (click)="resetCustomerRef()"
+          class="btn btn-outline-main d-flex justify-content-center align-items-center gap-2">
+          {{'general.reset' | translate}}
+          <i class="pi pi-times"></i>
+        </button>
+        <button class="btn btn-solid-main d-flex justify-content-center align-items-center gap-2"
+          (click)="addCustomerReference()">
+          <i class="pi pi-plus-circle"></i>
+          {{'supplierRegister.addCustomerRef' | translate}}</button>
+      </div>
+    </div>
+  </form>
+  <hr>
+  <!-- End Customer Reference Table -->
+  <div class="mt-5">
+    <p-table [value]="[1]" responsiveLayout="scroll" [rowHover]="false" [resizableColumns]="true"
+      [tableStyle]="{'min-width': '50rem'}" dataKey="id" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{"labels.customerName"|translate}}</th>
+          <th>{{"labels.product"|translate}}</th>
+          <th> {{"labels.address"|translate}}</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body">
+        <ng-container *ngIf="customerReferences?.length>0; else noCustomers">
+          <tr *ngFor="let item of customerReferences; let i = index">
+            <td>{{item?.name}}</td>
+            <td>{{item?.product}}</td>
+            <td>{{item?.address}}</td>
+            <td>
+              <div class="d-flex">
+                <a class="px-2 pointer" (click)="deleteCustomer(i)" pTooltip="{{'general.delete'|translate}}"
+                  tooltipPosition="top">
+                  <span><i class="pi pi-trash remove text-muted-color"></i></span>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noCustomers>
+          <tr>
+            <td colspan="4">
+              <div class="row justify-content-center">
+                <div
+                  class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                  <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                  <p>{{ 'general.no_records_found' | translate }}</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">
+            <div class="row justify-content-center">
+              <div
+                class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                <p>{{ 'general.no_records_found' | translate }}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="4">{{'total'|translate}}
+            <span class="total">{{customerReferences?.length||0}}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <!-- End Customer Reference Table -->
+</div>
+<div class="d-flex justify-content-end gap-3 mt-4">
+  <button (click)="goBack()" class="btn btn-outline-main text-capitalize d-flex align-items-center gap-2">
+    <span>
+      {{"back"|translate}}
+    </span>
+    <i class="pi pi-arrow-left"></i>
+  </button>
+  <button class="btn btn-solid-main d-flex align-items-center justify-content-evenly gap-2 btn-hover"
+    (click)="submit()">
+    <span>
+      {{"general.save"|translate}}
+    </span>
+    <i class="pi pi-save"></i>
+  </button>
+</div>

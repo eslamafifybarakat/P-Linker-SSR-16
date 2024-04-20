@@ -51,6 +51,7 @@ export const roots = {
     getCurrencies: "getCurrencies",
     getOwnerShip: "getOwnerShip",
     getCitiesByCountryId: "City/GetCitysByCountryId",
+    getTypesOfBusiness: 'getTypesOfBusiness'
   },
   dashboard: {
     availability: {

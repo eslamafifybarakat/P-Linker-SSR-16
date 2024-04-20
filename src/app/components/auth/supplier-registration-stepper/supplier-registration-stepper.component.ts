@@ -59,7 +59,7 @@ export class SupplierRegistrationStepperComponent {
     },
     {
       label: this.labels[4],
-      routerLink: 'Customer',
+      routerLink: 'Customer-Ref',
       command: (event: any) => {
         this.activeIndex = 5;
       }

@@ -139,7 +139,11 @@
 "enterCustomerNameFirst":"You must enter customer name first",
 "addNew":"Add New",
 "contactInfo":"Contact Info",
-"addAnother":"Add Another"
+"addAnother":"Add Another",
+"bankInfo":"Bank Information",
+"addBankInfo":"Add Bank Info",
+"addCustomerRef":"Add Customer Reference",
+"addParent":"Add Parent"
   },
   "labels": {
     "apply": "Apply",
@@ -197,7 +201,20 @@
 "addressLine2": "Address Line2",
 "name":"Name",
 "branch":"Branch",
-"fax":"Fax Number"
+"fax":"Fax Number",
+"bankName":"Bank Name",
+"branchName":"Branch Name",
+"accountNo":"Account No",
+"iban":"Iban",
+"swiftCode":"Swift Code",
+"accountCurrency":"Account Currency",
+"product":"Product",
+"customerName":"Customer Name",
+"typeOfBusiness":"Type Of Business",
+"relationType":"Relation Type",
+"company":"Company",
+"associates":"Associates",
+"subsidiary":"Subsidiary"
   },
   "placeholders": {
     "username": "Enter username",
@@ -242,7 +259,16 @@
 "addressLine2": "Enter address line2",
 "name":"Enter name",
 "branch":"Enter branch",
-"fax":"Enter fax number"
+"fax":"Enter fax number",
+"bankName":"Enter bank name",
+"branchName":"Enter branch name",
+"accountNo":"Enter account no",
+"iban":"Enter iban",
+"swiftCode":"Enter swift code",
+"accountCurrency":"Enter account currency",
+"product":"Enter product",
+"customerName":"Enter customer name",
+"typeOfBusiness":"Select type of business"
   },
   "validations": {
     "username": "Username is required",
@@ -275,7 +301,14 @@
     "specialChar":"At least one special character (!%*?&|@...)",
     "onlyNumber" : "Sorry, only numbers(0-9)",
     "phoneNotCorrect":"Phone Number not correct",
-    "faxNotCorrect":"Fax Number not correct"
+    "faxNotCorrect":"Fax Number not correct",
+    "bankNameLength": "Please enter valid Bank Name,It Must Be Between 2 And 75 Characters Long.",
+    "branchNameLength": "Please enter valid Branch Name,It Must Be Between 2 And 75 Characters Long.",
+    "validIban":"Please enter valid IBAN,It contain mix of letters and numbers, Must Be Between 14 and 34 character long ",
+    "validSwift":"Please enter valid SWIFT Code,It Must Be Between 8 and 11 character long",
+    "customerNameLength": "Please enter valid Customer Name,It Must Be Between 2 and 60 Characters Long.",
+    "enterValidAddress":"Please enter valid address ,It Must Be Between 4 And 100 Characters Long.",
+"enterValidProduct":"Please enter valid Product Must Be Between 2 And 100 Characters Long"
   },
   "home":{
     "getStarted":"Get Started",
