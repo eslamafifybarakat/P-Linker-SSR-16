@@ -118,7 +118,13 @@ export class SupplierRegisterService {
     }
     return this.http?.get<any>(this.apiUrl + roots?.supplier?.getCountries, { params: params });
   }
-
+  getCitiesByCountryId(CountryId: any): Observable<any> {
+    let params = new HttpParams();
+    if (CountryId) {
+      params = params?.append("CountryId", CountryId);
+    }
+    return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.getCitiesByCountryId, { params: params })
+  }
   getOwnerShip(): Observable<any> {
     return this.http?.get<any>(this.apiUrl + roots?.suppliersRegister?.getOwnerShip);
   }

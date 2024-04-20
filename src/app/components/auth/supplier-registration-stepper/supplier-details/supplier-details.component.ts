@@ -618,7 +618,7 @@ export class SupplierDetailsComponent {
   }
   private setMessage(message: string, type: string): void {
     this.alertsService.openToast(type, type, message);
-    // this.publicService.showGlobalLoader.next(false);
+    this.publicService.showGlobalLoader.next(false);
   }
 
   ngOnDestroy(): void {

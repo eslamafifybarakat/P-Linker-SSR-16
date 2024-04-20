@@ -49,7 +49,8 @@ export const roots = {
     getSupplierQuotation: 'RequestQutation/getSupplierQuotation',
     getRFQByIdWithFiles: 'RequestQutation/GetRFQByIdWithFiles',
     getCurrencies: "getCurrencies",
-    getOwnerShip: "getOwnerShip"
+    getOwnerShip: "getOwnerShip",
+    getCitiesByCountryId: "City/GetCitysByCountryId",
   },
   dashboard: {
     availability: {

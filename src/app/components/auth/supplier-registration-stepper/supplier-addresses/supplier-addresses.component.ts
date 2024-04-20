@@ -28,6 +28,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./supplier-addresses.component.scss']
 })
 export class SupplierAddressesComponent {
+  private subscriptions: Subscription[] = [];
+
+  isSupplierDataReturn: boolean = false;
+  supplierData: any;
+
   addressForm: any = this.fb?.group({
     addresses: this.fb?.array([]),
   })
@@ -87,99 +92,151 @@ export class SupplierAddressesComponent {
 
 
   ngOnInit(): void {
-    this.addAddress();
-  }
-  getCountrys(): void {
-    // this.isLoadingCountries = true;
-    // this.authService?.getCountrys()?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       this.countries = res;
-    //       this.isLoadingCountries = false;
-    //       if (this.isSupplierDataReturn) {
-    //         this.supplierData?.address?.forEach((item: any, index: any) => {
-    //           this.getCitysByCountryId(item?.countryId, index, true);
-    //         });
-    //       }
-    //     } else {
-    //       res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.error?.message) : '';
-    //       this.isLoadingCountries = false;
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService?.openSweetAlert('error', err) : '';
-    //     this.isLoadingCountries = false;
-    //   })
+    this.getCountries();
   }
 
+  // Start Get Counties
+  getCountries(): void {
+    this.isLoadingCountries = true;
+    let getCountriesSubscription: Subscription = this.supplierRegisterService?.getCountries().pipe(
+      tap(res => this.handleCountriesResponse(res)),
+      catchError(err => this.handleCountriesError(err))
+    ).subscribe();
+    this.subscriptions.push(getCountriesSubscription);
+  }
+  private handleCountriesResponse(res: any): void {
+    if (res) {
+      this.countries = res;
+      if (this.isSupplierDataReturn) {
+        this.supplierData?.address?.forEach((item: any, index: any) => {
+          this.getCitiesByCountryId(item?.countryId, index, true);
+        });
+      }
+    } else {
+      this.handleCountriesError(res?.message);
+    }
+    this.isLoadingCountries = false;
+    this.cdr.detectChanges();
+  }
+  private handleCountriesError(err: any): any {
+    this.isLoadingCountries = false;
+    this.handleError(err);
+    this.countries = [
+      { id: 1, name: 'country1', flag: '' }
+    ];
+    this.addAddress();
+  }
   onChangeCountry(index?: any): void {
     this.addressForm?.controls?.addresses?.at(index)?.get('city')?.reset();
     this.addressForm?.controls?.addresses?.at(index)?.get('poBox')?.reset();
     this.addressForm?.controls?.addresses?.at(index)?.get('postalCode')?.reset();
 
     this.currentCityIndex = index;
-    this.getCitysByCountryId(this.addressForm?.controls?.addresses?.at(index).get('country')?.value?.id, index, false);
+    this.getCitiesByCountryId(this.addressForm?.controls?.addresses?.at(index).get('country')?.value?.id, index, false);
+  }
+  // End  Get Counties
+
+  // Start Get Cities By Id
+  getCitiesByCountryId(id: any, index: any, isDoPatch?: boolean): void {
+    this.isLoadingCities = true;
+    let getCitiesSubscription: Subscription = this.supplierRegisterService?.getCitiesByCountryId(id).pipe(
+      tap(res => this.handleCitiesResponse(res, index, isDoPatch)),
+      catchError(err => this.handleCitiesError(err))
+    ).subscribe();
+    this.subscriptions.push(getCitiesSubscription);
+  }
+  private handleCitiesResponse(res: any, index: number, isDoPatch?: boolean): void {
+    if (res) {
+      const cities: any[] = res;
+      this.updateCityArray(cities, index);
+      if (isDoPatch) {
+        this.clearAddressForm();
+      }
+      if (this.cityArray[index]?.length <= 0) {
+        this.resetCityField(index);
+      }
+      if (isDoPatch) {
+        this.processSupplierDataAddress(index);
+      }
+    } else {
+      this.handleCitiesError(res?.message);
+    }
+    this.isLoadingCities = false;
+    this.cdr.detectChanges();
+  }
+  // Update Cities Array
+  updateCityArray(cities: any[], index: number): void {
+    if (this.cityArray[index]) {
+      this.cityArray[index] = cities;
+    } else {
+      this.cityArray?.push(cities);
+    }
+  }
+  //Clear Address Form
+  clearAddressForm(): void {
+    while (this.address?.length !== 0) {
+      this.address?.removeAt(0);
+    }
+  }
+  //Reset Address Form
+  resetCityField(index: number): void {
+    this.addressForm?.controls?.address?.at(index)?.get('city')?.setValue(null);
+  }
+  processSupplierDataAddress(index: number): void {
+    if (this.supplierData?.address?.length > 0 && index == this.supplierData?.address?.length - 1) {
+      const address: any[] = [];
+      this.supplierData?.address?.forEach((item: any, index: any) => {
+        let city: any = null;
+        this.cityArray[index]?.forEach((element: any) => {
+          if (element?.id == item?.cityId) {
+            city = element;
+          }
+        });
+        this.countries?.forEach((country: any) => {
+          if (item?.countryId == country?.id) {
+            address?.push({
+              id: item?.id,
+              title: item?.title,
+              poBox: item?.poBox,
+              postalCode: item?.postalCode,
+              addressLine1: item?.addressLine1,
+              addressLine2: item?.addressLine2,
+              city: city,
+              country: country
+            });
+          }
+        });
+      });
+      address?.forEach((item: any) => {
+        this.supplierAddress()?.push(this.newAddress(item));
+      });
+    } else {
+      this.addAddress();
+    }
+  }
+  private handleCitiesError(err: any): any {
+    this.isLoadingCities = false;
+    this.handleError(err);
+  }
+  // End  Get Cities By Id
+
+  /* --- Handle api requests messages --- */
+  private handleSuccess(msg: any): any {
+    this.setMessage(msg || this.publicService.translateTextFromJson('general.successRequest'), 'success');
+  }
+  private handleError(err: any): any {
+    this.setMessage(err || this.publicService.translateTextFromJson('general.errorOccur'), 'error');
+  }
+  private setMessage(message: string, type: string): void {
+    this.alertsService.openToast(type, type, message);
+    this.publicService.showGlobalLoader.next(false);
   }
 
-  getCitysByCountryId(id: any, index: any, isDoPatch?: boolean): void {
-    // this.isLoadingCities = true;
-    // this.authService?.getCitysByCountryId(id)?.subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       let arr: any = [];
-    //       arr = res;
-    //       this.cityArray[index] ? this.cityArray[index] = arr : this.cityArray?.push(arr);
-    //       this.isLoadingCities = false;
-    //       if (isDoPatch) {
-    //         while (this.address?.length !== 0) {
-    //           this.address?.removeAt(0);
-    //         }
-    //       }
-    //       if (this.cityArray[index]?.length <= 0) {
-    //         this.addressForm?.controls?.address?.at(index)?.get('city')?.setValue(null);
-    //       }
-    //       if (isDoPatch) {
-    //         if (this.supplierData?.address?.length > 0) {
-    //           if (index == this.supplierData?.address?.length - 1) {
-    //             let address = [];
-    //             this.supplierData?.address?.forEach((item: any, index: any) => {
-    //               let city: any = null;
-    //               this.cityArray[index]?.forEach((element: any) => {
-    //                 if (element?.id == item?.cityId) {
-    //                   city = element;
-    //                 }
-    //               });
-    //               this.countries?.forEach((country: any) => {
-    //                 if (item?.countryId == country?.id) {
-    //                   address?.push({
-    //                     id: item?.id,
-    //                     title: item?.title,
-    //                     poBox: item?.poBox,
-    //                     postalCode: item?.postalCode,
-    //                     addressLine1: item?.addressLine1,
-    //                     addressLine2: item?.addressLine2,
-    //                     city: city,
-    //                     country: country
-    //                   })
-    //                 }
-    //               });
-    //             });
-    //             address?.forEach((item: any) => {
-    //               this.supplierAddress()?.push(this.newAddress(item));
-    //             });
-    //           }
-    //         } else {
-    //           this.addAddress();
-    //         }
-    //       } else {
-    //         res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.error?.message) : '';
-    //         this.isLoadingCities = false;
-    //       }
-    //     }
-    //   },
-    //   (err: any) => {
-    //     err ? this.alertsService?.openSweetAlert('error', err) : '';
-    //     this.isLoadingCities = false;
-    //   })
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      if (subscription && subscription.closed) {
+        subscription.unsubscribe();
+      }
+    });
   }
 }
