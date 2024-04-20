@@ -1,8 +1,6 @@
 // Modules
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { TranslateModule } from '@ngx-translate/core';
-import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { SupplierRegisterService } from '../../../../services/supplier-register.service';
 import { PublicService } from './../../../../services/generic/public.service';
 import { AlertsService } from './../../../../services/generic/alerts.service';
-import { patterns } from './../../../../shared/configs/patterns';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Subscription, catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -219,6 +216,52 @@ export class SupplierAddressesComponent {
     this.handleError(err);
   }
   // End  Get Cities By Id
+
+  // Start Add Supplier Address
+  submit(): void {
+    if (this.addressForm?.valid) {
+      const data = this.extractFormData();
+      this.saveSupplierAddress(data);
+    } else {
+      this.publicService?.validateAllFormFields(this.addressForm);
+    }
+  }
+  private extractFormData(): any {
+    let addresses: any = [];
+    this.addressForm?.value?.addresses?.forEach((item: any) => {
+      addresses?.push({
+        id: item?.id,
+        title: item?.title,
+        poBox: item?.poBox,
+        postalCode: item?.postalCode,
+        cityId: item?.city?.id,
+        countryId: item?.country?.id,
+        addressLine1: item?.addressLine1,
+        addressLine2: item?.addressLine2,
+      })
+    });
+    return {
+      address: addresses
+    }
+  }
+  private saveSupplierAddress(data: any): void {
+    this.publicService?.showGlobalLoader?.next(true);
+    let subscribeSaveSupplierAddress: Subscription = this.supplierRegisterService?.saveSupplierAddress(data).pipe(
+      tap(res => this.handleSaveSupplierAddressSuccess(res)),
+      catchError(err => this.handleError(err))
+    ).subscribe();
+    this.subscriptions.push(subscribeSaveSupplierAddress);
+  }
+  private handleSaveSupplierAddressSuccess(response: any): void {
+    this.publicService?.showGlobalLoader?.next(false);
+    if (response) {
+      this.handleSuccess(response?.message);
+      this.router.navigate(['/Supplier-Register/Contact-Info']);
+    } else {
+      this.handleError(response?.message);
+    }
+  }
+  // End Add Supplier Address
 
   /* --- Handle api requests messages --- */
   private handleSuccess(msg: any): any {

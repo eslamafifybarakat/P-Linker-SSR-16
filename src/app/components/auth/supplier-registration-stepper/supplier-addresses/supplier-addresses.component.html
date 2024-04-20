@@ -4,7 +4,7 @@
     {{'supplierRegister.suppliersAddress'|translate}}
   </h5>
   <hr>
-  <form [formGroup]="addressForm" class="mt-4 second-form-style">
+  <form [formGroup]="addressForm" (ngSubmit)="submit()" class="mt-4 second-form-style">
     <div formArrayName="addresses" class="w-100">
       <ng-container *ngFor="let add of address.controls; let i=index">
         <div [formGroupName]="i">
@@ -288,7 +288,8 @@
 
     </div>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-solid-main d-flex justify-content-center align-items-center" (click)="addAddress()">
+      <button type="submit" class="btn btn-solid-main d-flex justify-content-center align-items-center"
+        (click)="addAddress()">
         {{'supplierRegister.addNewAddress'|translate}}
       </button>
     </div>

@@ -1,0 +1,332 @@
+<!-- <div class="mt-5">
+  <div class="d-flex justify-content-between gap-2 flex-wrap mb-3">
+    <h5 class="d-flex align-items-center gap-2">
+      <i class="fa fa-phone-square text-main-color fs-5"></i>
+      {{'contactInfo' | translate}}
+    </h5>
+    <button (click)="addNewContact()" class="btn btn-solid-main d-flex align-items-center gap-2">
+      <i class="pi pi-plus-circle"></i>
+      {{'addNew'|translate}}
+    </button>
+  </div>
+  <form [formGroup]="contactInformationForm">
+    <div class="row" formArrayName="contactInfo">
+      <div class="col-lg-6 mb-3 position-relative"
+        *ngFor="let financeGroup of contactInfo?.controls; let index = index">
+        <ng-container *ngIf="index>=1">
+          <div class="d-flex justify-content-center position-absolute removeContactInfo">
+            <a class="badge-secondary badge d-flex  justify-content-center align-items-center pointer rounded-circle">
+              <i class="pi pi-times delete-hover text-danger pointer px-2" (click)="removeContactInfo(index)"></i>
+            </a>
+          </div>
+        </ng-container>
+        <div class="global-card border h-100" [formGroupName]="index">
+          <div class="row" formGroupName="finance">
+            <div class="d-flex justify-content-between align-items-center flex-wrap px-2 w-100 mb-2">
+              <div>
+                <div class="mb-0 d-flex align-items-center gap-2">
+                  <i class="pi pi-info-circle text-main-color fs-5"></i>
+                  <input type="text" id="cardTitle" class="form-control border-0 px-0 cardTitle"
+                    formControlName="cardTitle" placeholder="{{'name'|translate}}"
+                    (input)="publicService?.clearValidationErrors(contactInfo?.controls[index]?.get('finance')?.controls?.cardTitle)">
+                </div>
+                <div class="">
+                  <ng-container
+                    *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.cardTitle?.errors?.required">
+                    <span class="text-danger fs-8 d-block mb-3">
+                      {{'validator_name'|translate}}
+                    </span>
+                  </ng-container>
+
+                </div>
+              </div>
+              <a class="reset me-auto" (click)="resetFinanceFormGroup(index)">{{'reset'|translate}}</a>
+            </div>
+            <hr>
+            <div class="col-lg-12">
+              <div class="mb-3">
+                <label for="name" class="form-label"
+                  [class.required]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.valid&&contactInfo?.controls[index]?.get('finance')?.value?.name!=''&&!contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                  {{"name"|translate}}
+                </label>
+                <input type="text" id="name" class="form-control" formControlName="name"
+                  placeholder="{{'name'|translate}}"
+                  [class.border-red]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid && (contactInfo?.controls[index]?.get('finance')?.controls?.name?.dirty || contactInfo?.controls[index]?.get('finance')?.controls?.name?.touched)"
+                  (input)="publicService?.clearValidationErrors(contactInfo?.controls[index]?.get('finance')?.controls?.name)"
+                  [required]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.valid&&contactInfo?.controls[index]?.get('finance')?.value?.name!=''&&!contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid||contactInfo?.controls[index]?.get('finance')?.value?.name==''">
+                    <span class="text-main-color d-flex align-items-center gap-1">
+                      <i class="pi pi-info-circle"></i>
+                      {{'enterNameFirst'|translate}}
+                    </span>
+                  </ng-container>
+                  <ng-container *ngIf="contactInfo?.controls[index]?.get('finance')?.value?.name!=''">
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.name?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validator_name'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.name?.errors?.minlength?.requiredLength==6">
+                      <span class="text-danger fs-8">
+                        {{'name_length'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="mb-3">
+                <label for="branch" class="form-label">
+                  {{"branch"|translate}}
+                </label>
+                <span class="p-input-icon-right select-loading d-block">
+                  <div
+                    [class.border-red]="(contactInfo?.controls[index]?.get('finance')?.controls?.branch?.touched||contactInfo?.controls[index]?.get('finance')?.controls?.branch?.dirty)&&contactInfo?.controls[index]?.get('finance')?.controls?.branch?.invalid"
+                    [class.valid]="(contactInfo?.controls[index]?.get('finance')?.controls?.branch?.touched||contactInfo?.controls[index]?.get('finance')?.controls?.branch?.dirty)&&contactInfo?.controls[index]?.get('finance')?.controls?.branch?.valid&&contactInfo?.controls[index]?.get('finance')?.controls?.branch!=null">
+                    <p-dropdown [options]="branches" formControlName="branch" optionLabel="title" [filter]="true"
+                      [virtualScroll]="true" filterBy="title" appendTo="body" scrollHeight="150px"
+                      filterPlaceholder="{{'search'|translate}}" emptyMessage="nodata" [showClear]="true"
+                      placeholder="{{'branch'|translate}}"
+                      [disabled]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid||contactInfo?.controls[index]?.get('finance')?.value?.name==''||branches?.length<=0||contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                    </p-dropdown>
+                  </div>
+                  <ng-container *ngIf="false">
+                    <i class="pi pi-spin pi-spinner"></i>
+                  </ng-container>
+                </span>
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.branch?.invalid && (contactInfo?.controls[index]?.get('finance')?.controls?.branch?.dirty || contactInfo?.controls[index]?.get('finance')?.controls?.branch?.touched)">
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.branch?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validator_required_field'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div formArrayName="financePhone" class="w-100 col-lg-12">
+              <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap mb-2 ">
+                <label for="phone" class="mb-0"
+                  [class.required]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.valid&&contactInfo?.controls[index]?.get('finance')?.value?.name!=''&&!contactInfo?.controls[index]?.get('finance')?.value?.isReset">{{'phone'|translate}}</label>
+                <div class="d-flex justify-content-end me-auto">
+                  <a class="add-another me-auto" (click)="addFinancePhone(index)">
+                    {{'addAnother'|translate}}
+                  </a>
+                </div>
+              </div>
+              <ng-container
+                *ngFor="let phone of contactInfo?.controls[index]?.get('finance')?.controls?.financePhone?.controls; let i = index">
+                <div [formGroupName]="i">
+                  <div class="mb-3">
+                    <div class="row">
+                      <div class="col-3">
+                        <p-dropdown [options]="phoneTypes" formControlName="phoneType" optionLabel="name"
+                          [filter]="true" filterBy="name" filterPlaceholder="{{'search'|translate}}" [showClear]="false"
+                          appendTo="body" [styleClass]="" placeholder=""
+                          (onChange)="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.reset();"
+                          [disabled]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid||contactInfo?.controls[index]?.get('finance')?.value?.name==''||contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                          <ng-template pTemplate="selectedItem">
+                            <div class="country-item country-item-value d-flex gap-2 align-items-center"
+                              *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.phoneType">
+                              <img
+                                [src]="contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.phoneType?.id==1?'assets/images/phone/land.png':'assets/images/phone/phone.png'"
+                                [class]="'flag flag-'" />
+                              <div>
+                                {{contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.phoneType?.name}}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <ng-template let-type pTemplate="item">
+                            <div class="country-item d-flex gap-2 align-items-center">
+                              <ng-container *ngIf="type?.id==1">
+                                <img src="assets/images/phone/land.png" [class]="'flag flag-'" />
+                              </ng-container>
+                              <ng-container *ngIf="type?.id==2">
+                                <img src="assets/images/phone/phone.png" [class]="'flag flag-'" />
+                              </ng-container>
+                              <div>{{type?.name}}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+                      </div>
+                      <div class="col-9">
+                        <div class="d-flex gap-2">
+                          <div class="p-inputgroup"
+                            [class.border-red]="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.invalid && (contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.dirty || contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.touched)"
+                            [class.disabled]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid||contactInfo?.controls[index]?.get('finance')?.value?.name==''||contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                            <span class="p-inputgroup-addon  bg-transparent p-0">
+                              <p-dropdown [options]="countries" formControlName="countryCode" optionLabel="countryCode"
+                                [filter]="true" filterBy="name" filterPlaceholder="{{'search'|translate}}"
+                                [showClear]="false" appendTo="body" [styleClass]="'border-0 bg-transparent'"
+                                placeholder="Select a Country"
+                                (onChange)="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.reset()">
+                                <ng-template pTemplate="selectedItem">
+                                  <div class="country-item country-item-value d-flex gap-2 align-items-center"
+                                    *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode">
+                                    <img
+                                      [src]="contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode?.flag"
+                                      [class]="'flag flag-'" onerror="src='assets/images/not-found/no-flag.svg'" />
+                                    <div>
+                                      {{contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode?.countryCode}}
+                                    </div>
+                                  </div>
+                                </ng-template>
+                                <ng-template let-country pTemplate="item">
+                                  <div class="country-item d-flex gap-2 align-items-center">
+                                    <img [src]="country.flag" onerror="src='assets/images/not-found/no-flag.svg'"
+                                      [class]="'flag flag-'" />
+                                    <div>{{country.name}} ({{country.countryCode}})</div>
+                                  </div>
+                                </ng-template>
+                              </p-dropdown>
+                            </span>
+                            <input type="text" formControlName="phone" placeholder="{{'enterPhoneNumber'|translate}}"
+                              pInputText class="border-left-0 bg-transparent"
+                              [minlength]="contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.phoneType?.id=='1'?contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode?.landNumber:contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode?.phoneNumber"
+                              [maxlength]="contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.phoneType?.id=='1'?contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode?.landNumber:contactInfo?.controls[index]?.get('finance.financePhone')?.value[i]?.countryCode?.phoneNumber"
+                              pattern="[0-9]*"
+                              (input)="publicService?.clearValidationErrors(contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone'))"
+                              [required]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.valid&&contactInfo?.controls[index]?.get('finance')?.value?.name!=''&&!contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                          </div>
+
+                          <ng-container *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.length>1">
+                            <a class="badge-secondary badge d-flex justify-content-center align-items-center pointer">
+                              <i class="pi pi-times delete-hover text-danger pointer px-2"
+                                (click)="removeFinancePhone(i)"></i>
+                            </a>
+                          </ng-container>
+                        </div>
+
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.invalid && (contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.dirty || contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.touched)">
+                      <div class="mt-2">
+                        <ng-container
+                          *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.errors?.required">
+                          <span class="text-danger fs-8 ps-3">
+                            {{'validator_required_field'|translate}}
+                          </span>
+                        </ng-container>
+                        <ng-container
+                          *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.errors?.minlength||contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.errors?.maxlength">
+                          <span class="text-danger fs-8 ps-3 d-flex">
+                            {{'phoneNotCorrect'|translate}}
+                          </span>
+                        </ng-container>
+                        <ng-container
+                          *ngIf="contactInfo?.controls[index]?.get('finance.financePhone')?.controls[i]?.get('phone')?.errors?.pattern">
+                          <span class="text-danger fs-8 ps-3">
+                            {{'onlyNum'|translate}}
+                          </span>
+                        </ng-container>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-lg-12">
+              <div class="mb-3">
+                <label for="fax">{{'fax'|translate}}</label>
+                <div class="p-inputgroup"
+                  [class.border-red]="contactInfo?.controls[index]?.get('finance')?.controls?.fax?.invalid && (contactInfo?.controls[index]?.get('finance')?.controls?.fax?.dirty || contactInfo?.controls[index]?.get('finance')?.controls?.fax?.touched)"
+                  [class.disabled]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid||contactInfo?.controls[index]?.get('finance')?.value?.name==''||contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                  <span class="p-inputgroup-addon  bg-transparent p-0">
+                    <p-dropdown [options]="countries" formControlName="countryCode" optionLabel="countryCode"
+                      [filter]="true" filterBy="name" filterPlaceholder="{{'search'|translate}}" [showClear]="false"
+                      appendTo="body" [styleClass]="'border-0 bg-transparent'" placeholder="Select a Country"
+                      (onChange)="contactInfo?.controls[index]?.get('finance')?.controls?.fax?.reset()">
+                      <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value d-flex gap-2 align-items-center"
+                          *ngIf="contactInfo?.controls[index]?.get('finance')?.value?.countryCode">
+                          <img [src]="contactInfo?.controls[index]?.get('finance')?.value?.countryCode?.flag"
+                            [class]="'flag flag-'" onerror="src='assets/images/not-found/no-flag.svg'" />
+                          <div>{{contactInfo?.controls[index]?.get('finance')?.value?.countryCode?.countryCode}}</div>
+                        </div>
+                      </ng-template>
+                      <ng-template let-country pTemplate="item">
+                        <div class="country-item d-flex gap-2 align-items-center">
+                          <img [src]="country.flag" onerror="src='assets/images/not-found/no-flag.svg'"
+                            [class]="'flag flag-'" />
+                          <div>{{country.name}} ({{country.countryCode}})</div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                  </span>
+                  <input type="text" formControlName="fax" placeholder="{{'enterFaxNumber'|translate}}" pInputText
+                    class="border-left-0 bg-transparent"
+                    [minlength]="contactInfo?.controls[index]?.get('finance')?.value?.countryCode?.landNumber"
+                    [maxlength]="contactInfo?.controls[index]?.get('finance')?.value?.countryCode?.landNumber"
+                    pattern="[0-9]*"
+                    (input)="publicService?.clearValidationErrors(contactInfo?.controls[index]?.get('finance')?.controls?.fax)">
+                </div>
+                <ng-container
+                  *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.fax?.invalid && (contactInfo?.controls[index]?.get('finance')?.controls?.fax?.dirty || contactInfo?.controls[index]?.get('finance')?.controls?.fax?.touched)">
+                  <div class="mt-2">
+                    <ng-container *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.fax?.errors?.required">
+                      <span class="text-danger fs-8 ps-3">
+                        {{'validator_required_field'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.fax?.errors?.minlength||contactInfo?.controls[index]?.get('finance')?.controls?.fax?.errors?.maxlength">
+                      <span class="text-danger fs-8 ps-3">
+                        {{'faxNotCorrect'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.fax?.errors?.pattern">
+                      <span class="text-danger fs-8 ps-3">
+                        {{'onlyNum'|translate}}
+                      </span>
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="mb-3">
+                <label for="email" class="form-label"
+                  [class.required]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.valid&&contactInfo?.controls[index]?.get('finance')?.value?.name!=''&&!contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                  {{"email"|translate}}
+                </label>
+                <input type="text" id="email" class="form-control" formControlName="email"
+                  placeholder="{{'email'|translate}}"
+                  [class.border-red]="(contactInfo?.controls[index]?.get('finance')?.controls?.email?.touched||contactInfo?.controls[index]?.get('finance')?.controls?.email?.dirty)&&contactInfo?.controls[index]?.get('finance')?.controls?.email?.invalid"
+                  (input)="publicService?.clearValidationErrors(contactInfo?.controls[index]?.get('finance')?.controls?.email)"
+                  [class.disabled]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.invalid||contactInfo?.controls[index]?.get('finance')?.value?.name==''||contactInfo?.controls[index]?.get('finance')?.value?.isReset"
+                  [required]="contactInfo?.controls[index]?.get('finance')?.controls?.name?.valid&&contactInfo?.controls[index]?.get('finance')?.value?.name!=''&&!contactInfo?.controls[index]?.get('finance')?.value?.isReset">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.email?.invalid && (contactInfo?.controls[index]?.get('finance')?.controls?.email?.dirty || contactInfo?.controls[index]?.get('finance')?.controls?.email?.touched)">
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.email?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validator_required_field'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="contactInfo?.controls[index]?.get('finance')?.controls?.email?.errors?.pattern">
+                      <span class="text-danger fs-8">
+                        {{'validator_email_not_correct'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> -->

@@ -45,14 +45,14 @@ export class SupplierRegistrationStepperComponent {
     },
     {
       label: this.labels[2],
-      routerLink: 'Contact',
+      routerLink: 'Contact-Info',
       command: (event: any) => {
         this.activeIndex = 3;
       }
     },
     {
       label: this.labels[3],
-      routerLink: 'Bank',
+      routerLink: 'Bank-Info',
       command: (event: any) => {
         this.activeIndex = 4;
       }
