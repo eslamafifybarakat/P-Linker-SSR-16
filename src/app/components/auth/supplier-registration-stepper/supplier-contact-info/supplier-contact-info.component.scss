@@ -8,6 +8,11 @@
   border: 1px solid var(--bg-main-color);
   color: var(--text-white-color);
 }
+.btn-outline-main {
+  background-color: transparent;
+  border-color: var(--bg-main-color);
+  color: var(--text-main-color);
+}
 .reset {
   background-color: var(--bg-main-color);
   color: var(--text-white-color);

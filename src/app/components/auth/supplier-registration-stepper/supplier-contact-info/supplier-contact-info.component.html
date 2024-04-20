@@ -333,4 +333,20 @@
       </div>
     </div>
   </form>
+
+  <div class="d-flex justify-content-end gap-3 mt-4">
+    <button (click)="goBack()" class="btn btn-outline-main text-capitalize d-flex align-items-center gap-2">
+      <span>
+        {{"back"|translate}}
+      </span>
+      <i class="pi pi-arrow-left"></i>
+    </button>
+    <button class="btn btn-solid-main d-flex align-items-center justify-content-evenly gap-2 btn-hover"
+      (click)="submit()">
+      <span>
+        {{"general.save"|translate}}
+      </span>
+      <i class="pi pi-save"></i>
+    </button>
+  </div>
 </div>

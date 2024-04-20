@@ -33,6 +33,9 @@ import { Router } from '@angular/router';
 export class SupplierDetailsComponent {
   private subscriptions: Subscription[] = [];
 
+  isSupplierDataReturn: boolean = false;
+  supplierData: any;
+
   // Check UserName Variables
   isUserNameAvailable: boolean = false;
   isLoadingCheckUserName: boolean = false;
@@ -436,6 +439,15 @@ export class SupplierDetailsComponent {
   private handleCountriesResponse(res: any): void {
     if (res) {
       this.countries = res;
+      if (this.isSupplierDataReturn) {
+        this.supplierData?.details?.countryId != null ? this.countries?.forEach((element: any) => {
+          if (element?.id == this.supplierData?.details?.countryId) {
+            this.detailsForm?.patchValue({
+              country: element
+            });
+          }
+        }) : '';
+      }
     } else {
       this.handleCountriesError(res?.message);
     }

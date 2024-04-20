@@ -217,6 +217,11 @@ export class SupplierAddressesComponent {
   }
   // End  Get Cities By Id
 
+  // Go Back
+  goBack(): void {
+    this.router.navigate(['/Supplier-Register/Details']);
+  }
+
   // Start Add Supplier Address
   submit(): void {
     if (this.addressForm?.valid) {

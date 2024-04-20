@@ -5,20 +5,11 @@
 }
 .btn-solid-main {
   background-color: var(--bg-main-color);
-  border: 1px solid var(--bg-main-color);
+  border-color: var(--bg-main-color);
   color: var(--text-white-color);
 }
 .btn-outline-main {
   background-color: transparent;
   border-color: var(--bg-main-color);
   color: var(--text-main-color);
-}
-.remove-address {
-  top: -20px;
-  left: 50%;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  background-color: #f7316430 !important;
-  color: #f73164 !important;
 }
