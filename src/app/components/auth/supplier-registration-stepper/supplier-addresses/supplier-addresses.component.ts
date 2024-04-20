@@ -86,6 +86,32 @@ export class SupplierAddressesComponent {
   }
 
 
+  ngOnInit(): void {
+    this.addAddress();
+  }
+  getCountrys(): void {
+    // this.isLoadingCountries = true;
+    // this.authService?.getCountrys()?.subscribe(
+    //   (res: any) => {
+    //     if (res) {
+    //       this.countries = res;
+    //       this.isLoadingCountries = false;
+    //       if (this.isSupplierDataReturn) {
+    //         this.supplierData?.address?.forEach((item: any, index: any) => {
+    //           this.getCitysByCountryId(item?.countryId, index, true);
+    //         });
+    //       }
+    //     } else {
+    //       res?.error?.message ? this.alertsService?.openSweetAlert('error', res?.error?.message) : '';
+    //       this.isLoadingCountries = false;
+    //     }
+    //   },
+    //   (err: any) => {
+    //     err ? this.alertsService?.openSweetAlert('error', err) : '';
+    //     this.isLoadingCountries = false;
+    //   })
+  }
+
   onChangeCountry(index?: any): void {
     this.addressForm?.controls?.addresses?.at(index)?.get('city')?.reset();
     this.addressForm?.controls?.addresses?.at(index)?.get('poBox')?.reset();
@@ -94,6 +120,7 @@ export class SupplierAddressesComponent {
     this.currentCityIndex = index;
     this.getCitysByCountryId(this.addressForm?.controls?.addresses?.at(index).get('country')?.value?.id, index, false);
   }
+
   getCitysByCountryId(id: any, index: any, isDoPatch?: boolean): void {
     // this.isLoadingCities = true;
     // this.authService?.getCitysByCountryId(id)?.subscribe(

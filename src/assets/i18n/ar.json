@@ -129,7 +129,14 @@
   "supplierRegister":{
     "supplierRegister": "نموذج تسجيل المورد",
 "fillSteps":"يرجى ملء خطوات النموذج لإكمال التسجيل",
-"suppliersDetails": "تفاصيل المورد"
+"suppliersDetails": "تفاصيل المورد",
+"suppliersAddress":"عناويين المورد",
+"addNewAddress":"اضافة عنوان جديد",
+"selectCurrencyFirst":"يجب عليك اختيار العملة أولاً",
+"selectCountryFirst":"يجب عليك اختيار الدولة أولاً",
+"enterNameFirst":"يجب عليك إدخال الاسم أولاً",
+"enterBankNameFirst":"يجب عليك إدخال اسم البنك أولاً",
+"enterCustomerNameFirst":"يجب عليك إدخال اسم العميل أولاً"
   },
   "labels": {
     "apply": "تطبيق",
@@ -169,7 +176,12 @@
 "skip":"تخطى",
 "category":"الفئة",
 "categories":"الفئات",
-"otherOwnerShipName":"اسم اخر للمالك"
+"otherOwnerShipName":"اسم اخر للمالك",
+"title":"العنوان",
+"poBox": "صندوق بريد",
+"postalCode":"الرمز البريدي",
+"addressLine1": "العنوان 1",
+"addressLine2": "العنوان 2"
   },
   "placeholders": {
     "username": "أدخل اسم المستخدم",
@@ -221,7 +233,8 @@
     "oneUppercase":"على الأقل حرف كبير واحد",
     "oneNumeric": "على الأقل رقم واحد",
     "eightChars":"الحد الأدنى لعدد الأحرف هو ٨",
-    "specialChar": "على الأقل حرف خاص واحد (!%*?&|@...)"
+    "specialChar": "على الأقل حرف خاص واحد (!%*?&|@...)",
+    "onlyNumber": "(0-9) عذرا، أرقام فقط"
   },
   "home": {
     "getStarted": "ابدأ الآن",
