@@ -136,7 +136,10 @@
 "selectCountryFirst":"يجب عليك اختيار الدولة أولاً",
 "enterNameFirst":"يجب عليك إدخال الاسم أولاً",
 "enterBankNameFirst":"يجب عليك إدخال اسم البنك أولاً",
-"enterCustomerNameFirst":"يجب عليك إدخال اسم العميل أولاً"
+"enterCustomerNameFirst":"يجب عليك إدخال اسم العميل أولاً",
+"addNew":"اضافة جديد",
+"contactInfo":"معلومات الاتصال",
+"addAnother":"اضافة اخر"
   },
   "labels": {
     "apply": "تطبيق",
@@ -181,7 +184,10 @@
 "poBox": "صندوق بريد",
 "postalCode":"الرمز البريدي",
 "addressLine1": "العنوان 1",
-"addressLine2": "العنوان 2"
+"addressLine2": "العنوان 2",
+"name":"الاسم",
+"branch":"الفرع",
+"fax":"رقم الفاكس"
   },
   "placeholders": {
     "username": "أدخل اسم المستخدم",
@@ -203,7 +209,10 @@
     "fullName":"أدخل الاسم الكامل",
 "subject":"أدخل الموضوع",
 "message":"أدخل الرسالة",
-"jobTitle":"أدخل عنوان الوظيفة"
+"jobTitle":"أدخل عنوان الوظيفة",
+"name":"أدخل الاسم",
+"branch":"اختر الفرع",
+"fax":"أدخل رقم الفاكس"
   },
   "validations": {
     "username": "اسم المستخدم مطلوب",
@@ -234,7 +243,9 @@
     "oneNumeric": "على الأقل رقم واحد",
     "eightChars":"الحد الأدنى لعدد الأحرف هو ٨",
     "specialChar": "على الأقل حرف خاص واحد (!%*?&|@...)",
-    "onlyNumber": "(0-9) عذرا، أرقام فقط"
+    "onlyNumber": "(0-9) عذرا، أرقام فقط",
+    "phoneNotCorrect":"رقم الهاتف غير صحيح",
+    "faxNotCorrect":"رقم الفاكس غير صحيح"
   },
   "home": {
     "getStarted": "ابدأ الآن",

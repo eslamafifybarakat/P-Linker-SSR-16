@@ -35,6 +35,8 @@ export class SupplierContactInfoComponent {
     { id: 1, name: 'Land' },
     { id: 2, name: 'Phone' }
   ];
+  branches: any = [];
+
   constructor(
     private supplierRegisterService: SupplierRegisterService,
     private alertsService: AlertsService,
@@ -49,6 +51,10 @@ export class SupplierContactInfoComponent {
   })
   get contactInformationFormControls(): any {
     return this.contactInformationForm?.controls;
+  }
+
+  ngOnInit(): void {
+    this.addContactInfo();
   }
 
   contact(): FormArray {

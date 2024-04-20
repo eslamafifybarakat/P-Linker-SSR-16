@@ -136,7 +136,10 @@
 "selectCountryFirst":"You must select country first",
 "enterNameFirst":"You must enter name first",
 "enterBankNameFirst":"You must enter bank name first",
-"enterCustomerNameFirst":"You must enter customer name first"
+"enterCustomerNameFirst":"You must enter customer name first",
+"addNew":"Add New",
+"contactInfo":"Contact Info",
+"addAnother":"Add Another"
   },
   "labels": {
     "apply": "Apply",
@@ -191,7 +194,10 @@
 "poBox":"PoBox",
 "postalCode":"Postal Code",
 "addressLine1": "Address Line1",
-"addressLine2": "Address Line2"
+"addressLine2": "Address Line2",
+"name":"Name",
+"branch":"Branch",
+"fax":"Fax Number"
   },
   "placeholders": {
     "username": "Enter username",
@@ -233,7 +239,10 @@
 "poBox":"Enter poBox",
 "postalCode":"Enter postal code",
 "addressLine1": "Enter address line1",
-"addressLine2": "Enter address line2"
+"addressLine2": "Enter address line2",
+"name":"Enter name",
+"branch":"Enter branch",
+"fax":"Enter fax number"
   },
   "validations": {
     "username": "Username is required",
@@ -264,7 +273,9 @@
     "oneNumeric":"At least one numeric",
     "eightChars":"Minimum 8 characters",
     "specialChar":"At least one special character (!%*?&|@...)",
-    "onlyNumber" : "Sorry, only numbers(0-9)"
+    "onlyNumber" : "Sorry, only numbers(0-9)",
+    "phoneNotCorrect":"Phone Number not correct",
+    "faxNotCorrect":"Fax Number not correct"
   },
   "home":{
     "getStarted":"Get Started",
