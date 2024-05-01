@@ -12,7 +12,6 @@ import { MetaDetails, MetadataService } from 'src/app/services/generic/metadata.
 import { AlertsService } from '../../../../services/generic/alerts.service';
 import { PublicService } from '../../../../services/generic/public.service';
 import { MaxDigitsDirective } from '../../directives/max-digits.directive';
-import { ClientsService } from '../../services/clients.service';
 import { patterns } from '../../../../shared/configs/patterns';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -89,7 +88,7 @@ export class AddClientComponent {
   constructor(
     private localizationLanguageService: LocalizationLanguageService,
     private metadataService: MetadataService,
-    private clientsService: ClientsService,
+    // private clientsService: ClientsService,
     private alertsService: AlertsService,
     public publicService: PublicService,
     private cdr: ChangeDetectorRef,
@@ -254,12 +253,12 @@ export class AddClientComponent {
     };
   }
   private addClient(formData: any): void {
-    this.publicService?.showGlobalLoader?.next(true);
-    let subscribeAddClient: Subscription = this.clientsService?.addClient(formData).pipe(
-      tap(res => this.handleAddClientSuccess(res)),
-      catchError(err => this.handleError(err))
-    ).subscribe();
-    this.subscriptions.push(subscribeAddClient);
+    // this.publicService?.showGlobalLoader?.next(true);
+    // let subscribeAddClient: Subscription = this.clientsService?.addClient(formData).pipe(
+    //   tap(res => this.handleAddClientSuccess(res)),
+    //   catchError(err => this.handleError(err))
+    // ).subscribe();
+    // this.subscriptions.push(subscribeAddClient);
   }
   private handleAddClientSuccess(response: any): void {
     this.publicService?.showGlobalLoader?.next(false);

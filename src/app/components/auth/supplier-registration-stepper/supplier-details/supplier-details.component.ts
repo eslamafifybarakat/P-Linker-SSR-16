@@ -397,7 +397,7 @@ export class SupplierDetailsComponent {
   }
 
   checkId(arr?: any, id?: any): void {
-    return arr?.some(obj => obj?.id === id);
+    return arr?.some((obj: any) => obj?.id === id);
   }
 
   // Start Get Currencies

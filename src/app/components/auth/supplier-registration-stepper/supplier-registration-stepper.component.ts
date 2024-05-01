@@ -73,7 +73,7 @@ export class SupplierRegistrationStepperComponent {
     },
     {
       label: this.labels[6],
-      routerLink: 'Attachment',
+      routerLink: 'Attachments',
       command: (event: any) => {
         this.activeIndex = 7;
       }

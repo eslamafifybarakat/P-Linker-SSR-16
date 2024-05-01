@@ -69,6 +69,13 @@ export const roots = {
       editClient: '/Client/UpdateClient',
       deleteClients: '/deleteClients',
     },
+    users: {
+      getUsers: 'Client/AllUsers',
+      getSingleUser: 'User/GetSingleUser',
+      addUser: 'User/AddUser',
+      editUser: '/User/UpdateUser',
+      deleteUsers: '/deleteUsers',
+    },
     records: {
       getRecords: 'ClientHistory/AllClientHistorys',
       getSingleHistory: 'ClientHistory/GetSingleHistory',

@@ -1,5 +1,5 @@
 import { environment } from './../../../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
 import { roots } from './../../../shared/configs/roots';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientsService {
+export class UsersService {
   baseUrl: string = environment?.apiUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getClientsList(page?: number, per_page?: number, search?: string, sort?: any, conditions?: any): Observable<any> {
+  getUsersList(page?: number, per_page?: number, search?: string, sort?: any, conditions?: any): Observable<any> {
     let params = new HttpParams();
     if (page) {
       params = params?.append("page", page);
@@ -31,22 +31,22 @@ export class ClientsService {
     if (conditions && conditions?.length > 0) {
       params = params?.append("conditions", JSON?.stringify(conditions));
     }
-    return this.http?.get(`${this.baseUrl}/${roots?.dashboard?.clients.getClients}`, { params: params });
+    return this.http?.get(`${this.baseUrl}/${roots?.dashboard?.users.getUsers}`, { params: params });
   }
-  addClient(data: any): Observable<any> {
-    return this.http?.post(`${this.baseUrl}/${roots?.dashboard?.clients.addClient}`, data);
+  addUser(data: any): Observable<any> {
+    return this.http?.post(`${this.baseUrl}/${roots?.dashboard?.users.addUser}`, data);
   }
-  editClient(data: any, id: number | string): Observable<any> {
-    return this.http?.put(`${this.baseUrl}/${roots?.dashboard?.clients.editClient}/${id}`, data);
+  editUser(data: any, id: number | string): Observable<any> {
+    return this.http?.put(`${this.baseUrl}/${roots?.dashboard?.users.editUser}/${id}`, data);
   }
-  getClientById(id: any): Observable<any> {
-    return this.http?.get(`${this.baseUrl}/${roots?.dashboard?.clients.getSingleClient}/${id}`);
+  getUserById(id: any): Observable<any> {
+    return this.http?.get(`${this.baseUrl}/${roots?.dashboard?.users.getSingleUser}/${id}`);
   }
-  deleteClientById(id: number, data: any): Observable<any> {
+  deleteUserById(id: number, data: any): Observable<any> {
     let params = new HttpParams();
     if (data?.name) {
       params = params.append("name", data?.name);
     }
-    return this.http.delete<any>(`${this.baseUrl}${roots?.dashboard.clients.deleteClients}/delete/` + id, { params: params });
+    return this.http.delete<any>(`${this.baseUrl}${roots?.dashboard.users.deleteUsers}/delete/` + id, { params: params });
   }
 }

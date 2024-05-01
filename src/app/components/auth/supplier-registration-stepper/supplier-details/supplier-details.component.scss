@@ -8,3 +8,10 @@
   border: 1px solid var(--bg-main-color);
   color: var(--text-white-color);
 }
+.disabled {
+  pointer-events: none;
+  background-color: #f2f2f2;
+}
+.valid {
+  background-color: #0352971a;
+}

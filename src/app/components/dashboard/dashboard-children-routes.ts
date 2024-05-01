@@ -1,8 +1,8 @@
 
 // import { PermissionGuard } from './../../services/authentication/guards/permission.guard';
 import { EditClientComponent } from "./clients/edit-client/edit-client.component";
-import { clientsChildrenRoutes } from "./clients/clients-children-routes";
 import { StatisticsComponent } from "./statistics/statistics.component";
+import { usersChildrenRoutes } from "./clients/users-children-routes";
 import { ErrorsComponent } from "../errors/errors.component";
 
 export const dashBoardChildrenRoutes: any[] = [
@@ -15,10 +15,10 @@ export const dashBoardChildrenRoutes: any[] = [
       title: 'Appointments'
     },
     loadComponent: () =>
-      import('./clients/clients.component').then(
-        (c) => c.ClientsComponent
+      import('./clients/users.component').then(
+        (c) => c.UsersComponent
       ),
-    children: clientsChildrenRoutes
+    children: usersChildrenRoutes
   },
   {
     path: 'Statistics',

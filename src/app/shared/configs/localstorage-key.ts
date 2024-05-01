@@ -5,5 +5,6 @@ export const keys = {
   logged: 'p-linkerLogged',
   token: 'p-linkerToken',
   userLoginData: 'p-linkerUserLoginData',
-  theme: 'p-linkerTheme'
+  theme: 'p-linkerTheme',
+  accessToken: 'p-linkerAccessToken'
 };

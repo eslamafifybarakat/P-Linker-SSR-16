@@ -17,7 +17,6 @@ import { AlertsService } from './../../../../services/generic/alerts.service';
 import { PublicService } from './../../../../services/generic/public.service';
 import { MaxDigitsDirective } from '../../directives/max-digits.directive';
 import { patterns } from './../../../../shared/configs/patterns';
-import { ClientsService } from '../../services/clients.service';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, catchError, tap } from 'rxjs';
@@ -111,7 +110,6 @@ export class EditClientComponent {
   constructor(
     private localizationLanguageService: LocalizationLanguageService,
     private metadataService: MetadataService,
-    private clientsService: ClientsService,
     private activatedRoute: ActivatedRoute,
     private alertsService: AlertsService,
     public publicService: PublicService,
@@ -182,12 +180,12 @@ export class EditClientComponent {
 
   // Start Get Client By Id
   getClientById(id: number | string): void {
-    this.isLoadingClientDetails = true;
-    let subscribeGetClient: Subscription = this.clientsService?.getClientById(id).pipe(
-      tap(res => this.handleGetClientSuccess(res)),
-      catchError(err => this.handleError(err))
-    ).subscribe();
-    this.subscriptions.push(subscribeGetClient);
+    // this.isLoadingClientDetails = true;
+    // let subscribeGetClient: Subscription = this.clientsService?.getClientById(id).pipe(
+    //   tap(res => this.handleGetClientSuccess(res)),
+    //   catchError(err => this.handleError(err))
+    // ).subscribe();
+    // this.subscriptions.push(subscribeGetClient);
   }
   private handleGetClientSuccess(response: any): void {
     if (response?.success) {
@@ -353,12 +351,12 @@ export class EditClientComponent {
     };
   }
   private editClient(formData: any): void {
-    this.publicService?.showGlobalLoader?.next(true);
-    let subscribeEditClient = this.clientsService?.editClient(formData, this.clientId)?.pipe(
-      tap(res => this.handleEditClientSuccess(res)),
-      catchError(err => this.handleError(err))
-    ).subscribe();
-    this.subscriptions.push(subscribeEditClient);
+    // this.publicService?.showGlobalLoader?.next(true);
+    // let subscribeEditClient = this.clientsService?.editClient(formData, this.clientId)?.pipe(
+    //   tap(res => this.handleEditClientSuccess(res)),
+    //   catchError(err => this.handleError(err))
+    // ).subscribe();
+    // this.subscriptions.push(subscribeEditClient);
   }
   private handleEditClientSuccess(response: any): void {
     this.publicService?.showGlobalLoader?.next(false);

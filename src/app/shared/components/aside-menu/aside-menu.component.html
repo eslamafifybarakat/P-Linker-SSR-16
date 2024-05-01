@@ -1,4 +1,4 @@
-<aside class="aside-menu position-fixed py-3 m-3" [class.toggle-aside]="showSideMenu"
+<aside class="aside-menu position-fixed pb-3" [class.toggle-aside]="showSideMenu"
   [ngClass]="collapsed ? 'aside-nav-collapsed' : ''">
   <div class="logo-container d-flex justify-content-center p-3">
     <button class="logo bg-transparent border-0 justify-content-center align-items-center">
@@ -20,10 +20,11 @@
             <a class="aside-nav-link position-relative d-flex align-items-center text-white-color"
               [class.justify-content-center]="!collapsed" [id]="item?.id"
               (click)="item?.id=='logout'?logout():handelClick(item)" (click)="!collapsed?toggleCollapse():''">
-              <i class="aside-nav-link-icon text-center fs-5 fa {{ item?.icon }}" [pTooltip]="!collapsed?item?.text:''"
-                tooltipPosition="left"></i>
+              <div *ngIf="!collapsed" [pTooltip]="item.text|translate" tooltipPosition="left"
+                [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.icon)"></div>
+              <div *ngIf="collapsed" [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.icon)"></div>
               <ng-container *ngIf="collapsed">
-                <span class="aside-nav-link-text ms-3 text-truncate">{{item?.text}}</span>
+                <span class="aside-nav-link-text ms-3 text-truncate">{{item?.text|translate}}</span>
               </ng-container>
               <ng-container *ngIf="collapsed && item?.children && item?.children?.length > 0 ">
                 <i class="fas fa-angle-down angle position-absolute fs-4-1"
@@ -39,7 +40,7 @@
                       <a class="sub-nav-link" [routerLink]="[i.routerLink]" [routerLinkActive]="['active']">
                         <i class=" fa fa-circle me-3"></i>
                         <ng-container *ngIf="collapsed">
-                          <span>{{i.text}}</span>
+                          <span>{{i.text|translate}}</span>
                         </ng-container>
                       </a>
                     </ng-container>

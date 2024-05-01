@@ -78,7 +78,8 @@
     "dataNotEditable": "This data is not editable",
     "except": "Except through the competent authority",
     "recordedData": "Your recorded data",
-    "noSearchResult":"There are no results for your search"
+    "noSearchResult":"There are no results for your search",
+    "noItemAdded":"No Item Added"
   },
   "summary": {
     "faster": "Faster",
@@ -143,7 +144,10 @@
 "bankInfo":"Bank Information",
 "addBankInfo":"Add Bank Info",
 "addCustomerRef":"Add Customer Reference",
-"addParent":"Add Parent"
+"addParent":"Add Parent",
+"supplierAttachment":"Supplier Attachment",
+"alRajhiTeam": "Al-Rajhi Team Is Recommended That All Files Be Uploaded To Contribute To The Selection And Approval Process",
+"selectDocumentTypeEnterName": "Select document type and enter it's name"
   },
   "labels": {
     "apply": "Apply",
@@ -214,7 +218,12 @@
 "relationType":"Relation Type",
 "company":"Company",
 "associates":"Associates",
-"subsidiary":"Subsidiary"
+"subsidiary":"Subsidiary",
+"documentType":"Document Type",
+"documentName":"Document Name",
+"uploadFile":"Upload File",
+"documentFile":"Document File",
+"permissions":"Permissions"
   },
   "placeholders": {
     "username": "Enter username",
@@ -268,7 +277,9 @@
 "accountCurrency":"Enter account currency",
 "product":"Enter product",
 "customerName":"Enter customer name",
-"typeOfBusiness":"Select type of business"
+"typeOfBusiness":"Select type of business",
+"documentType":"Select document type",
+"documentName":"Enter document name"
   },
   "validations": {
     "username": "Username is required",
@@ -375,9 +386,15 @@
       "sales": "Sales",
       "products": "Products",
       "messages": "Messages",
-      "settings": "Settings"
+      "settings": "Settings",
+      "usersManagement": "Users Management",
+      "usersManagementChild": {
+        "users": "Users",
+        "rolesManagement": "Roles Management"
+      }
     },
     "tableHeader": {
+      "permissions":"Permissions",
       "time": "Time",
       "location": "Location",
       "address": "Address",
@@ -414,6 +431,33 @@
       "totalRevenue": "Total Revenue",
       "GoalVReality": "Goal versus reality",
       "customerSatisfactio": "Customer Satisfactio"
+    },
+    "users": {
+      "permissions": "Permissions",
+      "users": "Users",
+      "allUsers": "Users",
+      "addUser": "Add User",
+      "createNewAccount": "Create new account",
+      "user": "user",
+      "editUser": "Edit User",
+      "userDetails": "User details",
+      "createAccount": "Create Account",
+      "assignPermissions": "Assign Permissions",
+      "editAccount": "Edit Account",
+      "basicInfo": "Basic Information",
+      "contactInfo": "Contact Information",
+      "professionalInfo": "Professional Information",
+      "userTypes": {
+        "superAdmin": "Super admin",
+        "admin": "Admin ",
+        "customerServicesSupervisor": "Customer services supervisor",
+        "customerService": "Customer service",
+        "driversSupervisor": "Drivers supervisor",
+        "driver": "Driver",
+        "gateIn": "Gate in ",
+        "gateOut": "Gate out",
+        "accountant": "Accountant"
+      }
     },
     "customers": {
       "customers": "Clients",

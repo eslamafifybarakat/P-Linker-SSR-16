@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core'
 interface MenuItem {
   id?: string;
   text: string;
-  icon: string;
+  icon?: string;
   routerLink?: string;
   state: boolean;
   permission?: boolean;
@@ -41,8 +41,8 @@ export class AsideMenuService {
         permission: true,
       },
       {
-        id: 'clients',
-        text: this.publicService.translateTextFromJson('dashboard.sideMenu.clients'),
+        id: 'usersManagement',
+        text: 'dashboard.sideMenu.usersManagement',
         icon: `
     <svg width="31" height="32" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <mask id="mask0_199_290" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="35">
@@ -59,10 +59,21 @@ export class AsideMenuService {
 </defs>
 </svg>
     `,
-        routerLink: '/Dashboard/Clients',
+        // routerLink: '/Dashboard/Clients',
         state: false, //Opened Or Closed
         // permission: this.checkPermissionService.hasPermission('Pages.Client.List'),
         permission: true,
+        children: [{
+          text: 'dashboard.sideMenu.usersManagementChild.users',
+          routerLink: '/Dashboard/Clients',
+          state: false,
+          permission: true,
+        }, {
+          text: 'dashboard.sideMenu.usersManagementChild.rolesManagement',
+          routerLink: '/Dashboard/Role',
+          state: false,
+          permission: true,
+        }]
       },
       {
         id: 'sales',

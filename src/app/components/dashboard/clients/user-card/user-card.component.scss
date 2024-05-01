@@ -1,0 +1,32 @@
+#user-card {
+  hr {
+    border-color: #8c95a32e;
+  }
+  .details-btn {
+    border-radius: 11px;
+    min-width: 6rem;
+    height: 2.6rem;
+    border: none;
+    padding: 0.9rem;
+    background-color: #0352971d;
+    color: var(--text-main-color);
+  }
+  .child {
+    background-color: var(--bg-main-color);
+    border-radius: 6px;
+    color: var(--text-white-color);
+    padding: 0.1rem 0.5rem;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    max-width: 7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .noItemAdded {
+    background-color: #e8e8e8 !important;
+    border-radius: 6px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

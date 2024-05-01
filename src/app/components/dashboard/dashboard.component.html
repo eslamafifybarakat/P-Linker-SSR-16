@@ -1,7 +1,7 @@
 <div id="dashboard">
+  <dashboard-navbar></dashboard-navbar>
   <aside-menu (onToggleSideNav)="onToggleSideNav($event)"></aside-menu>
   <div class="main" [class.dash]="!toggleSideMenu" [ngClass]="getDashClass()">
-    <dashboard-navbar></dashboard-navbar>
     <div class="py-3">
       <router-outlet></router-outlet>
     </div>

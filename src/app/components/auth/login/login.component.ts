@@ -49,7 +49,8 @@ export class LoginComponent {
     if (this.loginForm?.valid) {
       this.isLoadingBtn = true;
       let data = {
-        userName: this.loginForm?.value?.userName,
+        email: this.loginForm?.value?.userName,
+        // userName: this.loginForm?.value?.userName,
         password: this.loginForm?.value?.password,
       };
       //Send Request to login
@@ -64,7 +65,9 @@ export class LoginComponent {
   }
   private handleSuccessLoggedIn(res: any): void {
     if (res?.success == true) {
-      window.localStorage.setItem(keys.userData, JSON.stringify(res?.data));
+      this.authService.saveUserLoginData(res?.data);
+      this.authService.saveToken(res?.token);
+      // this.getCurrentUserInformation();
     } else {
       this.handleError(res?.error?.message || this.publicService.translateTextFromJson('general.errorOccur'));
     }

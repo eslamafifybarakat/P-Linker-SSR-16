@@ -1,16 +1,16 @@
 
 // import { PermissionGuard } from './../../../services/authentication/guards/permission.guard';
 import { RecordDetailsComponent } from "../records/record-details/record-details.component";
-import { ClientsListComponent } from "./clients-list/clients-list.component";
 import { EditClientComponent } from "./edit-client/edit-client.component";
 import { ErrorsComponent } from "../../errors/errors.component";
+import { UsersListComponent } from "./users-list/users-list.component";
 
 
-export const clientsChildrenRoutes: any[] = [
+export const usersChildrenRoutes: any[] = [
   { path: '', redirectTo: 'List', pathMatch: 'full' },
   {
     path: 'List',
-    component: ClientsListComponent,
+    component: UsersListComponent,
     // canActivate: [PermissionGuard],
     data: {
       permission: 'Pages.Client.List',

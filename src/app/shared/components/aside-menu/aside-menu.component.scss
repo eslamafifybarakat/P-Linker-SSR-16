@@ -13,13 +13,12 @@
 .aside-menu {
   transition: all 0.5s ease !important;
   z-index: 120;
-  top: 0;
+  bottom: 0;
   width: 6rem;
-  height: calc(100vh - 2rem);
-  border-radius: 10px;
+  height: calc(100vh - 4rem);
   background: linear-gradient(90deg, #0d2132e8 -35.03%, #035397 100%);
   &.aside-nav-collapsed {
-    width: 16.5625rem;
+    width: 17.5625rem;
   }
   .logo-container {
     .logo {
@@ -31,7 +30,7 @@
       width: 1.9rem;
       height: 1.9rem;
       border-radius: 0.525rem;
-      top: 2rem;
+      top: 1.5rem;
       right: -13px;
       z-index: 5;
       background-color: #e0e8ef;
@@ -59,7 +58,7 @@
         border-radius: 9px;
         padding: 1rem;
         .aside-nav-link-text {
-          font-size: 1.1rem;
+          font-size: 1.05rem;
         }
         .angle {
           right: 1rem;

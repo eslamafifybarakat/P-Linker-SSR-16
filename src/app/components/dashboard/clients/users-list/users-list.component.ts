@@ -4,23 +4,24 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
 // Components
-import { DynamicTableLocalActionsComponent } from './../../../../shared/components/dynamic-table-local-actions/dynamic-table-local-actions.component';
-import { DynamicTableComponent } from './../../../../shared/components/dynamic-table/dynamic-table.component';
-import { SkeletonComponent } from './../../../../shared/skeleton/skeleton/skeleton.component';
+import { DynamicTableLocalActionsComponent } from '../../../../shared/components/dynamic-table-local-actions/dynamic-table-local-actions.component';
+import { DynamicTableComponent } from '../../../../shared/components/dynamic-table/dynamic-table.component';
+import { SkeletonComponent } from '../../../../shared/skeleton/skeleton/skeleton.component';
 import { DynamicSvgComponent } from 'src/app/shared/components/icons/dynamic-svg/dynamic-svg.component';
 import { AddClientComponent } from '../add-client/add-client.component';
 import { FilterClientsComponent } from '../filter-clients/filter-clients.component';
-import { ClientCardComponent } from './../client-card/client-card.component';
+import { UserCardComponent } from '../user-card/user-card.component';
 
 //Services
-import { ClientListingItem, ClientsListApiResponse } from './../../../../interfaces/dashboard/clients';
-import { LocalizationLanguageService } from './../../../../services/generic/localization-language.service';
-import { MetaDetails, MetadataService } from './../../../../services/generic/metadata.service';
-import { AlertsService } from './../../../../services/generic/alerts.service';
-import { PublicService } from './../../../../services/generic/public.service';
+
+import { LocalizationLanguageService } from '../../../../services/generic/localization-language.service';
+import { UserListingItem, UsersListApiResponse } from './../../../../interfaces/dashboard/users';
+import { MetaDetails, MetadataService } from '../../../../services/generic/metadata.service';
+import { AlertsService } from '../../../../services/generic/alerts.service';
+import { PublicService } from '../../../../services/generic/public.service';
 import { catchError, debounceTime, finalize, tap } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { ClientsService } from '../../services/clients.service';
+import { UsersService } from '../../services/clients.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -36,15 +37,15 @@ import { Router } from '@angular/router';
     // Components
     DynamicTableLocalActionsComponent,
     DynamicTableComponent,
-    ClientCardComponent,
     DynamicSvgComponent,
+    UserCardComponent,
     SkeletonComponent
   ],
-  selector: 'app-clients-list',
-  templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.scss']
+  selector: 'app-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss']
 })
-export class ClientsListComponent {
+export class UsersListComponent {
   private subscriptions: Subscription[] = [];
 
   dataStyleType: string = 'list';
@@ -52,12 +53,12 @@ export class ClientsListComponent {
   isLoadingSearch: boolean = false;
   isSearch: boolean = false;
 
-  // Start Clients List Variables
-  isLoadingClientsList: boolean = false;
-  clientsList: ClientListingItem[] = [];
-  clientsCount: number = 0;
+  // Start Users List Variables
+  isLoadingUsersList: boolean = false;
+  usersList: UserListingItem[] = [];
+  usersCount: number = 0;
   tableHeaders: any = [];
-  // End Clients List Variables
+  // End Users List Variables
 
   // Start Pagination Variables
   page: number = 1;
@@ -90,10 +91,10 @@ export class ClientsListComponent {
   constructor(
     private localizationLanguageService: LocalizationLanguageService,
     private metadataService: MetadataService,
-    private clientsService: ClientsService,
     private publicService: PublicService,
     private dialogService: DialogService,
     private alertsService: AlertsService,
+    private usersService: UsersService,
     private cdr: ChangeDetectorRef,
     private router: Router
   ) {
@@ -109,16 +110,16 @@ export class ClientsListComponent {
   private loadData(): void {
     this.tableHeaders = [
       { field: 'name', header: 'dashboard.tableHeader.name', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.name'), type: 'text' },
-      { field: 'identity', header: 'dashboard.tableHeader.id', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.id'), type: 'text' },
-      { field: 'birthDate', header: 'dashboard.tableHeader.date', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.date'), type: 'date' },
-      { field: 'phoneNumber', header: 'dashboard.tableHeader.mobilePhone', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.mobilePhone'), type: 'text' }
+      { field: 'email', header: 'dashboard.tableHeader.email', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.email'), type: 'text' },
+      { field: 'phoneNumber', header: 'dashboard.tableHeader.mobilePhone', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.mobilePhone'), type: 'text' },
+      { field: 'permissions', header: 'dashboard.tableHeader.permissions', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.permissions'), type: 'filterArray', dataType: 'array' },
       // { field: 'name', header: 'dashboard.tableHeader.name', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.name'), type: 'text', sort: true, showDefaultSort: true, showAscSort: false, showDesSort: false, filter: true },
       // { field: 'identity', header: 'dashboard.tableHeader.id', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.id'), type: 'text', sort: true, showDefaultSort: true, showAscSort: false, showDesSort: false, filter: true },
       // { field: 'birthDate', header: 'dashboard.tableHeader.date', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.date'), type: 'date', sort: true, showDefaultSort: true, showAscSort: false, showDesSort: false, filter: true },
       // { field: 'phoneNumber', header: 'dashboard.tableHeader.mobilePhone', title: this.publicService?.translateTextFromJson('dashboard.tableHeader.mobilePhone'), type: 'text', sort: true, showDefaultSort: true, showAscSort: false, showDesSort: false, filter: true}
     ];
     this.updateMetaTagsForSEO();
-    this.getAllClients();
+    this.getAllUsers();
   }
   private updateMetaTagsForSEO(): void {
     let metaData: MetaDetails = {
@@ -157,41 +158,47 @@ export class ClientsListComponent {
     this.dataStyleType = type;
   }
 
-  // Start Clients List Functions
-  getAllClients(isFiltering?: boolean): void {
-    isFiltering ? this.publicService.showSearchLoader.next(true) : this.isLoadingClientsList = true;
-    this.clientsService?.getClientsList(this.page, this.perPage, this.searchKeyword, this.sortObj, this.filtersArray ?? null)
+  // Start Users List Functions
+  getAllUsers(isFiltering?: boolean): void {
+    isFiltering ? this.publicService.showSearchLoader.next(true) : this.isLoadingUsersList = true;
+    this.usersService?.getUsersList(this.page, this.perPage, this.searchKeyword, this.sortObj, this.filtersArray ?? null)
       .pipe(
-        tap((res: ClientsListApiResponse) => this.processClientsListResponse(res)),
+        tap((res: UsersListApiResponse) => this.processUserResponse(res)),
         catchError(err => this.handleError(err)),
-        finalize(() => this.finalizeClientListLoading())
+        finalize(() => this.finalizeUserListLoading())
       ).subscribe();
   }
-  private processClientsListResponse(response: any): void {
+  private processUserResponse(response: any): void {
     if (response) {
-      this.clientsCount = response?.result?.totalCount;
-      this.pagesCount = Math.ceil(this.clientsCount / this.perPage);
-      this.clientsList = response?.result?.items;
+      this.usersCount = response?.result?.totalCount;
+      this.pagesCount = Math.ceil(this.usersCount / this.perPage);
+      this.usersList = response?.result?.items;
     } else {
       this.handleError(response.error);
       return;
     }
   }
-  private finalizeClientListLoading(): void {
-    this.isLoadingClientsList = false;
+  private finalizeUserListLoading(): void {
+    this.isLoadingUsersList = false;
     this.isLoadingSearch = false;
     this.enableSortFilter = false;
     this.publicService.showSearchLoader.next(false);
     setTimeout(() => {
       this.enableSortFilter = true;
     }, 200);
+    this.usersCount = 5;
+    this.usersList = [
+      { name: 'name', email: 'email77@gmail.com', birthDate: new Date(), phoneNumber: "444", permissions: [{ id: 1, name: 'permission 1' }, { id: 1, name: 'permission 2' }] },
+      { name: 'name', email: 'email77@gmail.com', birthDate: new Date(), phoneNumber: "444", permissions: [{ id: 1, name: 'permission 1' }, { id: 1, name: 'permission 2' }, { id: 1, name: 'permission 3' }] },
+      { name: 'name', email: 'email77@gmail.com', birthDate: new Date(), phoneNumber: "444", permissions: [] },
+    ]
   }
-  // End Clients List Functions
+  // End Users List Functions
 
   itemDetails(item?: any): void {
     this.router.navigate(['Dashboard/Clients/Details/' + item.id]);
   }
-  // Add Client
+  // Add User
   addItem(item?: any, type?: any): void {
     const ref = this.dialogService?.open(AddClientComponent, {
       data: {
@@ -208,15 +215,15 @@ export class ClientsListComponent {
         this.page = 1;
         this.publicService?.changePageSub?.next({ page: this.page });
         this.dataStyleType == 'grid' ? this.changePageActiveNumber(1) : '';
-        this.dataStyleType == 'grid' ? this.getAllClients() : '';
+        this.dataStyleType == 'grid' ? this.getAllUsers() : '';
       }
     });
   }
-  // Edit Client
+  // Edit User
   editItem(item: any): void {
     this.router.navigate(['Dashboard/Clients/Details/' + item.id]);
   }
-  //Start Delete Client Functions
+  //Start Delete User Functions
   deleteItem(item: any): void {
     if (!item?.confirmed) {
       return;
@@ -225,8 +232,8 @@ export class ClientsListComponent {
       name: item?.item?.title
     };
     this.publicService.showGlobalLoader.next(true);
-    this.clientsService?.deleteClientById(item?.item?.id, data)?.pipe(
-      tap((res: ClientsListApiResponse) => this.processDeleteResponse(res)),
+    this.usersService?.deleteUserById(item?.item?.id, data)?.pipe(
+      tap((res: UsersListApiResponse) => this.processDeleteResponse(res)),
       catchError(err => this.handleError(err)),
       finalize(() => {
         this.publicService.showGlobalLoader.next(false);
@@ -240,10 +247,10 @@ export class ClientsListComponent {
 
     this.alertsService.openToast(messageType, messageType, message);
     if (messageType === 'success') {
-      this.getAllClients();
+      this.getAllUsers();
     }
   }
-  //End Delete Client Functions
+  //End Delete User Functions
 
   // Start Search Functions
   handleSearch(event: any): void {
@@ -253,9 +260,9 @@ export class ClientsListComponent {
     this.page = 1;
     this.dataStyleType == 'grid' ? this.perPage = 8 : this.perPage = 5;
     this.searchKeyword = keyWord;
-    this.isLoadingClientsList = true;
+    this.isLoadingUsersList = true;
     this.isSearch = true;
-    this.getAllClients(true);
+    this.getAllUsers(true);
     if (keyWord?.length > 0) {
       this.isLoadingSearch = true;
     }
@@ -264,7 +271,7 @@ export class ClientsListComponent {
   clearSearch(search: any): void {
     search.value = null;
     this.searchKeyword = null;
-    this.getAllClients(true);
+    this.getAllUsers(true);
   }
   // End Search Functions
 
@@ -282,7 +289,7 @@ export class ClientsListComponent {
         this.page = 1;
         this.filtersArray = res.conditions;
         this.filterCards = res.conditions;
-        this.getAllClients(true);
+        this.getAllUsers(true);
       }
     });
   }
@@ -347,7 +354,7 @@ export class ClientsListComponent {
     });
     this.page = 1;
     // this.publicService?.changePageSub?.next({ page: this.page });
-    this.getAllClients();
+    this.getAllUsers();
   }
   // Clear table Function
   clearTable(): void {
@@ -358,7 +365,7 @@ export class ClientsListComponent {
     this.dataStyleType == 'list' ? this.publicService.resetTable.next(true) : '';
     this.dataStyleType == 'grid' ? this.changePageActiveNumber(1) : '';
     // this.publicService?.changePageSub?.next({ page: this.page });
-    this.getAllClients();
+    this.getAllUsers();
   }
   // Sort table Functions
   sortItems(event: any): void {
@@ -367,28 +374,28 @@ export class ClientsListComponent {
         column: event?.field,
         order: 'asc'
       }
-      this.getAllClients();
+      this.getAllUsers();
     } else if (event?.order == -1) {
       this.sortObj = {
         column: event?.field,
         order: 'desc'
       }
-      this.getAllClients();
+      this.getAllUsers();
     }
   }
 
   // Start Pagination Functions
   onPageChange(e: any): void {
     this.page = e?.page + 1;
-    this.getAllClients();
+    this.getAllUsers();
   }
   onPaginatorOptionsChange(e: any): void {
     this.perPage = e?.value;
-    this.pagesCount = Math?.ceil(this.clientsCount / this.perPage);
+    this.pagesCount = Math?.ceil(this.usersCount / this.perPage);
     this.page = 1;
     this.publicService?.changePageSub?.next({ page: this.page });
     this.dataStyleType == 'grid' ? this.changePageActiveNumber(1) : '';
-    this.dataStyleType == 'grid' ? this.getAllClients() : '';
+    this.dataStyleType == 'grid' ? this.getAllUsers() : '';
   }
   changePageActiveNumber(number: number): void {
     this.paginator?.changePage(number - 1);
@@ -402,7 +409,7 @@ export class ClientsListComponent {
   private setErrorMessage(message: string): void {
     this.alertsService.openToast('error', 'error', message);
     this.publicService.showGlobalLoader.next(false);
-    this.finalizeClientListLoading();
+    this.finalizeUserListLoading();
   }
 
   // Hide dropdown to not make action when keypress on keyboard arrows

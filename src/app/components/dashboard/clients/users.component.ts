@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule],
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class ClientsComponent {
+export class UsersComponent {
 
 }

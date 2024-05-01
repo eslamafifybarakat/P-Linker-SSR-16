@@ -17,6 +17,17 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
   ) { }
+
+  saveUserLoginData(data: any): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(keys.userLoginData, JSON.stringify(data));
+    }
+  }
+  removeUserLoginData(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(keys.userLoginData);
+    }
+  }
   getUserLoginDataLocally(): any {
     if (isPlatformBrowser(this.platformId)) {
       return JSON.parse(localStorage.getItem(keys.userLoginData) || '{}');
@@ -28,6 +39,17 @@ export class AuthService {
       return JSON.parse(localStorage.getItem(keys.currentUserInformation) || '{}');
     }
     return {};
+  }
+  saveToken(jwt: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(keys.accessToken, jwt);
+    }
+  }
+  getToken(): string {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(keys.accessToken) || '';
+    }
+    return '';
   }
   login(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + roots.auth.login, data);

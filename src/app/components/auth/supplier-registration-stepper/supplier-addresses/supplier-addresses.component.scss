@@ -22,3 +22,10 @@
   background-color: #f7316430 !important;
   color: #f73164 !important;
 }
+.disabled {
+  pointer-events: none;
+  background-color: #f2f2f2;
+}
+.valid {
+  background-color: #0352971a;
+}

@@ -8,7 +8,6 @@ import { DynamicTableLocalActionsComponent } from './../../../shared/components/
 import { DynamicTableComponent } from './../../../shared/components/dynamic-table/dynamic-table.component';
 import { DynamicSvgComponent } from 'src/app/shared/components/icons/dynamic-svg/dynamic-svg.component';
 import { SkeletonComponent } from './../../../shared/skeleton/skeleton/skeleton.component';
-import { ClientCardComponent } from '../clients/client-card/client-card.component';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { VehiclesListComponent } from './vehicles-list/vehicles-list.component';
 
@@ -32,7 +31,6 @@ import { Component, Input } from '@angular/core';
     VehiclesListComponent,
     DynamicTableComponent,
     DynamicSvgComponent,
-    ClientCardComponent,
     SkeletonComponent,
   ],
   selector: 'employees-vehicles-list',

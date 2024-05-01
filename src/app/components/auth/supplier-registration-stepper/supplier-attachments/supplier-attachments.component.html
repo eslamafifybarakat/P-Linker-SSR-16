@@ -1,1 +1,238 @@
-<p>supplier-attachments works!</p>
+<div>
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <div class="global-card border h-100 p-4">
+        <h5 class="mb-3 d-flex align-items-center gap-2">
+          <i class="pi pi-info-circle text-main-color fs-5"></i>
+          {{'supplierRegister.supplierAttachment' | translate}}
+        </h5>
+        <hr>
+        <div>
+          <h6 class="mb-4 fs-8 fw-bold lh-base">
+            <span>{{'supplierRegister.alRajhiTeam'|translate}}</span>
+          </h6>
+          <ng-container *ngFor="let req of attachmentsType">
+            <span class="d-flex align-items-center gap-2 mb-3 fs-8">
+              <ng-container *ngIf='false'>
+                <i class="fa fa-check"></i>
+              </ng-container>
+              <ng-container *ngIf='true'>
+                <i class="pi pi-clock fs-6"></i>
+              </ng-container>
+              <span>{{req?.businessDescription}}</span>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="global-card border h-100 mt-md-0 mt-4 p-4">
+        <h5 class="mb-3 d-flex align-items-center gap-2">
+          <i class="pi pi-info-circle text-main-color fs-5"></i>
+          {{'supplierRegister.selectDocumentTypeEnterName' | translate}}
+        </h5>
+        <hr>
+        <form [formGroup]="attachmentsForm" class="second-form-style">
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label required" for="documentType">
+                {{"labels.documentType"|translate}}
+              </label>
+              <span class="p-input-icon-right select-loading d-block">
+                <div
+                  [class.border-red]="attachmentsFormControls?.documentType?.invalid && (attachmentsFormControls?.documentType?.dirty || attachmentsFormControls?.documentType?.touched)">
+                  <p-dropdown [options]="attachmentsType" formControlName="documentType"
+                    [readonly]="isLoadingAttachmentsType" optionLabel="businessName" [filter]="true"
+                    [virtualScroll]="true" filterBy="businessName" appendTo="body" scrollHeight="200px"
+                    emptyMessage="nodata" [showClear]="true" placeholder="{{'placeholders.documentType'|translate}}">
+                  </p-dropdown>
+                </div>
+                <ng-container *ngIf="isLoadingAttachmentsType">
+                  <i class="pi pi-spin pi-spinner"></i>
+                </ng-container>
+              </span>
+              <div class="my-2">
+                <ng-container
+                  *ngIf="attachmentsFormControls?.documentType?.invalid && (attachmentsFormControls?.documentType?.dirty || attachmentsFormControls?.documentType?.touched)">
+                  <ng-container *ngIf="attachmentsFormControls?.documentType?.errors?.required">
+                    <span class="text-danger fs-8">
+                      {{"validations.requiredField"|translate}}
+                    </span>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="attachmentsForm?.value?.documentType?.id==8">
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label for="typeName" class="form-label">
+                  {{"labels.typeName"|translate}}
+                </label>
+                <input type="text" id="typeName" class="form-control" formControlName="typeName"
+                  placeholder="{{'placeholders.typeName'|translate}}"
+                  [class.border-red]="(attachmentsFormControls?.typeName?.touched||attachmentsFormControls?.typeName?.dirty)&&attachmentsFormControls?.typeName?.invalid"
+                  (input)="publicService?.clearValidationErrors(attachmentsFormControls?.typeName)"
+                  [class.disabled]="attachmentsFormControls?.documentType?.invalid||attachmentsForm?.value?.documentType==null">
+                <div class="mt-1">
+                  <ng-container
+                    *ngIf="attachmentsFormControls?.typeName?.invalid && (attachmentsFormControls?.typeName?.dirty || attachmentsFormControls?.typeName?.touched)">
+                    <ng-container *ngIf="attachmentsFormControls?.documentType?.errors?.required">
+                      <span class="text-danger fs-8">
+                        {{'validations.requiredField'|translate}}
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="attachmentsFormControls?.typeName?.errors?.minlength">
+                      <span class="text-danger fs-8">
+                        {{'validations.minLength'|translate}}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label for="documentName" class="form-label required">
+                {{"labels.documentName"|translate}}
+              </label>
+              <input type="text" id="documentName" class="form-control" formControlName="documentName"
+                placeholder="{{'placeholders.documentName'|translate}}"
+                [class.border-red]="(attachmentsFormControls?.documentName?.touched||attachmentsFormControls?.documentName?.dirty)&&attachmentsFormControls?.documentName?.invalid"
+                (input)="publicService?.clearValidationErrors(attachmentsFormControls?.documentName)"
+                [class.disabled]="attachmentsFormControls?.documentType?.invalid||attachmentsForm?.value?.documentType==null">
+              <div class="mt-1">
+                <ng-container
+                  *ngIf="attachmentsFormControls?.documentName?.invalid && (attachmentsFormControls?.documentName?.dirty || attachmentsFormControls?.documentName?.touched)">
+                  <ng-container *ngIf="attachmentsFormControls?.documentName?.errors?.required">
+                    <span class="text-danger fs-8">
+                      {{'validations.requiredField'|translate}}
+                    </span>
+                  </ng-container>
+                  <ng-container *ngIf="attachmentsFormControls?.documentName?.errors?.minlength">
+                    <span class="text-danger fs-8">
+                      {{'validations.documentNameLength'|translate}}
+                    </span>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 mt-4">
+            <label for="uploadFile" class="form-label required">
+              {{"labels.uploadFile"|translate}}
+            </label>
+            <div>
+              <app-file-upload></app-file-upload>
+            </div>
+            <div class="mt-1">
+              <ng-container
+                *ngIf="attachmentsFormControls?.attachmentFile?.invalid && (attachmentsFormControls?.attachmentFile?.dirty || attachmentsFormControls?.attachmentFile?.touched)">
+                <ng-container *ngIf="attachmentsFormControls?.attachmentFile?.errors?.required">
+                  <span class="text-danger fs-8">
+                    {{'validations.requiredField'|translate}}
+                  </span>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end gap-2 col-lg-12 mt-4">
+            <button (click)="attachmentsForm?.reset();showImage=false"
+              class="btn btn-outline-main d-flex justify-content-center align-items-center gap-2">
+              {{'reset' | translate}}
+              <i class="pi pi-times"></i>
+            </button>
+            <button class="btn btn-solid-main d-flex justify-content-center align-items-center gap-2"
+              (click)="addAttachment()">
+              <i class="pi pi-plus-circle"></i>
+              {{'add' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="mt-3 global-card">
+    <p-table [value]="[1]" responsiveLayout="scroll" [rowHover]="false" [resizableColumns]="true"
+      [tableStyle]="{'min-width': '50rem'}" dataKey="id" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{"labels.documentType"|translate}}</th>
+          <th>{{"labels.documentName"|translate}}</th>
+          <th>{{"labels.documentFile"|translate}}</th>
+          <th> {{"labels.link"|translate}}</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body">
+        <ng-container *ngIf="attachments?.length>0; else noAttachments">
+          <ng-container *ngFor="let item of attachments; let i = index">
+            <tr>
+              <td>{{item?.attachmentTypeName}}</td>
+              <td>{{item?.displayName}}</td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <ng-container *ngIf="item?.contentType?.includes('pdf')">
+                    <img src="assets/images/profile/documents/pdf.svg" alt="document" class="document-type">
+                  </ng-container>
+                  <ng-container *ngIf="item?.contentType?.includes('xls')">
+                    <img src="assets/images/profile/documents/xls.svg" alt="document" class="document-type">
+                  </ng-container>
+                  <ng-container *ngIf="item?.contentType?.includes('image')">
+                    <img [src]="item?.link" onerror="this.src='assets/images/not-found/no-user.svg'" alt="document"
+                      class="document attachment-img shadow">
+                  </ng-container>
+                  {{item?.fileName}}
+                </div>
+              </td>
+              <td>{{item?.link}}</td>
+              <td>
+                <div class="d-flex">
+                  <a class="px-2 pointer" (click)="removeAttachment(i)" pTooltip="{{'delete'|translate}}"
+                    tooltipPosition="top">
+                    <span><i class="pi pi-trash remove text-muted-color"></i></span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <ng-template #noAttachments>
+          <tr>
+            <td colspan="5">
+              <div class="row justify-content-center">
+                <div
+                  class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                  <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                  <p>{{ 'general.no_records_found' | translate }}</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">
+            <div class="row justify-content-center">
+              <div
+                class="col-xl-3 col-lg-4 col-md-5 col-sm-8 col-9 d-flex justify-content-center flex-column align-items-center">
+                <img src="assets/images/notFound/no-data.svg" alt="no-data" class="no-data">
+                <p>{{ 'general.no_records_found' | translate }}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="5">{{'total'|translate}}
+            <span class="total">
+              {{attachments?.length || 0}}
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

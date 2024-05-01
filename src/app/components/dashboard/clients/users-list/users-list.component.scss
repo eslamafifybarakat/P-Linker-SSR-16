@@ -1,4 +1,4 @@
-#clients {
+#users {
   .btn {
     height: 2.9rem;
     padding: 1rem;
@@ -59,7 +59,7 @@
 }
 
 @media (max-width: 767px) {
-  #clients {
+  #users {
     .btn {
       height: 2.6rem;
       padding: 0.7rem;
@@ -68,11 +68,14 @@
 }
 
 @media (max-width: 375px) {
-  #clients {
+  #users {
     .title-header {
       align-items: center;
       justify-content: center;
       flex-direction: column;
     }
   }
+}
+hr {
+  border-color: #9f9f9f;
 }
